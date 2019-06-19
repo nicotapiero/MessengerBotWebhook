@@ -31,6 +31,14 @@ body_parser = require('body-parser'),
 
 
   const nodeyourmeme = require('nodeyourmeme');
+  var promise = nodeyourmeme.search('knuckles'.substring(7)).then(printAbout);
+
+  function printAbout(yeehaw) {
+  	console.log(yeehaw.about);
+  }
+  //let result = await promise.about
+  //wait(5000);
+  console.log('nico:::' + promise.about)
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -111,10 +119,11 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     if (received_message.text.startsWith('Search:')) {
-    	console.log(search)
-    	console.log(nodeyourmeme.search(received_message.text.substring(7))
+    	//console.log(search)
+    	var text = nodeyourmeme.search(received_message.text.substring(7)).about
+    	
     	response = {
-    		"text": nodeyourmeme.search(received_message.text.substring(7))
+    		"text": text
     	}
     } else {
     	response = {
