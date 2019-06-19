@@ -112,7 +112,7 @@ function handleMessage(sender_psid, received_message) {
     // will be added to the body of our request to the Send API
     if (received_message.text.startsWith('Search:')) {
 response = {
-    "text": nodeyourmeme.search(received_message.text)
+    "text": nodeyourmeme.search(received_message.text.substring(7))
       
     }
     }
