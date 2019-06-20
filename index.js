@@ -1015,7 +1015,7 @@ async function handleMessage(sender_psid, received_message) {
     	resetCurrentPokemon();
     	} else if (received_message.text.startsWith("Catch ")) {
     		response = {
-    		"text": "Darn! the " + currentPokemon + "got away!"
+    		"text": "Darn! the " + currentPokemon + " got away!"
     	}
     	resetCurrentPokemon();
     	}
@@ -1121,7 +1121,8 @@ if (num < 10) {
 }
 
 function checkPokemonName(string) {
-	var substring = string.substring(6, currentPokemon.length)
+	var substring = string.substring(6, currentPokemon.length+6)
+	console.log(substring)
 	return (substring.toLowerCase === currentPokemon && substring.length === currentPokemon.length)
 }
 
