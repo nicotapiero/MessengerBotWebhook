@@ -886,6 +886,7 @@ function resetCurrentPokemon(id) {
   var string = pokemon[number];
 
   currentMap.set(id, string.toLowerCase());
+  console.log("your pokemon is:::" +string.toLowerCase());
   currentPokemon = string.toLowerCase();
 
 }
