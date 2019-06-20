@@ -969,7 +969,7 @@ async function handleMessage(sender_psid, received_message) {
     } else {*/
 
 
-    	if (received_message.text === 'Start') {
+    	if (received_message.text === 'Start' || received_message.text.toLowerCase() === 'play again') {
     		
     		console.log("https://img.pokemondb.net/artwork/large/" + currentPokemon + ".jpg")
 
@@ -993,7 +993,7 @@ async function handleMessage(sender_psid, received_message) {
     		"payload": {
     			"template_type": "generic",
     			"elements": [{
-    				"title": "Congratulations! You caught a " +currentPokemon +"!",
+    				"title": "Congratulations! You caught a " +currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) +"!",
     				
     				"buttons": [
     				{
@@ -1009,14 +1009,14 @@ async function handleMessage(sender_psid, received_message) {
     }
     		
     	resetCurrentPokemon();
-    	} else if (received_message.text.startsWith("Catch ")) {
+    	} else if (received_message.text.toLowerCase().startsWith("catch")) {
     		response = {
     	"attachment": {
     		"type": "template",
     		"payload": {
     			"template_type": "generic",
     			"elements": [{
-    				"title": "Darn! the " + currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) + " got away!",
+    				"title": "Darn! The " + currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) + " got away!",
     				
     				"buttons": [
     				{
