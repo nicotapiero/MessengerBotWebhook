@@ -1245,6 +1245,9 @@ function checkPokemonName(string) {
 
 
 app.get('/home_url', function(req, res){
+	res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
+	
+	res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
      res.sendFile( __dirname + "/public/" + "home_url.html" );
  });
 
