@@ -33,8 +33,38 @@ body_parser = require('body-parser'),
   const nodeyourmeme = require('nodeyourmeme');
 
 
+//const myModule = require('./pokemonManager.js');
 
-var currentPokemon;
+//import pokemonManager from 'pokemonManager';
+
+var currentPokemon = "current";
+
+//console.log(myModule.testFunction());
+
+var map = new Map([[100000 ,["bulbasaur", "ivysaur"]]]);
+console.log(map.get(100000));
+
+
+
+
+function catchPokemon(id) {
+	var pc;
+if (map.has(id)) {
+pc = map.get(id);
+//pc.push(currentPokemon);
+} else {
+	pc = []
+}
+
+if (!pc.includes(currentPokemon)) {
+	pc.push(currentPokemon)
+} 
+
+map.set(id, pc);
+}
+
+catchPokemon(100000);
+console.log(map.get(100000))
 
 
 function resetCurrentPokemon() {
@@ -969,7 +999,7 @@ async function handleMessage(sender_psid, received_message) {
     } else {*/
 
 
-    	if (received_message.text === 'Start' || received_message.text.toLowerCase() === 'play again') {
+    	if (received_message.text.toLowerCase() === 'start catching' || received_message.text.toLowerCase() === 'play again') {
     		
     		console.log("https://img.pokemondb.net/artwork/large/" + currentPokemon + ".jpg")
 
@@ -1007,7 +1037,7 @@ async function handleMessage(sender_psid, received_message) {
     		}
     	}
     }
-    		
+        catchPokemon(sender_psid);
     	resetCurrentPokemon();
     	} else if (received_message.text.toLowerCase().startsWith("catch")) {
     		response = {
@@ -1032,7 +1062,26 @@ async function handleMessage(sender_psid, received_message) {
     }
     		
     	resetCurrentPokemon();
-    	} else if (received_message.text.startsWith("oh ma")) {
+    	} else if (received_message.text.toLowerCase().startsWith("show caught pokemon")) {
+    		if (!map.contains(sender_psid)) {
+    			response = {
+    				"text" : "You haven't caught any Pokémon!"
+    			}
+    		} else {
+    		var stringMess = "You've caught:"
+    		map.get(sender_psid).forEach(function(item){
+  "\n" + stringMess + item 
+});
+
+
+
+    		response = {
+    		"text" : stringMess
+    	}
+
+    	}}
+
+    	 else if (received_message.text.startsWith("oh ma")) {
     		response = {
     			"text" : "be proud of the cow"
     		}
