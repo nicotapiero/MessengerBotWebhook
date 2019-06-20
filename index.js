@@ -1081,7 +1081,37 @@ async function handleMessage(sender_psid, received_message) {
     			response = {
     				"text" : "You haven't caught any Pokémon!"
     			}
-    		} else {
+    		} else if (received_message.text.toLowerCase().startsWith("show")) {
+          var pokeName = received_message.text.toLowerCase.substring(5);
+
+          if (map.has(sender_psid) && map.get(sender_psid).includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))) { 
+
+response = {
+        "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "‌‌Your "${received_message.text}!"",
+            "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
+          }]
+        }
+      }
+    }
+
+} else {
+  response = {
+    "text" : "You do not have a "${received_message.text}"!"
+  }
+}
+
+
+
+
+
+
+
+        }else {
     		var stringMess = "You've caught:"
     		map.get(sender_psid).forEach(function(item){
   stringMess = stringMess + "\n";
@@ -1268,6 +1298,8 @@ app.get('/home_url', function(req, res){
 	res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
      res.sendFile( __dirname + "/public/" + "home_url.html" );
  });
+
+
 
 
 
