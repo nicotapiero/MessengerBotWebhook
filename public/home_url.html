@@ -15,21 +15,26 @@
 
   		window.extAsyncInit = function() {
   // the Messenger Extensions JS SDK is done loading 
-};
-  	</script>
-    <script>
-    MessengerExtensions.getUserID(function success(uids) {
+
+
+MessengerExtensions.getUserID(function success(uids) {
     // User ID was successfully obtained. 
         var psid = uids.psid;
   
     }, function error(err, errorMessage) {      
     // Error handling code
     });    
+
+  
+};
+  	</script>
+    <script>
+    
 </script>
 
     <h1>Hello world!</h1>
 <button type="button"
-onclick="document.getElementById('demo').innerHTML = MessengerExtensions.getUserID">
+onclick="document.getElementById('demo').innerHTML = MessengerExtensions.getUserID()">
 Click me to display Date and Time.</button>
 
 <p id="demo"></p>
