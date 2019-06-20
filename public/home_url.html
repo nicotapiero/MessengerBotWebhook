@@ -5,39 +5,29 @@
 
   <body>
   	<script>
-  		(function(d, s, id){
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'Messenger'));
-
-  		window.extAsyncInit = function() {
-  // the Messenger Extensions JS SDK is done loading 
-
-
-MessengerExtensions.getUserID(function success(uids) {
-    // User ID was successfully obtained. 
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.com/en_US/messenger.Extensions.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+    window.extAsyncInit = function() {
+      alert('loaded sdk');
+    };
+    function getUser() {
+      MessengerExtensions.getUserID(function success(uids) {
         var psid = uids.psid;
-  
-    }, function error(err, errorMessage) {      
-    // Error handling code
-    });    
-
-  
-};
-  	</script>
-    <script>
-    
-</script>
-
-    <h1>Hello world!</h1>
-<button type="button"
-onclick="document.getElementById('demo').innerHTML = MessengerExtensions.getUserID()">
-Click me to display Date and Time.</button>
-
-<p id="demo"></p>
+        alert(JSON.stringify(psid));
+      }, function error(err, errorMessage) {
+        alert(JSON.stringify(errorMessage));
+      });
+    }
+  </script>
+  <input type="button" onclick="getUser()" value="Get user id" />
 
 
   </body>
