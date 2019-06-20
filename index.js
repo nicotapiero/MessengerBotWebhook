@@ -1063,7 +1063,7 @@ async function handleMessage(sender_psid, received_message) {
     		
     	resetCurrentPokemon();
     	} else if (received_message.text.toLowerCase().startsWith("show caught pokemon")) {
-    		if (!map.contains(sender_psid)) {
+    		if (!map.has(sender_psid)) {
     			response = {
     				"text" : "You haven't caught any Pokémon!"
     			}
