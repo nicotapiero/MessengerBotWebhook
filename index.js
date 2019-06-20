@@ -1244,6 +1244,10 @@ function checkPokemonName(string) {
 }
 
 
+app.get('/home_url', function(req, res){
+     res.sendFile( __dirname + "/public/" + "home_url.html" );
+ });
+
 
 
 
