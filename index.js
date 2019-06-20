@@ -1092,7 +1092,7 @@ response = {
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": "‌‌Your "${received_message.text}!"",
+            "title": 'Your "${received_message.text}"!',
             "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
           }]
         }
@@ -1101,7 +1101,7 @@ response = {
 
 } else {
   response = {
-    "text" : "You do not have a "${received_message.text}"!"
+    "text" : 'You do not have a "${received_message.text}"!'
   }
 }
 
