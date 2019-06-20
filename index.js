@@ -35,6 +35,8 @@ body_parser = require('body-parser'),
 
 
 var currentPokemon;
+
+
 function resetCurrentPokemon() {
 var number = Math.floor(Math.random() * 803);
 var pokemon = ["Bulbasaur",
@@ -967,7 +969,7 @@ async function handleMessage(sender_psid, received_message) {
     } else {*/
 
 
-    	if (received_message.text === 'Start') {
+    	if (received_message.text === 'Start' || received_message.text === 'Play again') {
     		
     		console.log("https://img.pokemondb.net/artwork/large/" + currentPokemon + ".jpg")
 
@@ -984,7 +986,42 @@ async function handleMessage(sender_psid, received_message) {
     		}
     	}
     }
-    	} else {
+    	} else if (checkPokemonName(received_message.text)) {
+    		response = {
+    	"attachment": {
+    		"type": "template",
+    		"payload": {
+    			"template_type": "generic",
+    			"elements": [{
+    				"title": "Congratulations! You caught a " +currentPokemon +"!",
+    				
+    				"buttons": [
+    				{
+    					"type": "postback",
+    					"title": "Play again?",
+    					"payload": "Play again",
+    				},
+    				{
+    					"type": "postback",
+    					"title": "No!",
+    					"payload": "no",
+    				}
+    				],
+    			}]
+    		}
+    	}
+    }
+    		
+    	resetCurrentPokemon();
+    	} else if (received_message.text.startsWith("Catch ")) {
+    		response = {
+    		"text": "Darn! the " + currentPokemon + "got away!"
+    	}
+    	resetCurrentPokemon();
+    	}
+
+
+    	else {
     	response = {
     		"text": `You sent the message: "${received_message.text}". Now send me an attachment!`
     	}
@@ -1081,6 +1118,11 @@ if (num < 10) {
 } else {
 	return ""+num;
 }
+}
+
+function checkPokemonName(string) {
+	var substring = string.substring(6, currentPokemon.length)
+	return (substring.toLowerCase === currentPokemon && substring.length === currentPokemon.length)
 }
 
 
