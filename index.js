@@ -1033,7 +1033,7 @@ async function handleMessage(sender_psid, received_message) {
     					"type": "postback",
     					"title": "Play again",
     					"payload": "Play again",
-    				}
+    				},
     				{
     					"type": "postback",
     					"title": "Show caught pokémon",
@@ -1061,7 +1061,7 @@ async function handleMessage(sender_psid, received_message) {
     					"type": "postback",
     					"title": "Play again",
     					"payload": "Play again",
-    				}
+    				},
     				{
     					"type": "postback",
     					"title": "Show caught pokémon",
@@ -1242,6 +1242,8 @@ function checkPokemonName(string) {
  
 	return (substring.toLowerCase() === currentPokemon && substring.length === currentPokemon.length)
 }
+
+
 
 
 
