@@ -1062,7 +1062,7 @@ async function handleMessage(sender_psid, received_message) {
     }
     		
     	resetCurrentPokemon();
-    	} else if (received_message.text.toLowerCase().startsWith("show caught pokemon")) {
+    	} else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
     		if (!map.has(sender_psid)) {
     			response = {
     				"text" : "You haven't caught any Pokémon!"
@@ -1070,7 +1070,7 @@ async function handleMessage(sender_psid, received_message) {
     		} else {
     		var stringMess = "You've caught:"
     		map.get(sender_psid).forEach(function(item){
-  stringMess = "\n" + stringMess;
+  stringMess = stringMess + "\n";
   stringMess = stringMess + item;
 });
 
