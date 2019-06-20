@@ -153,7 +153,7 @@ async function handleMessage(sender_psid, received_message) {
     			"elements": [{
     				"title": "‌‌A wild pokémon has appeared!",
     				"subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
-    				"image_url": "https://cdn.bulbagarden.net/upload/7/73/" + threeNum(num) + pokemon[num],
+    				"image_url": "https://img.pokemondb.net/artwork/large/" + pokemon[num] + ".jpg",
     			}]
     		}
     	}
