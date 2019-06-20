@@ -39,9 +39,9 @@ var yeehaw = nodeyourmeme.search('knuckles'.substring(7));
   	console.log(yeehaw.about);
   }
 var yeehaw = nodeyourmeme.search('knuckles'.substring(7));
-  while (!(yeehaw.about)) {
+/*  while (!(yeehaw.about)) {
     		console.log('waiting');
-    	}
+    	}*/
     	console.log('hey');
     	console.log(yeehaw.about);
 
@@ -142,7 +142,7 @@ async function handleMessage(sender_psid, received_message) {
     } else {*/
 
 
-    	if (received_message.text === 'Start' {
+    	if (received_message.text === 'Start') {
     		var num = Math.floor(Math.random() * 803);
 
     		response = {
