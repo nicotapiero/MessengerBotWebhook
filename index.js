@@ -1070,7 +1070,8 @@ async function handleMessage(sender_psid, received_message) {
     		} else {
     		var stringMess = "You've caught:"
     		map.get(sender_psid).forEach(function(item){
-  stringMess = "\n" + stringMess + item ;
+  stringMess = "\n" + stringMess;
+  stringMess = stringMess + item;
 });
 
 
