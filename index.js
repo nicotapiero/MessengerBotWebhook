@@ -998,14 +998,10 @@ async function handleMessage(sender_psid, received_message) {
     				"buttons": [
     				{
     					"type": "postback",
-    					"title": "Play again?",
+    					"title": "Play again",
     					"payload": "Play again",
-    				},
-    				{
-    					"type": "postback",
-    					"title": "No!",
-    					"payload": "no",
     				}
+    				
     				],
     			}]
     		}
@@ -1015,9 +1011,31 @@ async function handleMessage(sender_psid, received_message) {
     	resetCurrentPokemon();
     	} else if (received_message.text.startsWith("Catch ")) {
     		response = {
-    		"text": "Darn! the " + currentPokemon + " got away!"
+    	"attachment": {
+    		"type": "template",
+    		"payload": {
+    			"template_type": "generic",
+    			"elements": [{
+    				"title": "Darn! the " + currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) + " got away!",
+    				
+    				"buttons": [
+    				{
+    					"type": "postback",
+    					"title": "Play again",
+    					"payload": "Play again",
+    				}
+    				
+    				],
+    			}]
+    		}
     	}
+    }
+    		r
     	resetCurrentPokemon();
+    	} else if (received_message.text.startsWith("oh ma")) {
+    		response = {
+    			"text" : "be proud of the cow"
+    		}
     	}
 
 
