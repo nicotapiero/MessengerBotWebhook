@@ -999,7 +999,7 @@ async function handleMessage(sender_psid, received_message) {
     				{
     					"type": "postback",
     					"title": "Play again",
-    					"payload": "Play again",
+    					//"payload": "Play again",
     				}
     				
     				],
@@ -1022,7 +1022,7 @@ async function handleMessage(sender_psid, received_message) {
     				{
     					"type": "postback",
     					"title": "Play again",
-    					"payload": "Play again",
+    					//"payload": "Play again",
     				}
     				
     				],
