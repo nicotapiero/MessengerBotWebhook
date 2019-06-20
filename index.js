@@ -1017,6 +1017,11 @@ if (received_message.text) {
   		
   		console.log("https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg")
 
+      if (!currentMap.has(sender_psid)){
+      currentMap.set(sender_psid, "bulbasaur");
+      resetCurrentPokemon(sender_psid);
+    }
+
   		response = {
         "attachment": {
           "type": "template",
@@ -1223,6 +1228,10 @@ if (payload === 'yes') {
 
 }
 } else if (payload === 'Play again' || payload == "Start Catching") {
+  if (!currentMap.has(sender_psid)){
+      currentMap.set(sender_psid, "bulbasaur");
+      resetCurrentPokemon(sender_psid);
+    }
 	response = {
     "attachment": {
       "type": "template",
