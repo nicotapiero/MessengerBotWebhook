@@ -1099,7 +1099,7 @@ async function handleMessage(sender_psid, received_message) {
     		response = {
     			"text" : "be proud of the cow"
     		}
-    	} else if (recieved_message.text.toLowerCase().startsWith("begin trade")) {
+    	} else if (received_message.text.toLowerCase().startsWith("begin trade")) {
 response = {
     attachment: {
         type: "template",
