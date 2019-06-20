@@ -969,7 +969,7 @@ async function handleMessage(sender_psid, received_message) {
     } else {*/
 
 
-    	if (received_message.text === 'Start' || received_message.text === 'Play again') {
+    	if (received_message.text === 'Start') {
     		
     		console.log("https://img.pokemondb.net/artwork/large/" + currentPokemon + ".jpg")
 
@@ -999,7 +999,7 @@ async function handleMessage(sender_psid, received_message) {
     				{
     					"type": "postback",
     					"title": "Play again",
-    					//"payload": "Play again",
+    					"payload": "Play again",
     				}
     				
     				],
@@ -1022,7 +1022,7 @@ async function handleMessage(sender_psid, received_message) {
     				{
     					"type": "postback",
     					"title": "Play again",
-    					//"payload": "Play again",
+    					"payload": "Play again",
     				}
     				
     				],
@@ -1090,6 +1090,20 @@ function handlePostback(sender_psid, received_postback) {
   	response = { "text": "Thanks!" }
   } else if (payload === 'no') {
   	response = { "text": "Oops, try sending another image." }
+  } else if (payload === 'Play again') {
+  	response = {
+    		"attachment": {
+    		"type": "template",
+    		"payload": {
+    			"template_type": "generic",
+    			"elements": [{
+    				"title": "‌‌A wild pokémon has appeared!",
+    				"subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
+    				"image_url": "https://img.pokemondb.net/artwork/large/" + currentPokemon + ".jpg",
+    			}]
+    		}
+    	}
+    }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
