@@ -17,17 +17,19 @@
   // the Messenger Extensions JS SDK is done loading 
 };
   	</script>
+    <script>
+    MessengerExtensions.getUserID(function success(uids) {
+    // User ID was successfully obtained. 
+        var psid = uids.psid;
+  
+    }, function error(err, errorMessage) {      
+    // Error handling code
+    });    
+</script>
 
     <h1>Hello world!</h1>
 <button type="button"
-onclick="document.getElementById('demo').innerHTML = MessengerExtensions.getContext('435458370579279', 
-  function success(thread_context){
-    // success
-  },
-  function error(err){
-    // error
-  }
-).psid">
+onclick="document.getElementById('demo').innerHTML = MessengerExtensions.getUserID">
 Click me to display Date and Time.</button>
 
 <p id="demo"></p>
