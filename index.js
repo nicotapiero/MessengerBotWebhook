@@ -1121,9 +1121,10 @@ if (num < 10) {
 }
 
 function checkPokemonName(string) {
-	var substring = string.substring(6, currentPokemon.length+6)
-	console.log(substring)
-	return (substring.toLowerCase === currentPokemon && substring.length === currentPokemon.length)
+	var substring = string.substring(6).trim();
+    
+ 
+	return (substring.toLowerCase() === currentPokemon && substring.length === currentPokemon.length)
 }
 
 
