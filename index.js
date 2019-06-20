@@ -1099,6 +1099,23 @@ async function handleMessage(sender_psid, received_message) {
     		response = {
     			"text" : "be proud of the cow"
     		}
+    	} else if (recieved_message.text.toLowerCase().startsWith("begin trade")) {
+response = {
+    attachment: {
+        type: "template",
+        payload: {
+            template_type: "button",
+            text: "OK, let's set your room preferences so I won't need to ask for them in the future.",
+            buttons: [{
+                type: "web_url",
+                url: "https://nicoswebhook.herokuapp.com/home_url",
+                title: "Set preferences",
+                webview_height_ratio: "compact",
+                messenger_extensions: true
+            }]
+        }
+    }
+};
     	}
 
 
