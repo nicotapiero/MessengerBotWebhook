@@ -1030,7 +1030,7 @@ async function handleMessage(sender_psid, received_message) {
     		}
     	}
     }
-    		r
+    		
     	resetCurrentPokemon();
     	} else if (received_message.text.startsWith("oh ma")) {
     		response = {
