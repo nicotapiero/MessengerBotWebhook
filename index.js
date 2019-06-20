@@ -33,6 +33,8 @@ body_parser = require('body-parser'),
   const nodeyourmeme = require('nodeyourmeme');
 
 
+
+
 //const myModule = require('./pokemonManager.js');
 
 //import pokemonManager from 'pokemonManager';
@@ -57,7 +59,7 @@ pc = map.get(id);
 }
 
 if (!pc.includes(currentPokemon)) {
-	pc.push(currentPokemon)
+	pc.push(currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) )
 } 
 
 map.set(id, pc);
@@ -999,7 +1001,7 @@ async function handleMessage(sender_psid, received_message) {
     } else {*/
 
 
-    	if (received_message.text.toLowerCase() === 'start catching' || received_message.text.toLowerCase() === 'play again') {
+    	if (received_message.text.toLowerCase() === 'start catching' || received_message.text.toLowerCase() === 'play again' || received_message.text.toLowerCase() === 'get started' || received_message.text.toLowerCase() === 'catch pokemon' || received_message.text.toLowerCase() === 'catch pokémon') {
     		
     		console.log("https://img.pokemondb.net/artwork/large/" + currentPokemon + ".jpg")
 
@@ -1140,7 +1142,7 @@ function handlePostback(sender_psid, received_postback) {
   	response = { "text": "Thanks!" }
   } else if (payload === 'no') {
   	response = { "text": "Oops, try sending another image." }
-  } else if (payload === 'Play again') {
+  } else if (payload === 'Play again' || payload == "Start Catching") {
   	response = {
     		"attachment": {
     		"type": "template",
@@ -1186,7 +1188,9 @@ function callSendAPI(sender_psid, response) {
 
 
 
-
+function capitalizeFirstLetter(string) {
+	return currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) 
+}
 
 
 
