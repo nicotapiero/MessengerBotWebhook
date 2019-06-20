@@ -64,6 +64,7 @@ if (!pc.includes(currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1
 } 
 
 map.set(id, pc);
+console.log(map)
 }
 
 catchPokemon(100000);
