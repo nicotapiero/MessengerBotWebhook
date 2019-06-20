@@ -1082,6 +1082,7 @@ async function handleMessage(sender_psid, received_message) {
     				"text" : "You haven't caught any Pokémon!"
     			}
     		} else if (received_message.text.toLowerCase().startsWith("show")) {
+          console.log("showing pokemon")
           var pokeName = received_message.text.toLowerCase.substring(5);
 
           if (map.has(sender_psid) && map.get(sender_psid).includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))) { 
