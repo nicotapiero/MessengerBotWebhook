@@ -46,6 +46,9 @@ var currentPokemon = "current";
 var map = new Map([[100000 ,["bulbasaur", "ivysaur"]]]);
 console.log(map.get(100000));
 
+var currentMap = new Map([[100000 ,"bulbasaur"]]);
+console.log(currentMap.get(100000));
+
 
 
 
@@ -59,19 +62,23 @@ function catchPokemon(id) {
 }
 
 //change this back to just "currentPokemon" if you wanna make easy duplicates
-if (!pc.includes(currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1))) {
-  pc.push(currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) )
+if (!pc.includes(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1))) {
+  pc.push(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1) )
 } 
 
 map.set(id, pc);
 console.log(map)
 }
 
+
+
+
+
 catchPokemon(100000);
 console.log(map.get(100000))
 
 
-function resetCurrentPokemon() {
+function resetCurrentPokemon(id) {
   var number = Math.floor(Math.random() * 803);
   var pokemon = ["Bulbasaur",
   "Ivysaur",
@@ -877,10 +884,12 @@ function resetCurrentPokemon() {
   "Marshadow"];
 
   var string = pokemon[number];
+
+  currentMap.set(id, string.toLowerCase());
   currentPokemon = string.toLowerCase();
 
 }
-resetCurrentPokemon();
+resetCurrentPokemon(10000);
 
 
 
@@ -982,7 +991,7 @@ if (mode && token) {
 }
 });
 
-async function handleMessage(sender_psid, received_message) {
+function handleMessage(sender_psid, received_message) {
   let response;
 
 // Checks if the message contains text
@@ -1005,7 +1014,7 @@ if (received_message.text) {
 
   	if (received_message.text.toLowerCase() === 'start catching' || received_message.text.toLowerCase() === 'play again' || received_message.text.toLowerCase() === 'get started' || received_message.text.toLowerCase() === 'catch pokemon' || received_message.text.toLowerCase() === 'catch pokémon') {
   		
-  		console.log("https://img.pokemondb.net/artwork/large/" + currentPokemon + ".jpg")
+  		console.log("https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg")
 
   		response = {
         "attachment": {
@@ -1015,7 +1024,7 @@ if (received_message.text) {
            "elements": [{
             "title": "‌‌A wild pokémon has appeared!",
             "subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
-            "image_url": "https://img.pokemondb.net/artwork/large/" + currentPokemon + ".jpg",
+            "image_url": "https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg",
           }]
         }
       }
@@ -1027,7 +1036,7 @@ if (received_message.text) {
       "payload": {
        "template_type": "generic",
        "elements": [{
-        "title": "Congratulations! You caught a " +currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) +"!",
+        "title": "Congratulations! You caught a " +currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) +"!",
 
         "buttons": [
         {
@@ -1047,7 +1056,7 @@ if (received_message.text) {
  }
 }
 catchPokemon(sender_psid);
-resetCurrentPokemon();
+resetCurrentPokemon(sender_psid);
 } else if (received_message.text.toLowerCase().startsWith("catch")) {
   response = {
   	"attachment": {
@@ -1055,7 +1064,7 @@ resetCurrentPokemon();
   		"payload": {
   			"template_type": "generic",
   			"elements": [{
-  				"title": "Darn! The " + currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) + " got away!",
+  				"title": "Darn! The " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) + " got away!",
   				
   				"buttons": [
   				{
@@ -1075,7 +1084,7 @@ resetCurrentPokemon();
   	}
   }
 
-  resetCurrentPokemon();
+  resetCurrentPokemon(sender_psid);
 } else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
   if (!map.has(sender_psid)) {
    response = {
@@ -1221,7 +1230,7 @@ if (payload === 'yes') {
        "elements": [{
         "title": "‌‌A wild pokémon has appeared!",
         "subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
-        "image_url": "https://img.pokemondb.net/artwork/large/" + currentPokemon + ".jpg",
+        "image_url": "https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg",
       }]
     }
   }
