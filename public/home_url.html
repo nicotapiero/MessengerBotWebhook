@@ -19,6 +19,20 @@
   	</script>
 
     <h1>Hello world!</h1>
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = MessengerExtensions.getContext('435458370579279', 
+  function success(thread_context){
+    // success
+  },
+  function error(err){
+    // error
+  }
+).psid">
+Click me to display Date and Time.</button>
+
+<p id="demo"></p>
+
+
   </body>
    
 </html>
