@@ -58,7 +58,8 @@ pc = map.get(id);
 	pc = []
 }
 
-if (!pc.includes(currentPokemon)) {
+//change this back to just "currentPokemon" if you wanna make easy duplicates
+if (!pc.includes(currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1))) {
 	pc.push(currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) )
 } 
 
@@ -1033,6 +1034,11 @@ async function handleMessage(sender_psid, received_message) {
     					"title": "Play again",
     					"payload": "Play again",
     				}
+    				{
+    					"type": "postback",
+    					"title": "Show caught pokémon",
+    					"payload": "Show caught pokémon",
+    				}
     				
     				],
     			}]
@@ -1055,6 +1061,11 @@ async function handleMessage(sender_psid, received_message) {
     					"type": "postback",
     					"title": "Play again",
     					"payload": "Play again",
+    				}
+    				{
+    					"type": "postback",
+    					"title": "Show caught pokémon",
+    					"payload": "Show caught pokémon",
     				}
     				
     				],
@@ -1142,6 +1153,25 @@ function handlePostback(sender_psid, received_postback) {
   	response = { "text": "Thanks!" }
   } else if (payload === 'no') {
   	response = { "text": "Oops, try sending another image." }
+  } else if (payload === 'Show caught pokémon') {
+if (!map.has(sender_psid)) {
+    			response = {
+    				"text" : "You haven't caught any Pokémon!"
+    			}
+    		} else {
+    		var stringMess = "You've caught:"
+    		map.get(sender_psid).forEach(function(item){
+  stringMess = stringMess + "\n";
+  stringMess = stringMess + item;
+});
+
+
+
+    		response = {
+    		"text" : stringMess
+    	}
+
+    	}
   } else if (payload === 'Play again' || payload == "Start Catching") {
   	response = {
     		"attachment": {
