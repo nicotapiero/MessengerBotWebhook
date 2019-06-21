@@ -51,13 +51,13 @@ var currentPokemon = "current";
 
 //console.log(myModule.testFunction());
 
-var map = new Map([[100000 ,["bulbasaur", "ivysaur"]]]);
+var map = new Map([['100000' ,["bulbasaur", "ivysaur"]]]);
 console.log(map.get(100000));
 
-var currentMap = new Map([[100000 ,"bulbasaur"]]);
+var currentMap = new Map([['100000' ,"bulbasaur"]]);
 console.log(currentMap.get(100000));
 
-map.set(['2674269505918135', ["bulbasaur", "venusaur"]]);
+map.set('2674269505918135', ["bulbasaur", "venusaur"]);
 
 
 
@@ -91,7 +91,7 @@ console.log(map)
 
 
 
-catchPokemon(100000);
+catchPokemon('100000');
 console.log(map.get(100000))
 
 
@@ -1372,7 +1372,7 @@ var name = "Trainer";
   if (err) { return console.log(err); 
 res.render('trade',{
   title: "Trading with " + name,
-  user:id,
+  user:name,
   itemList:arr
 } ) ;
 
@@ -1385,7 +1385,7 @@ res.render('trade',{
 
   res.render('trade',{
   title: "Trading with " + name,
-  user:id,
+  user:name,
   itemList:arr
 } ) ;
 
