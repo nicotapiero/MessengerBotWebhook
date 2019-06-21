@@ -101,6 +101,12 @@ div {
     Select which pokemon to Trade!
 </h2>
 
+<script type="text/javascript">
+  alert("this is what i have:" + user_psid);
+  getUser();
+document.getElementById("psidOfSender").setAttribute('value', user_psid);
+</script>
+
 
 <form id="tableForm" action="/trade?id=<%= id%>" method="post">
     <select id="select" name="name">
@@ -111,11 +117,7 @@ div {
 
 
 <input type = "hidden" name="psidOfSender" id="psidOfSender">
-<script type="text/javascript">
-  alert("this is what i have:" + user_psid);
-  getUser();
-document.getElementById("psidOfSender").setAttribute('value', user_psid);
-</script>
+
 
 
 
