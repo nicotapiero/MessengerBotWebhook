@@ -19,19 +19,24 @@
      // alert('loaded sdk');
     };
     function getUser() {
-      return MessengerExtensions.getUserID(function success(uids) {
+      MessengerExtensions.getUserID(function success(uids) {
         var psid = uids.psid;
         alert(JSON.stringify(psid));
-          return JSON.stringify(psid);
+        setUser(JSON.stringify(psid))
       }, function error(err, errorMessage) {
         alert(JSON.stringify(errorMessage));
-          return undefined;
+         // return undefined;
       });
+    }
+
+    var user_psid;
+    function setUser(string) {
+      user_psid = string;
     }
 
     function getLink() {
       var string = getUser();
-      return "https://nicoswebhook.herokuapp.com/trade?id=" + string;
+      return "https://nicoswebhook.herokuapp.com/trade?id=" + user_psid;
     }
 
    // function get
