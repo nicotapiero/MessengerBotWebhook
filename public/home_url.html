@@ -19,12 +19,13 @@
      // alert('loaded sdk');
     };
     function getUser() {
-      MessengerExtensions.getUserID(function success(uids) {
+      return MessengerExtensions.getUserID(function success(uids) {
         var psid = uids.psid;
         alert(JSON.stringify(psid));
           return JSON.stringify(psid);
       }, function error(err, errorMessage) {
         alert(JSON.stringify(errorMessage));
+          return undefined;
       });
     }
 
