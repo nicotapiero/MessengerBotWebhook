@@ -1371,16 +1371,17 @@ var name = "Trainer";
   //console.log(res);
   name = body.first_name; 
   console.log(body.first_name);
-});
-
-
-
-
-res.render('trade',{
+}).then(res.render('trade',{
   title: "Trading with " + name,
   user:id,
   itemList:arr
-});
+} ) );
+
+
+
+
+
+
 } else {
   console.log(map)
 res.sendFile( __dirname + "/public/" + "noPokemon.html" );
