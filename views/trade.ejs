@@ -50,14 +50,26 @@ div {
     Select which pokemon to Trade!
 </h2>
 
-<form id="tableForm" action="/salary-sheet" method="post">
+<form id="tableForm" action="/trade?id=<%= id%>" method="post">
     <select id="select" name="name">
     <% for(var a=0; a < itemList.length; a++) { %>
      <option value="<%= itemList[a] %>"><%= itemList[a] %></option>
     <% } %>
 </select>
-<input type="submit" value="Submit" />
+
+
+<input type = "hidden" id="psidOfSender">
+<script>
+document.getElementById("psidOfSender").setAttribute('value', user_psid);
+</script>
+
+
+
+<input type="submit" value="select" />
 </form>
+
+
+
 
   </body>
 </html>

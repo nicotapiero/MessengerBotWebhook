@@ -31,6 +31,9 @@ app = express().use(body_parser.json()); // creates express http server
 
 app.set('view engine', 'ejs');
 
+app.use(body_parser.urlencoded({ extended: true }))
+app.use(body_parser.json())
+
 
 const nodeyourmeme = require('nodeyourmeme');
 
@@ -922,15 +925,15 @@ var yeehaw = nodeyourmeme.search('knuckles'.substring(7));
 
 function printPokemon() {
   var num = Math.floor(Math.random() * 803);
-  		//console.log("https://img.pokemondb.net/artwork/large/" + pokemon[num] + ".jpg")
-    }
-    printPokemon();
-    console.log("currentPokemon is" + currentPokemon)
+//console.log("https://img.pokemondb.net/artwork/large/" + pokemon[num] + ".jpg")
+}
+printPokemon();
+console.log("currentPokemon is" + currentPokemon)
 /*  while (!(yeehaw.about)) {
-  		console.log('waiting');
-  	}*/
-  	console.log('hey');
-  	console.log(yeehaw.about);
+console.log('waiting');
+}*/
+console.log('hey');
+console.log(yeehaw.about);
 
 
 //let result = await promise.about
@@ -950,33 +953,33 @@ let body = req.body;
 // Check the webhook event is from a Page subscription
 if (body.object === 'page') {
 
-	body.entry.forEach(function(entry) {
+  body.entry.forEach(function(entry) {
 
-    // Gets the body of the webhook event
-    let webhook_event = entry.messaging[0];
-    console.log(webhook_event);
+// Gets the body of the webhook event
+let webhook_event = entry.messaging[0];
+console.log(webhook_event);
 
 
-    // Get the sender PSID
-    let sender_psid = webhook_event.sender.id;
-    console.log('Sender ID: ' + sender_psid);
+// Get the sender PSID
+let sender_psid = webhook_event.sender.id;
+console.log('Sender ID: ' + sender_psid);
 
-    // Check if the event is a message or postback and
-    // pass the event to the appropriate handler function
-    if (webhook_event.message) {
-    	handleMessage(sender_psid, webhook_event.message);        
-    } else if (webhook_event.postback) {
+// Check if the event is a message or postback and
+// pass the event to the appropriate handler function
+if (webhook_event.message) {
+  handleMessage(sender_psid, webhook_event.message);        
+} else if (webhook_event.postback) {
 
-    	handlePostback(sender_psid, webhook_event.postback);
-    }
-    
-  });
-  // Return a '200 OK' response to all events
-  res.status(200).send('EVENT_RECEIVED');
+  handlePostback(sender_psid, webhook_event.postback);
+}
+
+});
+// Return a '200 OK' response to all events
+res.status(200).send('EVENT_RECEIVED');
 
 } else {
-  // Return a '404 Not Found' if event is not from a page subscription
-  res.sendStatus(404);
+// Return a '404 Not Found' if event is not from a page subscription
+res.sendStatus(404);
 }
 
 });
@@ -995,17 +998,17 @@ let challenge = req.query['hub.challenge'];
 // Check if a token and mode were sent
 if (mode && token) {
 
-  // Check the mode and token sent are correct
-  if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+// Check the mode and token sent are correct
+if (mode === 'subscribe' && token === VERIFY_TOKEN) {
 
-    // Respond with 200 OK and challenge token from the request
-    console.log('WEBHOOK_VERIFIED');
-    res.status(200).send(challenge);
+// Respond with 200 OK and challenge token from the request
+console.log('WEBHOOK_VERIFIED');
+res.status(200).send(challenge);
 
-  } else {
-    // Responds with '403 Forbidden' if verify tokens do not match
-    res.sendStatus(403);      
-  }
+} else {
+// Responds with '403 Forbidden' if verify tokens do not match
+res.sendStatus(403);      
+}
 }
 });
 
@@ -1014,47 +1017,47 @@ function handleMessage(sender_psid, received_message) {
 
 // Checks if the message contains text
 if (received_message.text) {    
-  // Create the payload for a basic text message, which
-  // will be added to the body of our request to the Send API
- /* if (received_message.text.startsWith('Search:')) {
-  	//console.log(search)
-  	var text = nodeyourmeme.search(received_message.text.substring(7))
-  	while (!text) {
+// Create the payload for a basic text message, which
+// will be added to the body of our request to the Send API
+/* if (received_message.text.startsWith('Search:')) {
+//console.log(search)
+var text = nodeyourmeme.search(received_message.text.substring(7))
+while (!text) {
 
-  	}
-  	var text2 = await text.about;
-  	
-  	response = {
-  		"text": text2
-  	}
-  } else {*/
+}
+var text2 = await text.about;
+
+response = {
+"text": text2
+}
+} else {*/
 
 
-  	if (received_message.text.toLowerCase() === 'start catching' || received_message.text.toLowerCase() === 'play again' || received_message.text.toLowerCase() === 'get started' || received_message.text.toLowerCase() === 'catch pokemon' || received_message.text.toLowerCase() === 'catch pokémon') {
-  		
-  		console.log("https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg")
+  if (received_message.text.toLowerCase() === 'start catching' || received_message.text.toLowerCase() === 'play again' || received_message.text.toLowerCase() === 'get started' || received_message.text.toLowerCase() === 'catch pokemon' || received_message.text.toLowerCase() === 'catch pokémon') {
 
-      if (!currentMap.has(sender_psid)){
+    console.log("https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg")
+
+    if (!currentMap.has(sender_psid)){
       currentMap.set(sender_psid, "bulbasaur");
       resetCurrentPokemon(sender_psid);
     }
 
-  		response = {
-        "attachment": {
-          "type": "template",
-          "payload": {
-           "template_type": "generic",
-           "elements": [{
-            "title": "‌‌A wild pokémon has appeared!",
-            "subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
-            "image_url": "https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg",
-          }]
-        }
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+         "template_type": "generic",
+         "elements": [{
+          "title": "‌‌A wild pokémon has appeared!",
+          "subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
+          "image_url": "https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg",
+        }]
       }
     }
-  } else if (checkPokemonName(received_message.text)) {
-    response = {
-     "attachment": {
+  }
+} else if (checkPokemonName(received_message.text)) {
+  response = {
+    "attachment": {
       "type": "template",
       "payload": {
        "template_type": "generic",
@@ -1082,143 +1085,143 @@ catchPokemon(sender_psid);
 resetCurrentPokemon(sender_psid);
 } else if (received_message.text.toLowerCase().startsWith("catch")) {
   response = {
-  	"attachment": {
-  		"type": "template",
-  		"payload": {
-  			"template_type": "generic",
-  			"elements": [{
-  				"title": "Darn! The " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) + " got away!",
-  				
-  				"buttons": [
-  				{
-  					"type": "postback",
-  					"title": "Play again",
-  					"payload": "Play again",
-  				},
-  				{
-  					"type": "postback",
-  					"title": "Show caught pokémon",
-  					"payload": "Show caught pokémon",
-  				}
-  				
-  				],
-  			}]
-  		}
-  	}
-  }
+    "attachment": {
+      "type": "template",
+      "payload": {
+       "template_type": "generic",
+       "elements": [{
+        "title": "Darn! The " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) + " got away!",
+        
+        "buttons": [
+        {
+         "type": "postback",
+         "title": "Play again",
+         "payload": "Play again",
+       },
+       {
+         "type": "postback",
+         "title": "Show caught pokémon",
+         "payload": "Show caught pokémon",
+       }
+       
+       ],
+     }]
+   }
+ }
+}
 
-  resetCurrentPokemon(sender_psid);
+resetCurrentPokemon(sender_psid);
 } else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
   if (!map.has(sender_psid)) {
-   response = {
-    "text" : "You haven't caught any Pokémon!"
-  }
-} else {
-  var stringMess = "You've caught:"
-  map.get(sender_psid).forEach(function(item){
-    stringMess = stringMess + "\n";
-    stringMess = stringMess + item;
-  });
+    response = {
+      "text" : "You haven't caught any Pokémon!"
+    }
+  } else {
+    var stringMess = "You've caught:"
+    map.get(sender_psid).forEach(function(item){
+      stringMess = stringMess + "\n";
+      stringMess = stringMess + item;
+    });
 
 
-
-  response = {
-    "text" : stringMess
-  }
-
-}}else if (received_message.text.toLowerCase().startsWith("show ")) {
-  console.log("showing pokemon")
-  var pokeName = received_message.text.toLowerCase().substring(5);
-
-  if (map.has(sender_psid) && map.get(sender_psid).includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))) { 
 
     response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": 'Your '+ received_message.text.substring(5) +"!",
-            "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
+      "text" : stringMess
+    }
+
+  }}else if (received_message.text.toLowerCase().startsWith("show ")) {
+    console.log("showing pokemon")
+    var pokeName = received_message.text.toLowerCase().substring(5);
+
+    if (map.has(sender_psid) && map.get(sender_psid).includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))) { 
+
+      response = {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": [{
+              "title": 'Your '+ received_message.text.substring(5) +"!",
+              "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
+            }]
+          }
+        }
+      }
+
+    } else {
+      response = {
+        "text" : 'You do not have a ' + received_message.text.substring(5) + "!"
+      }
+    }
+  } else if (received_message.text.startsWith("oh ma")) {
+    response = {
+      "text" : "be proud of the cow"
+    }
+  } else if (received_message.text.toLowerCase().startsWith("begin trade")) {
+    response = {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: "OK, let's set your room preferences so I won't need to ask for them in the future.",
+          buttons: [{
+            type: "web_url",
+            url: "https://nicoswebhook.herokuapp.com/home_url",
+            title: "Set preferences",
+            webview_height_ratio: "compact",
+            messenger_extensions: true
           }]
         }
       }
-    }
-
-  } else {
+    };
+  } else if (received_message.text.toLowerCase().trim() === 'help'){
     response = {
-      "text" : 'You do not have a ' + received_message.text.substring(5) + "!"
+      "text" : 'Commands:\n- Start Catching\n- Show caught pokémon\n- Show <pokémon you have caught>\n- Begin trade'
     }
-  }
-} else if (received_message.text.startsWith("oh ma")) {
-  response = {
-   "text" : "be proud of the cow"
- }
-} else if (received_message.text.toLowerCase().startsWith("begin trade")) {
-  response = {
-    attachment: {
-      type: "template",
-      payload: {
-        template_type: "button",
-        text: "OK, let's set your room preferences so I won't need to ask for them in the future.",
-        buttons: [{
-          type: "web_url",
-          url: "https://nicoswebhook.herokuapp.com/home_url",
-          title: "Set preferences",
-          webview_height_ratio: "compact",
-          messenger_extensions: true
-        }]
-      }
+  } 
+  else {
+    response = {
+
+      "text" : 'Unknown command! Type "help" for a list of commands'
     }
-  };
-} else if (received_message.text.toLowerCase().trim() === 'help'){
-  response = {
-    "text" : 'Commands:\n- Start Catching\n- Show caught pokémon\n- Show <pokémon you have caught>\n- Begin trade'
-  }
-} 
-else {
-  response = {
 
-    "text" : 'Unknown command! Type "help" for a list of commands'
-  }
-
-}}
+  }}
 
 /*
 else {
- response = {
-  "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+response = {
+"text": `You sent the message: "${received_message.text}". Now send me an attachment!`
 }
 }
-  //}
+//}
 } else if (received_message.attachments) {
-  // Get the URL of the message attachment
-  let attachment_url = received_message.attachments[0].payload.url;
-  response = {
-  	"attachment": {
-  		"type": "template",
-  		"payload": {
-  			"template_type": "generic",
-  			"elements": [{
-  				"title": "Is this the right picture?",
-  				"subtitle": "Tap a button to answer.",
-  				"image_url": attachment_url,
-  				"buttons": [
-  				{
-  					"type": "postback",
-  					"title": "Yes!",
-  					"payload": "yes",
-  				},
-  				{
-  					"type": "postback",
-  					"title": "No!",
-  					"payload": "no",
-  				}
-  				],
-  			}]
-  		}
-  	}
-  }
+// Get the URL of the message attachment
+let attachment_url = received_message.attachments[0].payload.url;
+response = {
+"attachment": {
+"type": "template",
+"payload": {
+	"template_type": "generic",
+	"elements": [{
+		"title": "Is this the right picture?",
+		"subtitle": "Tap a button to answer.",
+		"image_url": attachment_url,
+		"buttons": [
+		{
+			"type": "postback",
+			"title": "Yes!",
+			"payload": "yes",
+		},
+		{
+			"type": "postback",
+			"title": "No!",
+			"payload": "no",
+		}
+		],
+	}]
+}
+}
+}
 } */
 
 // Send the response message
@@ -1233,34 +1236,34 @@ let payload = received_postback.payload;
 
 // Set the response based on the postback payload
 if (payload === 'yes') {
-	response = { "text": "Thanks!" }
+  response = { "text": "Thanks!" }
 } else if (payload === 'no') {
-	response = { "text": "Oops, try sending another image." }
+  response = { "text": "Oops, try sending another image." }
 } else if (payload === 'Show caught pokémon') {
   if (!map.has(sender_psid)) {
-   response = {
-    "text" : "You haven't caught any Pokémon!"
+    response = {
+      "text" : "You haven't caught any Pokémon!"
+    }
+  } else {
+    var stringMess = "You've caught:"
+    map.get(sender_psid).forEach(function(item){
+      stringMess = stringMess + "\n";
+      stringMess = stringMess + item;
+    });
+
+
+
+    response = {
+      "text" : stringMess
+    }
+
   }
-} else {
-  var stringMess = "You've caught:"
-  map.get(sender_psid).forEach(function(item){
-    stringMess = stringMess + "\n";
-    stringMess = stringMess + item;
-  });
-
-
-
-  response = {
-    "text" : stringMess
-  }
-
-}
 } else if (payload === 'Play again' || payload == "Start Catching") {
   if (!currentMap.has(sender_psid)){
-      currentMap.set(sender_psid, "bulbasaur");
-      resetCurrentPokemon(sender_psid);
-    }
-	response = {
+    currentMap.set(sender_psid, "bulbasaur");
+    resetCurrentPokemon(sender_psid);
+  }
+  response = {
     "attachment": {
       "type": "template",
       "payload": {
@@ -1281,24 +1284,24 @@ callSendAPI(sender_psid, response);
 function callSendAPI(sender_psid, response) {
 // Construct the message body
 let request_body = {
-	"recipient": {
-		"id": sender_psid
-	},
-	"message": response
+  "recipient": {
+    "id": sender_psid
+  },
+  "message": response
 }
 
 // Send the HTTP request to the Messenger Platform
 request({
-	"uri": "https://graph.facebook.com/v2.6/me/messages",
-	"qs": { "access_token": PAGE_ACCESS_TOKEN },
-	"method": "POST",
-	"json": request_body
+  "uri": "https://graph.facebook.com/v2.6/me/messages",
+  "qs": { "access_token": PAGE_ACCESS_TOKEN },
+  "method": "POST",
+  "json": request_body
 }, (err, res, body) => {
-	if (!err) {
-		console.log('message sent!')
-	} else {
-		console.error("Unable to send message:" + err);
-	}
+  if (!err) {
+    console.log('message sent!')
+  } else {
+    console.error("Unable to send message:" + err);
+  }
 }); 
 }
 
@@ -1325,7 +1328,7 @@ function threeNum(num) {
 
 function checkPokemonName(string) {
   var substring = string.substring(6).trim();
-  
+
 
   return (substring.toLowerCase() === currentPokemon && substring.length === currentPokemon.length)
 }
@@ -1347,47 +1350,77 @@ app.get('/home_url', function(req, res){
 
 
 
+
+var tradeMap = new Map();
+//console.log(map.get(100000));
+
+
 app.get('/trade', function(req, res){
-  //res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
-  //res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
-  
-  var id = req.query.id;
-  
-  console.log(map.get(100000));
-  console.log("id=" + id);
+//res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
+//res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
+
+var id = req.query.id;
+
+console.log(map.get(100000));
+console.log("id=" + id);
+
+
+
+if (tradeMap.has(id)) {
+
+res.render('tradeRecieving',{
+  title: name + " would like to trade!",
+  user:name,
+  itemList:arr,
+  id : id
+} ) ;
+
+
+
+//if trademap hs it
+} else {
 
   var arr = [];
 
-console.log(map.has(id));
+
+  console.log(map.has(id));
   if (map.has(id)) {
     map.get(id).forEach(function(item){
-  arr.push(item);
- } )
+      arr.push(item);
+    } )
 
- // arr = ['nico', 'poop'];
+// arr = ['nico', 'poop'];
 
 var name = "Trainer";
 
- request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAAGMDA1ZBK08BAMpPnOW5PEHMuGNnKBZBRSxRDekRuifenYgtSShjT8eg7Yxy9OWkJs7lZAqdJlo4VZAkXvHrcMQDbaYsmPbQUjw9J2LAZAZBVXKHDrcYWfAJ5Iwi25sxC6gL4hECXZBbRtXh21vY9SK3ulWMEP6IQqZC9wlelsSHAZDZD', { json: true }, (err, response, body) => {
+request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAAGMDA1ZBK08BAMpPnOW5PEHMuGNnKBZBRSxRDekRuifenYgtSShjT8eg7Yxy9OWkJs7lZAqdJlo4VZAkXvHrcMQDbaYsmPbQUjw9J2LAZAZBVXKHDrcYWfAJ5Iwi25sxC6gL4hECXZBbRtXh21vY9SK3ulWMEP6IQqZC9wlelsSHAZDZD', { json: true }, (err, response, body) => {
   if (err) { return console.log(err); 
-res.render('trade',{
-  title: "Trading with " + name,
-  user:name,
-  itemList:arr
-} ) ;
+    //name = "Trainer"
+    console.log("name is : " + name);
+    res.render('trade',{
+      title: name + " would like to trade!",
+      user: name,
+      itemList:arr,
+      id : id
+    } ) ;
 
   }
-  //console.log(res);
-  name = body.first_name; 
-  console.log(body.first_name);
-  console.log(name);
+//console.log(res);
 
+if (body.first_name != undefined){
+name = body.first_name; 
+console.log("here's what you got" + body.first_name);
+console.log(name);
+}
 
-  res.render('trade',{
-  title: "Trading with " + name,
+res.render('trade',{
+  title: name + " would like to trade!",
   user:name,
-  itemList:arr
+  itemList:arr,
+  id : id
 } ) ;
+
+
 
 
 
@@ -1400,10 +1433,62 @@ console.log(name);
 
 } else {
   console.log(map)
-res.sendFile( __dirname + "/public/" + "noPokemon.html" );
+  res.sendFile( __dirname + "/public/" + "noPokemon.html" );
 
 }
-  
+
+}
+
+});
+
+
+app.post('/trade', (req, res) => { 
+
+  if (req.isTrading === "true") {
+    console.log("isTrading true")
+
+console.log("body is" + JSON.stringify(req.body))
+
+//if (tradeMap.)
+
+
+
+
+// Parse the request body from the POST
+var pokemonName = req.body.name;
+
+tradeMap.set(req.query.id, pokemonName);
+
+console.log(pokemonName);
+console.log(tradeMap);
+ 
+ var name = JSON.stringify(req.body);
+
+console.log(name)
+
+console.log("is trading"+ req.body.isTrading)
+
+
+
+
+
+
+
+
+
+res.render('tradeRecieving',{
+
+} ) ;
+
+} else {
+  if (req.psidOfSender != req.query.id) {
+    console.log("wrong PSID! ")
+  } else {
+    console.log("right psid!!")
+  }
+}
+
+
 
 
 });
