@@ -80,6 +80,10 @@ div {
       console.log('set user to: ' + user_psid);
     }
 
+      function getUserPSIDString() {
+      return user_psid;
+    }
+
     function getLink() {
       //var string = getUser();
       //user_psid.replace(/['"]+/g, '')
@@ -105,8 +109,9 @@ div {
 <script type="text/javascript">
   getUser();
   alert("this is what i have:" + user_psid);
+  alert('function gives me ' + getUserPSIDString());
   
-document.getElementById("psidOfSender").setAttribute('value', user_psid);
+document.getElementById("psidOfSender").setAttribute('value', getUserPSIDString());
 </script>
 
 
