@@ -57,6 +57,8 @@ console.log(map.get(100000));
 var currentMap = new Map([[100000 ,"bulbasaur"]]);
 console.log(currentMap.get(100000));
 
+map.set(['2674269505918135', ["bulbasaur", "venusaur"]]);
+
 
 
 //const request = require('request');
