@@ -1315,6 +1315,35 @@ function checkPokemonName(string) {
 
 
 app.get('/home_url', function(req, res){
+
+(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.com/en_US/messenger.Extensions.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+    window.extAsyncInit = function() {
+     // alert('loaded sdk');
+    };
+    function getUser() {
+      MessengerExtensions.getUserID(function success(uids) {
+        var psid = uids.psid;
+        alert(JSON.stringify(psid));
+      }, function error(err, errorMessage) {
+        alert(JSON.stringify(errorMessage));
+      });
+    }
+
+console.log(getUser());
+
+
+
+
+
   res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
 
   res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
