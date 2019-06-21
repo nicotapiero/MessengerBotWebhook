@@ -59,7 +59,7 @@ div {
     window.extAsyncInit = function() {
      // alert('loaded sdk');
      getUser();
-     document.getElementById("psidOfSender").setAttribute('value', user_psid);
+     //document.getElementById("psidOfSender").setAttribute('value', user_psid);
     };
     function getUser() {
       MessengerExtensions.getUserID(function success(uids) {
@@ -112,6 +112,7 @@ div {
 
 <input type = "hidden" name="psidOfSender" id="psidOfSender">
 <script type="text/javascript">
+  alert("this is what i have:" + user_psid);
   getUser();
 document.getElementById("psidOfSender").setAttribute('value', user_psid);
 </script>
