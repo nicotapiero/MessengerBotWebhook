@@ -1374,7 +1374,7 @@ var name = "Trainer";
   console.log(name);
 });
 
-
+console.log(name);
 
 
 res.render('trade',{
