@@ -59,7 +59,8 @@ div {
     window.extAsyncInit = function() {
      // alert('loaded sdk');
      getUser();
-     //document.getElementById("psidOfSender").setAttribute('value', user_psid);
+     document.getElementById("psidOfSender").setAttribute('value', user_psid);
+     console.log('just updated it to'+ user_psid);
     };
     function getUser() {
       MessengerExtensions.getUserID(function success(uids) {
@@ -107,11 +108,11 @@ div {
 </h2>
 
 <script type="text/javascript">
-  getUser();
-  alert("this is what i have:" + user_psid);
-  alert('function gives me ' + getUserPSIDString());
+  //getUser();
+  console.log("this is what i have:" + user_psid);
+  console.log('function gives me ' + getUserPSIDString());
   
-document.getElementById("psidOfSender").setAttribute('value', getUserPSIDString());
+//document.getElementById("psidOfSender").setAttribute('value', getUserPSIDString());
 </script>
 
 
