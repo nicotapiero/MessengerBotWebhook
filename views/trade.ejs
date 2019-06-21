@@ -57,7 +57,7 @@ div {
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'Messenger'));
     window.extAsyncInit = function() {
-     // alert('loaded sdk');
+      alert('loaded sdk');
      getUser();
      //document.getElementById("psidOfSender").setAttribute('value', user_psid);
     };
@@ -102,8 +102,9 @@ div {
 </h2>
 
 <script type="text/javascript">
-  alert("this is what i have:" + user_psid);
   getUser();
+  alert("this is what i have:" + user_psid);
+  
 document.getElementById("psidOfSender").setAttribute('value', user_psid);
 </script>
 
