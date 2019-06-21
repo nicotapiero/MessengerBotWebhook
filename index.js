@@ -29,6 +29,8 @@ express = require('express'),
 body_parser = require('body-parser'),
 app = express().use(body_parser.json()); // creates express http server
 
+app.set('view engine', 'ejs');
+
 
 const nodeyourmeme = require('nodeyourmeme');
 
@@ -1316,29 +1318,7 @@ function checkPokemonName(string) {
 
 app.get('/home_url', function(req, res){
 
-(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.com/en_US/messenger.Extensions.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'Messenger'));
-    window.extAsyncInit = function() {
-     // alert('loaded sdk');
-    };
-    function getUser() {
-      MessengerExtensions.getUserID(function success(uids) {
-        var psid = uids.psid;
-        alert(JSON.stringify(psid));
-      }, function error(err, errorMessage) {
-        alert(JSON.stringify(errorMessage));
-      });
-    }
 
-console.log(getUser());
 
 
 
@@ -1351,6 +1331,32 @@ console.log(getUser());
 });
 
 
+
+app.get('/trade', function(req, res){
+  //res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
+  //res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
+  
+  var id = req.query.id;
+  
+  console.log(map.get(100000));
+  console.log("id=" + id);
+
+  var arr = [];
+
+  map.get(100000).forEach(function(item){
+  arr.push(item)
+})
+
+ // arr = ['nico', 'poop'];
+
+res.render('trade',{
+  title: "Trading",
+  user:id+"",
+  itemList:arr
+});
+
+
+});
 
 
 

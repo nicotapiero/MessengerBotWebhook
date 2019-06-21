@@ -1,0 +1,25 @@
+<html>
+
+
+
+<%function getUser() {
+      return 100000;
+    }%>
+
+
+  <head><title><%= title %></title></head>
+  <body>
+    welcome <%= user%>;
+    hey did this work? <%= getUser();%>
+
+
+
+    <select id="select" name="name">
+    <% for(var a=0; a < itemList.length; a++) { %>
+     <option value="<%= itemList[a] %>"><%= itemList[a] %></option>
+    <% } %>
+</select>
+
+
+  </body>
+</html>
