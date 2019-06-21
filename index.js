@@ -1154,9 +1154,20 @@ resetCurrentPokemon(sender_psid);
       }
     }
   };
+} else if (received_message.text.toLowerCase().trim() === 'help'){
+  response = {
+    "text" : 'Commands:\n- Start Catching\n- Show caught pokémon\n- Show <pokémon you have caught>\n- Begin trade'
+  }
+} 
+else {
+  response = {
+
+    "text" : 'Unknown command! Type "help" for a list of commands'
+  }
+
 }
 
-
+/*
 else {
  response = {
   "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
@@ -1191,7 +1202,7 @@ else {
   		}
   	}
   }
-} 
+} */
 
 // Send the response message
 callSendAPI(sender_psid, response);    
@@ -1309,6 +1320,8 @@ app.get('/home_url', function(req, res){
   res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
   res.sendFile( __dirname + "/public/" + "home_url.html" );
 });
+
+
 
 
 
