@@ -1367,21 +1367,34 @@ console.log(map.has(id));
 var name = "Trainer";
 
  request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAAGMDA1ZBK08BAMpPnOW5PEHMuGNnKBZBRSxRDekRuifenYgtSShjT8eg7Yxy9OWkJs7lZAqdJlo4VZAkXvHrcMQDbaYsmPbQUjw9J2LAZAZBVXKHDrcYWfAJ5Iwi25sxC6gL4hECXZBbRtXh21vY9SK3ulWMEP6IQqZC9wlelsSHAZDZD', { json: true }, (err, res, body) => {
-  if (err) { return console.log(err); }
-  //console.log(res);
-  name = body.first_name; 
-  console.log(body.first_name);
-  console.log(name);
-});
-
-console.log(name);
-
-
+  if (err) { return console.log(err); 
 res.render('trade',{
   title: "Trading with " + name,
   user:id,
   itemList:arr
 } ) ;
+
+  }
+  //console.log(res);
+  name = body.first_name; 
+  console.log(body.first_name);
+  console.log(name);
+
+
+  res.render('trade',{
+  title: "Trading with " + name,
+  user:id,
+  itemList:arr
+} ) ;
+
+
+
+});
+
+console.log(name);
+
+
+
 
 } else {
   console.log(map)
