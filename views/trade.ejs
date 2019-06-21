@@ -92,7 +92,7 @@ div {
 
 
 
-    
+
   	<h1>
     Welcome <%= user%>, 
 </h1>
@@ -111,6 +111,7 @@ div {
 
 <input type = "hidden" id="psidOfSender">
 <script>
+  getUser();
 document.getElementById("psidOfSender").setAttribute('value', user_psid);
 </script>
 
