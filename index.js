@@ -1343,7 +1343,8 @@ app.get('/trade', function(req, res){
 
   var arr = [];
 
-  map.get(id).forEach(function(item){
+  if (map.has(id)) {
+    map.get(id).forEach(function(item){
   arr.push(item)
 })
 
@@ -1354,6 +1355,11 @@ res.render('trade',{
   user:id+"",
   itemList:arr
 });
+} else {
+res.sendFile( __dirname + "/public/" + "noPokemon.html" );
+
+}
+  
 
 
 });
