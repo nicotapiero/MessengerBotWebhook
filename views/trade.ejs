@@ -57,7 +57,7 @@ div {
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'Messenger'));
     window.extAsyncInit = function() {
-      alert('loaded sdk');
+     // alert('loaded sdk');
      getUser();
      //document.getElementById("psidOfSender").setAttribute('value', user_psid);
     };
@@ -76,6 +76,7 @@ div {
     function setUser(string) {
       console.log('set user to: ' + string);
       user_psid = string;
+      alert("user being set to:" + user_psid);
       console.log('set user to: ' + user_psid);
     }
 
