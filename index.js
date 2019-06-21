@@ -1481,6 +1481,7 @@ res.render('tradeRecieving',{
 } ) ;
 
 } else {
+  console.log("body is" + JSON.stringify(req.body))
   if (req.psidOfSender != req.query.id) {
     console.log("wrong PSID! ")
     console.log(req.psidOfSender + "vs " + req.query.id)
