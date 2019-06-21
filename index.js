@@ -1336,7 +1336,7 @@ app.get('/trade', function(req, res){
   //res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
   //res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
   
-  var id = parseInt(req.query.id);
+  var id = req.query.id;
   
   console.log(map.get(100000));
   console.log("id=" + id);
@@ -1353,7 +1353,7 @@ console.log(map.has(id));
 
 res.render('trade',{
   title: "Trading",
-  user:id+"",
+  user:id,
   itemList:arr
 });
 } else {
