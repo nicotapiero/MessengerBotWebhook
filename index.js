@@ -1165,7 +1165,7 @@ else {
     "text" : 'Unknown command! Type "help" for a list of commands'
   }
 
-}
+}}
 
 /*
 else {
@@ -1320,20 +1320,6 @@ app.get('/home_url', function(req, res){
   res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
   res.sendFile( __dirname + "/public/" + "home_url.html" );
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
