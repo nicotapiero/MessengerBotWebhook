@@ -22,14 +22,18 @@
       MessengerExtensions.getUserID(function success(uids) {
         var psid = uids.psid;
         alert(JSON.stringify(psid));
+          return JSON.stringify(psid);
       }, function error(err, errorMessage) {
         alert(JSON.stringify(errorMessage));
       });
     }
 
     function getLink() {
-      return "https://nicoswebhook.herokuapp.com/trade?id=" + getUser();
+      var string = getUser();
+      return "https://nicoswebhook.herokuapp.com/trade?id=" + string;
     }
+
+   // function get
 
 
 
