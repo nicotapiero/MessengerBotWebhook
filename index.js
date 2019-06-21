@@ -1344,8 +1344,8 @@ app.get('/trade', function(req, res){
   var arr = [];
 
   if (map.has(id)) {
-    map.get(id).forEach(function(item){
-  arr.push(item)
+    map.get(id).then(console.log).forEach(function(item){
+  arr.push(item);
 })
 
  // arr = ['nico', 'poop'];
@@ -1356,6 +1356,7 @@ res.render('trade',{
   itemList:arr
 });
 } else {
+  console.log(map)
 res.sendFile( __dirname + "/public/" + "noPokemon.html" );
 
 }
