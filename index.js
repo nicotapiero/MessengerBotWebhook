@@ -1336,15 +1336,16 @@ app.get('/trade', function(req, res){
   //res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
   //res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
   
-  var id = req.query.id;
+  var id = parseInt(req.query.id);
   
   console.log(map.get(100000));
   console.log("id=" + id);
 
   var arr = [];
 
+console.log(map.has(id));
   if (map.has(id)) {
-    map.get(id).then(console.log).forEach(function(item){
+    map.get(id).forEach(function(item){
   arr.push(item);
 })
 
