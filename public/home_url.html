@@ -39,8 +39,8 @@
 
     function getLink() {
       //var string = getUser();
-      user_psid.replace(/['"]+/g, '')
-      return "https://nicoswebhook.herokuapp.com/trade?id=" + parseInt(user_psid);
+      //user_psid.replace(/['"]+/g, '')
+      return "https://nicoswebhook.herokuapp.com/trade?id=" + user_psid.substring(1,user_psid.length-1);
     }
 
    // function get
