@@ -1483,6 +1483,7 @@ res.render('tradeRecieving',{
 } else {
   if (req.psidOfSender != req.query.id) {
     console.log("wrong PSID! ")
+    console.log(req.psidOfSender + "vs " + req.query.id)
   } else {
     console.log("right psid!!")
   }
