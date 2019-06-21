@@ -1360,7 +1360,7 @@ console.log(map.has(id));
   if (map.has(id)) {
     map.get(id).forEach(function(item){
   arr.push(item);
-})
+ } )
 
  // arr = ['nico', 'poop'];
 
@@ -1371,16 +1371,17 @@ var name = "Trainer";
   //console.log(res);
   name = body.first_name; 
   console.log(body.first_name);
-}).then(res.render('trade',{
+  console.log(name);
+});
+
+
+
+
+res.render('trade',{
   title: "Trading with " + name,
   user:id,
   itemList:arr
-} ) );
-
-
-
-
-
+} ) ;
 
 } else {
   console.log(map)
