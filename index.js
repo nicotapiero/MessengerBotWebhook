@@ -1109,7 +1109,7 @@ resetCurrentPokemon(sender_psid);
     "text" : stringMess
   }
 
-}}else if (received_message.text.toLowerCase().startsWith("show")) {
+}}else if (received_message.text.toLowerCase().startsWith("show ")) {
   console.log("showing pokemon")
   var pokeName = received_message.text.toLowerCase().substring(5);
 
@@ -1121,7 +1121,7 @@ resetCurrentPokemon(sender_psid);
         "payload": {
           "template_type": "generic",
           "elements": [{
-            "title": 'Your '+ received_message.text +"!",
+            "title": 'Your '+ received_message.text.substring(5) +"!",
             "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
           }]
         }
@@ -1130,7 +1130,7 @@ resetCurrentPokemon(sender_psid);
 
   } else {
     response = {
-      "text" : 'You do not have a ' + received_message.text + "!"
+      "text" : 'You do not have a ' + received_message.text.substring(5) + "!"
     }
   }
 } else if (received_message.text.startsWith("oh ma")) {
