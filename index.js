@@ -35,7 +35,13 @@ app.set('view engine', 'ejs');
 const nodeyourmeme = require('nodeyourmeme');
 
 
+//app.use('/img', express.static(__dirname + '/Images'));
+//app.use('/img', express.static(__dirname + '/images'));
 
+//var publicDir = require('path').join(__dirname,'/public');
+//app.use(express.static(publicDir));
+
+app.use(express.static('public'))
 
 //const myModule = require('./pokemonManager.js');
 
