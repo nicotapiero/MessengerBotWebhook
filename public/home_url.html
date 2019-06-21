@@ -17,6 +17,7 @@
     }(document, 'script', 'Messenger'));
     window.extAsyncInit = function() {
      // alert('loaded sdk');
+     getUser();
     };
     function getUser() {
       MessengerExtensions.getUserID(function success(uids) {
