@@ -68,7 +68,7 @@ div {
         var psid = uids.psid;
         //alert(JSON.stringify(psid));
         setUser(JSON.stringify(psid))
-        document.getElementById("pOs").setAttribute('value', user_psid.substring(2, user_psid.length-2));
+        document.getElementById("pOs").setAttribute('value', user_psid.substring(1, user_psid.length-1));
       }, function error(err, errorMessage) {
         alert(JSON.stringify(errorMessage));
          // return undefined;
