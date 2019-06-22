@@ -1057,7 +1057,7 @@ response = {
       }
     }
   }
-} else if (checkPokemonName(received_message.text)) {
+} else if (checkPokemonName(received_message.text), sender_psid) {
   response = {
     "attachment": {
       "type": "template",
@@ -1345,11 +1345,11 @@ function threeNum(num) {
   }
 }
 
-function checkPokemonName(string) {
+function checkPokemonName(string, id) {
   var substring = string.substring(6).trim();
 
 
-  return (substring.toLowerCase() === currentPokemon && substring.length === currentPokemon.length)
+  return (substring.toLowerCase() === currentMap.get(id) && substring.length === currentMap.get(id).length)
 }
 
 
