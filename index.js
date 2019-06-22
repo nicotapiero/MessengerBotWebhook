@@ -1650,6 +1650,7 @@ res.sendFile( __dirname + "/public/" + "selfTrade.html" );
 var pokemonToTrade = JSON.stringify(req.body.pokemonName);
 pokemonToTrade = pokemonToTrade.substring(1, pokemonToTrade.length -1);
 pokemonToTrade = pokemonToTrade.toLowerCase();
+pokemonToTrade = pokemonToTrade.charAt(0).toUpperCase() + pokemonToTrade.slice(1)
   console.log(map);
   console.log(idOfSender)
   var arr = map.get(idOfSender);
