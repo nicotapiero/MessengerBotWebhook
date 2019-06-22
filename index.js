@@ -1348,7 +1348,9 @@ function threeNum(num) {
 function checkPokemonName(string, id) {
   var substring = string.substring(6).trim();
 
-
+  console.log(currentMap)
+  console.log(id)
+  console.log(string)
   return (substring.toLowerCase() === currentMap.get(id) && substring.length === currentMap.get(id).length)
 }
 
