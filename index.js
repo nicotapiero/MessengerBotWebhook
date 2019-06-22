@@ -1518,7 +1518,7 @@ pokemonToTrade = pokemonToTrade.toLowerCase();
 if (!map.has(idOfSender)){
   res.sendFile( __dirname + "/public/" + "noPokemon.html" );
 }
-if (!arr.includes(pokemonToTrade){
+if (!arr.includes(pokemonToTrade)){
 
 
 res.render('noSuchPokemon',{
