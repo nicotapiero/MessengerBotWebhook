@@ -1415,7 +1415,7 @@ console.log("id=" + id);
 ///TESTIGN------------
 var home = "broadcast"
 
-if ("home" in req.query.id) {
+if ("home" in req.query) {
   home = "currentThread";
   console.log("there is a home")
 } else {
@@ -1571,7 +1571,7 @@ console.log("body is" + JSON.stringify(req.body))
 ///TESTIGN------------
 var home = "broadcast"
 
-if ("home" in req.query.id) {
+if ("home" in req.query) {
   home = "currentThread";
   console.log("there is a home")
 } else {
