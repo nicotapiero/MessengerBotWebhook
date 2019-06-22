@@ -197,7 +197,7 @@ let message = {attachment: {
 };*/
 
 function sendShare(){
-  alert("calling sendShare()");
+  //alert("calling sendShare()");
 MessengerExtensions.beginShareFlow(function(share_response) {
   // User dismissed without error, but did they share the message?
   if(share_response.is_sent){
