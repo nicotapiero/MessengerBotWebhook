@@ -1560,6 +1560,24 @@ console.log(name);
 
 app.post('/trade', (req, res) => { 
 
+  var home = "broadcast"
+
+console.log('this is req.query');
+console.log(JSON.stringify(req.query));
+
+
+if ("home" in req.query) {
+  home = "current_thread";
+  console.log("there is a home")
+} else {
+  console.log("no home")
+}
+
+
+
+
+
+
   if (req.body.isTrading === "true") {
     console.log("isTrading true")
 
@@ -1573,8 +1591,9 @@ console.log("body is" + JSON.stringify(req.body))
 ///TESTIGN------------
 var home = "broadcast"
 
-console.log('this is req.query')
-console.log(JSON.stringify(req.query))
+console.log('this is req.query');
+console.log(JSON.stringify(req.query));
+
 
 if ("home" in req.query) {
   home = "current_thread";
@@ -1685,7 +1704,7 @@ res.sendFile( __dirname + "/public/" + "successfulTrade.html" );
 } else {
 
 
-
+//here!!!
 
 
   console.log("body is" + JSON.stringify(req.body))
