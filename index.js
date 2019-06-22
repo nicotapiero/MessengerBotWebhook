@@ -1267,7 +1267,7 @@ if (payload === 'yes') {
     }
 
   }
-} else if (payload === 'Play again' || payload === "Start Catching" || payload === 'Start catching') {
+} else if (payload === 'Play again' || payload === "Start Catching" || payload === 'Start catching' || payload === 'Get started') {
   if (!currentMap.has(sender_psid)){
     currentMap.set(sender_psid, "bulbasaur");
     resetCurrentPokemon(sender_psid);
@@ -1660,6 +1660,9 @@ if (!map.has(idOfSender) ){//|| arr === undefined){
   return;
 } 
 if (!arr.includes(pokemonToTrade)){
+
+  console.log('pokemon to Trade');
+  console.log(pokemonToTrade)
 
 
 res.render('noSuchPokemon',{
