@@ -158,7 +158,7 @@ MessengerExtensions.beginShareFlow(function(share_response) {
   if(share_response.is_sent){
     // The user actually did share. 
     // Perhaps close the window w/ requestCloseBrowser().
-    requestCloseBrowser();
+    MessengerExtensions.requestCloseBrowser();
   }
 }, 
 function(errorCode, errorMessage) {      
@@ -171,6 +171,13 @@ message,
 
 
 }
+
+
+MessengerExtensions.requestCloseBrowser(function success() {
+  // webview closed
+}, function error(err) {
+  // an error occurred
+});
 
 
 
