@@ -1416,7 +1416,7 @@ console.log("id=" + id);
 var home = "broadcast"
 
 if ("home" in req.query) {
-  home = "currentThread";
+  home = "current_thread";
   console.log("there is a home")
 } else {
   console.log("no home")
@@ -1572,7 +1572,7 @@ console.log("body is" + JSON.stringify(req.body))
 var home = "broadcast"
 
 if ("home" in req.query) {
-  home = "currentThread";
+  home = "current_thread";
   console.log("there is a home")
 } else {
   console.log("no home")
