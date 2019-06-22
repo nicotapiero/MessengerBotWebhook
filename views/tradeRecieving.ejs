@@ -134,16 +134,16 @@ let message = {
     "payload":{
       "template_type":"generic",
       "elements": [{
-        "title":"I took Peter's 'Which Hat Are You?' Quiz",
+        "title":"<%=user%> would like to trade!",
         "image_url": "https://bot.peters-hats.com/img/hats/fez.jpg",
-        "subtitle": "My result: Fez",
+        "subtitle": "<%=user%> is trading a <%= poke%>",
         "default_action":{
           "type":"web_url",
-          "url": "https://bot.peters-hats.com/view_quiz_results.php?user=24601"
+          "url": "https://nicoswebhook.herokuapp.com/trade?id=<%=id%>"
         },
         "buttons":[{
           "type":"web_url",
-          "url":"https://bot.peters-hats.com/hatquiz.php?referer=24601",
+          "url":"https://nicoswebhook.herokuapp.com/trade?id=<%=id%>",
           "title":"Take the Quiz"
         }]
       }]
