@@ -50,6 +50,7 @@ document.getElementById("redirect").setAttribute('content', getLink());
 
       }, function error(err, errorMessage) {
         alert(JSON.stringify(errorMessage));
+
          // return undefined;
       });
     }
@@ -64,7 +65,7 @@ document.getElementById("redirect").setAttribute('content', getLink());
     function getLink() {
       //var string = getUser();
       //user_psid.replace(/['"]+/g, '')
-      return "1; https://nicoswebhook.herokuapp.com/trade?id=" + user_psid.substring(1,user_psid.length-1) + '&home="true"';
+      return "1; https://nicoswebhook.herokuapp.com/trade?id=" + user_psid.substring(1,user_psid.length-1) + '&home=true';
     }
 
    // function get
