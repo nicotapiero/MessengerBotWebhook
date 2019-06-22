@@ -1,0 +1,100 @@
+<!DOCTYPE ejs>
+<html>
+  <head>
+    <title>My Awesome Webview</title>
+    <style>
+img {
+  width: 100%;
+  height: auto;
+}
+</style>
+  </head>
+
+ <body style="background-color:powderblue;">
+  	<script>
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.com/en_US/messenger.Extensions.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+    window.extAsyncInit = function() {
+     // alert('loaded sdk');
+     getUser();
+    };
+    function getUser() {
+      MessengerExtensions.getUserID(function success(uids) {
+        var psid = uids.psid;
+        alert(JSON.stringify(psid));
+        setUser(JSON.stringify(psid))
+      }, function error(err, errorMessage) {
+        alert(JSON.stringify(errorMessage));
+         // return undefined;
+      });
+    }
+
+    var user_psid;
+    function setUser(string) {
+      console.log('set user to: ' + string);
+      user_psid = string;
+      console.log('set user to: ' + user_psid);
+    }
+    function getUserPSIDString() {
+      return user_psid;
+    }
+
+    function getLink() {
+      //var string = getUser();
+      //user_psid.replace(/['"]+/g, '')
+      return "https://nicoswebhook.herokuapp.com/trade?id=" + user_psid.substring(1,user_psid.length-1);
+    }
+
+
+   // function get
+
+</script>
+
+
+  </script>
+  <input type="button" onclick="getUser()" value="Get user id" />
+
+
+<button onclick="location.href = getLink();" id="myButton" class="float-left submit-button" >Home</button>
+
+
+
+<h1> Select your pokemon to trade:  </h1>
+  <form method = "post">
+  First name: <input type="text" name="fname"><br>
+  Last name: <input type="text" name="lname"><br>
+  
+  <input type="hidden" name="user_psid" id="example" ><br> 
+  <input type="hidden" name="isTrading" id="isTrading" value = "true"><br>
+<script type="text/javascript"> 
+  //getUser();
+  alert(getUserPSIDString())
+  document.getElementById("example").setAttribute('value', getUserPSIDString());
+</script>
+  <input type="submit" value="Submit">
+</form>
+
+
+<a href="javascript:getLink();">
+
+<img border="0" alt="cover photo" src="/images/cover.png">
+</a>
+
+
+
+
+
+
+  </body>
+
+
+   
+</html>

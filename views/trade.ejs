@@ -59,8 +59,9 @@ div {
     window.extAsyncInit = function() {
      // alert('loaded sdk');
      getUser();
-     document.getElementById("psidOfSender").setAttribute('value', user_psid);
-     console.log('just updated it to'+ user_psid);
+     //alert('setting to ' + user_psid);
+     document.getElementById("pOs").setAttribute('value', user_psid);
+     
     };
     function getUser() {
       MessengerExtensions.getUserID(function success(uids) {
@@ -71,13 +72,16 @@ div {
         alert(JSON.stringify(errorMessage));
          // return undefined;
       });
-    }
+    }/*
+    function getUser() {
+      setUser('100000');
+    }*/
 
     var user_psid;
     function setUser(string) {
       console.log('set user to: ' + string);
       user_psid = string;
-      alert("user being set to:" + user_psid);
+     // alert("user being set to:   " + user_psid);
       console.log('set user to: ' + user_psid);
     }
 
@@ -124,7 +128,7 @@ div {
 </select>
 
 
-<input type = "hidden" name="psidOfSender" id="psidOfSender">
+<input type = "hidden" name="idOfSender" id="pOs" value = "thisIStheId">
 
 
 

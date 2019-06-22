@@ -1,17 +1,51 @@
-<!DOCTYPE ejs>
 <html>
-  <head>
-    <title>My Awesome Webview</title>
+
+
+
+<%function getUser() {
+      return 100000;
+    }%>
+
     <style>
-img {
+input[type=text], select {
   width: 100%;
-  height: auto;
+  height: 25%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
 }
 </style>
-  </head>
 
- <body style="background-color:powderblue;">
-  	<script>
+
+  <head><title><%= title %></title></head>
+  <body style="background-color:powderblue;">
+
+
+    <script>
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) {
@@ -25,6 +59,9 @@ img {
     window.extAsyncInit = function() {
      // alert('loaded sdk');
      getUser();
+    // alert('setting to ' + user_psid);
+     document.getElementById("pOs").setAttribute('value', user_psid);
+     
     };
     function getUser() {
       MessengerExtensions.getUserID(function success(uids) {
@@ -36,14 +73,19 @@ img {
          // return undefined;
       });
     }
+    /*function getUser() {
+      setUser('500');
+    }*/
 
     var user_psid;
     function setUser(string) {
       console.log('set user to: ' + string);
       user_psid = string;
+     // alert("user being set to:   " + user_psid);
       console.log('set user to: ' + user_psid);
     }
-    function getUserPSIDString() {
+
+      function getUserPSIDString() {
       return user_psid;
     }
 
@@ -52,32 +94,42 @@ img {
       //user_psid.replace(/['"]+/g, '')
       return "https://nicoswebhook.herokuapp.com/trade?id=" + user_psid.substring(1,user_psid.length-1);
     }
-
+    
 
    // function get
 
 </script>
 
 
-  </script>
-  <input type="button" onclick="getUser()" value="Get user id" />
-
-
-<button onclick="location.href = getLink();" id="myButton" class="float-left submit-button" >Home</button>
 
 
 
-<h1> Select your pokemon to trade:  </h1>
-  <form method = "post">
-  First name: <input type="text" name="fname"><br>
-  Last name: <input type="text" name="lname"><br>
+    <h1>
+    Currently Trading with: <%= user%>! , 
+</h1>
+<h2>
+    Send this link to a friend you'd like to trade with!
+</h2>
+
+<script type="text/javascript">
+  //getUser();
+  console.log("this is what i have:" + user_psid);
+  console.log('function gives me ' + getUserPSIDString());
   
-  <input type="hidden" name="user_psid" id="example" ><br> 
+//document.getElementById("psidOfSender").setAttribute('value', getUserPSIDString());
+</script>
+
+
+<h1> Type which pokemon you'd like to trade:  </h1>
+  <form method = "post">
+  Pokemon To Trade: <input type="text" name="pokemonName"><br>
+  
+  <input type="hidden" name="user_psid" id="pOs" ><br> 
   <input type="hidden" name="isTrading" id="isTrading" value = "true"><br>
 <script type="text/javascript"> 
   //getUser();
-  alert(getUserPSIDString())
-  document.getElementById("example").setAttribute('value', getUserPSIDString());
+  //alert(getUserPSIDString())
+ // document.getElementById("example").setAttribute('value', getUserPSIDString());
 </script>
   <input type="submit" value="Submit">
 </form>
@@ -91,10 +143,5 @@ img {
 
 
 
-
-
   </body>
-
-
-   
 </html>

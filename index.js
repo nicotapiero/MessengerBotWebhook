@@ -57,6 +57,8 @@ var currentPokemon = "current";
 var map = new Map([['100000' ,["bulbasaur", "ivysaur"]]]);
 console.log(map.get(100000));
 
+map.set('500', ['bulbasaur']);
+
 var currentMap = new Map([['100000' ,"bulbasaur"]]);
 console.log(currentMap.get(100000));
 
@@ -82,9 +84,9 @@ function catchPokemon(id) {
 }
 
 //change this back to just "currentPokemon" if you wanna make easy duplicates
-if (!pc.includes(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1))) {
+//if (!pc.includes(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1))) {
   pc.push(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1) )
-} 
+//} 
 
 map.set(id, pc);
 console.log(map)
@@ -1334,6 +1336,21 @@ function checkPokemonName(string) {
 }
 
 
+
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
+
+
+
+
 app.get('/home_url', function(req, res){
 
 
@@ -1379,6 +1396,7 @@ res.render('tradeRecieving',{
 
 //if trademap hs it
 } else {
+  console.log(tradeMap);
 
   var arr = [];
 
@@ -1442,9 +1460,15 @@ console.log(name);
 });
 
 
+
+
+
+
+
+
 app.post('/trade', (req, res) => { 
 
-  if (req.isTrading === "true") {
+  if (req.body.isTrading === "true") {
     console.log("isTrading true")
 
 console.log("body is" + JSON.stringify(req.body))
@@ -1457,7 +1481,7 @@ console.log("body is" + JSON.stringify(req.body))
 // Parse the request body from the POST
 var pokemonName = req.body.name;
 
-tradeMap.set(req.query.id, pokemonName);
+//tradeMap.set(req.query.id, pokemonName);
 
 console.log(pokemonName);
 console.log(tradeMap);
@@ -1471,22 +1495,118 @@ console.log("is trading"+ req.body.isTrading)
 
 
 
+var idOfSender = JSON.stringify(req.body.user_psid);
+  idOfSender = idOfSender.substring(1, idOfSender.length -1);
+console.log(idOfSender)
+
+if (idOfSender === req.query.id) {
 
 
 
-
-
-res.render('tradeRecieving',{
-
-} ) ;
+res.sendFile( __dirname + "/public/" + "selfTrade.html" );
 
 } else {
+
+
+
+var pokemonToTrade = JSON.stringify(req.body.pokemonName);
+pokemonToTrade = pokemonToTrade.substring(1, pokemonToTrade.length -1);
+  console.log(map);
+  console.log(idOfSender)
+  var arr = map.get(idOfSender)
+if (!map.has(idOfSender)){
+  res.sendFile( __dirname + "/public/" + "noPokemon.html" );
+}
+if (!arr.includes(pokemonToTrade)){
+
+
+res.render('noSuchPokemon',{
+fakepoke: pokemonToTrade,//name + " would like to trade!",
+ // user:"getname"//name,
+  //itemList:arr,
+  //id : id
+} ) ;
+
+
+}
+
+else {
+
+//trading begins
+console.log('map before')
+console.log(map);
+
+var trader1Arr = map.get(req.query.id)
+var trader2Arr = map.get(idOfSender)
+
+console.log(tradeMap)
+
+var otherPoke = tradeMap.get(req.query.id)
+
+trader1Arr.remove(otherPoke);
+tradeMap.delete(req.query.id);
+trader2Arr.remove(pokemonToTrade);
+trader1Arr.push(pokemonToTrade);
+trader2Arr.push(otherPoke);
+
+
+
+
+map.set(req.query.id, trader1Arr);
+map.set(idOfSender, trader2Arr);
+
+console.log('map after')
+console.log(map)
+
+
+res.sendFile( __dirname + "/public/" + "successfulTrade.html" );
+
+}
+}
+
+
+
+} else {
+
+
+
+
+
   console.log("body is" + JSON.stringify(req.body))
-  if (req.psidOfSender != req.query.id) {
+  var idOfSender = JSON.stringify(req.body.idOfSender);
+  idOfSender = idOfSender.substring(1, idOfSender.length -1);
+var poke = JSON.stringify(req.body.name);
+  poke = poke.substring(1, poke.length -1);
+
+console.log('poke is' + poke)
+
+  tradeMap.set(idOfSender, poke);
+  console.log(tradeMap)
+
+
+  if (idOfSender != req.query.id) {
     console.log("wrong PSID! ")
-    console.log(req.psidOfSender + "vs " + req.query.id)
+
+    console.log(parseInt(idOfSender) + "vs " + req.query.id)
+
+
+    res.sendFile( __dirname + "/public/" + "forceTrade.html" );
+
   } else {
     console.log("right psid!!")
+
+
+    res.render('tradeRecieving',{
+title: "filler title",//name + " would like to trade!",
+  user:"getname"//name,
+  //itemList:arr,
+  //id : id
+} ) ;
+
+
+
+
+
   }
 }
 
