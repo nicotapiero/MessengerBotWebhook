@@ -218,7 +218,7 @@ alert(JSON.stringify(errorMessage))
         elements: [{
           title: "<%=user%> would like to trade!",
           image_url: 'https://png.pngtree.com/element_our/png/20181031/dog-so-sute-png_225212.jpg',
-          subtitle: 'A shared list from Tasks',
+          subtitle: '<%=user%> is trading their <%=poke%>!',
           default_action: {
             type: 'web_url',
             url: 'https://nicoswebhook.herokuapp.com/trade?id=<%=id%>',
@@ -226,7 +226,7 @@ alert(JSON.stringify(errorMessage))
           },
           buttons: [{
           type: 'web_url',
-    title: 'buttonText',
+    title: 'Press here to trade!',
     url: 'https://nicoswebhook.herokuapp.com/trade?id=<%=id%>',
     messenger_extensions: true,
     webview_height_ratio: 'compact',
