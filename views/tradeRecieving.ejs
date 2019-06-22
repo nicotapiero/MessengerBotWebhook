@@ -88,6 +88,7 @@ document.getElementById("pOs").setAttribute('value', user_psid.substring(1, user
 
       }, function error(err, errorMessage) {
         alert(JSON.stringify(errorMessage));
+        alert('Trading will most likely not work, make sure to open this link within messenger!')
          // return undefined;
       });
     }

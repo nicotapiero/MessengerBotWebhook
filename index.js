@@ -1573,7 +1573,9 @@ pokemonToTrade = pokemonToTrade.toLowerCase();
   console.log(map);
   console.log(idOfSender)
   var arr = map.get(idOfSender);
-if (!map.has(idOfSender) || arr === undefined){
+  console.log('array is:vvvvv')
+  console.log(arr);
+if (!map.has(idOfSender) ){//|| arr === undefined){
   res.sendFile( __dirname + "/public/" + "noPokemon.html" );
   return;
 } 
