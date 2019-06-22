@@ -1634,12 +1634,43 @@ console.log('poke is' + poke)
     console.log("right psid!!")
 
 
-    res.render('tradeRecieving',{
-title: "filler title",//name + " would like to trade!",
-  user:"getname"//name,
+
+
+
+var name = 'Trainer'
+request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAAGMDA1ZBK08BAMpPnOW5PEHMuGNnKBZBRSxRDekRuifenYgtSShjT8eg7Yxy9OWkJs7lZAqdJlo4VZAkXvHrcMQDbaYsmPbQUjw9J2LAZAZBVXKHDrcYWfAJ5Iwi25sxC6gL4hECXZBbRtXh21vY9SK3ulWMEP6IQqZC9wlelsSHAZDZD', { json: true }, (err, response, body) => {
+  if (err) { return console.log(err); 
+    //name = "Trainer"
+    console.log("name is : " + name);
+     res.render('tradeRecieving',{
+title: name + " would like to trade!",//name + " would like to trade!",
+  user:name//name,
   //itemList:arr,
   //id : id
 } ) ;
+
+  }
+//console.log(res);
+
+if (body.first_name != undefined){
+name = body.first_name; 
+console.log("here's what you got" + body.first_name);
+console.log(name);
+}
+
+ res.render('tradeRecieving',{
+title: name + " would like to trade!",
+  user:name//name,
+  //itemList:arr,
+  //id : id
+} ) ;
+
+
+
+
+});
+
+   
 
 
 
