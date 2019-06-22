@@ -128,7 +128,24 @@ document.getElementById("pOs").setAttribute('value', psid.substring(1, psid.leng
 
 
 
-let message = {
+let message = {"attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"button",
+        "text":"<%=name%> would like to trade!",
+        "buttons":[
+          {
+            "type":"web_url",
+            "url":"https://nicoswebhook.herokuapp.com/trade?id=<%=id%>",
+            "title":"Begin trade",
+            "webview_height_ratio": "compact"
+          }
+        ]
+      }
+    }
+  };
+
+/*{
   "attachment":{
     "type":"template",
     "payload":{
@@ -150,7 +167,7 @@ let message = {
       }]
     }
   }
-};
+};*/
 
 function sendShare(){
   alert("calling sendShare()");

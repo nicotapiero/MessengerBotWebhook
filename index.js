@@ -1574,7 +1574,7 @@ console.log("body is" + JSON.stringify(req.body))
 var home = "broadcast"
 
 console.log('this is req.query')
-console.log(req.query)
+console.log(JSON.stringify(req.query))
 
 if ("home" in req.query) {
   home = "current_thread";
