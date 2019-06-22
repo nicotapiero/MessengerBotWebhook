@@ -1427,6 +1427,11 @@ if ("home" in req.query.id) {
 
 
 
+
+
+
+
+
 if (tradeMap.has(id)) {
 
 
@@ -1437,13 +1442,12 @@ request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,
   if (err) { return console.log(err); 
     //name = "Trainer"
 
-
     console.log("name is : " + name);
     res.render('tradeRecieving',{
       title: name + ' would like to trade!',
       user: name,
-      poke : tradeMap.get(id)
-      
+      poke : tradeMap.get(id),
+      home : home
     } ) ;
 
   }
@@ -1458,7 +1462,8 @@ console.log(name);
 res.render('tradeRecieving',{
   title: name + " would like to trade!",
   user:name,
-  poke: tradeMap.get(id)
+  poke: tradeMap.get(id),
+  home:home
   
 } ) ;
 
@@ -1559,6 +1564,23 @@ app.post('/trade', (req, res) => {
 console.log("body is" + JSON.stringify(req.body))
 
 //if (tradeMap.)
+
+
+
+
+///TESTIGN------------
+var home = "broadcast"
+
+if ("home" in req.query.id) {
+  home = "currentThread";
+  console.log("there is a home")
+} else {
+  console.log("no home")
+}
+//-----------
+
+
+
 
 
 
@@ -1696,7 +1718,8 @@ request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,la
      res.render('tradeRecieving',{
 title: name + " would like to trade!",//name + " would like to trade!",
   user:name,
-  poke:tradeMap.get(idOfSender)//name,,
+  poke:tradeMap.get(idOfSender),//name,,
+  home: home
   //itemList:arr,
   //id : id
 } ) ;
@@ -1713,7 +1736,8 @@ console.log(name);
  res.render('tradeRecieving',{
 title: name + " would like to trade!",
   user:name,
-  poke:tradeMap.get(idOfSender)//name,
+  poke:tradeMap.get(idOfSender),//name,
+  home: home
   //itemList:arr,
   //id : id
 } ) ;
