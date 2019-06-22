@@ -82,7 +82,10 @@ div {
     function getUser() {
       MessengerExtensions.getUserID(function success(uids) {
         var psid = uids.psid;
-        //alert(JSON.stringify(psid));
+
+        alert(JSON.stringify(psid));
+
+        psid = JSON.stringify(psid);
         setUser(JSON.stringify(psid))
 document.getElementById("pOs").setAttribute('value', psid.substring(1, psid.length-1));
 
