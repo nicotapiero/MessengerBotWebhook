@@ -1416,7 +1416,7 @@ request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,
     //name = "Trainer"
     console.log("name is : " + name);
     res.render('trade',{
-      title: name + " would like to trade!",
+      title: 'Select a Pokémon to trade, ' +name + "!",
       user: name,
       itemList:arr,
       id : id
@@ -1511,13 +1511,14 @@ res.sendFile( __dirname + "/public/" + "selfTrade.html" );
 
 var pokemonToTrade = JSON.stringify(req.body.pokemonName);
 pokemonToTrade = pokemonToTrade.substring(1, pokemonToTrade.length -1);
+pokemonToTrade = pokemonToTrade.toLowerCase();
   console.log(map);
   console.log(idOfSender)
   var arr = map.get(idOfSender)
 if (!map.has(idOfSender)){
   res.sendFile( __dirname + "/public/" + "noPokemon.html" );
 }
-if (!arr.includes(pokemonToTrade)){
+if (!arr.includes(pokemonToTrade){
 
 
 res.render('noSuchPokemon',{
