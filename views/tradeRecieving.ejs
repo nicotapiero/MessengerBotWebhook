@@ -84,6 +84,7 @@ div {
         var psid = uids.psid;
 
         alert(JSON.stringify(psid));
+        alert("<%=home%>");
 
         psid = JSON.stringify(psid);
         setUser(psid)
@@ -210,7 +211,7 @@ message,
 </h2>
 
 <img onclick="javascript:sendShare()" src=
-<%if (home === 'broadcast') {%> 
+<%if (locals.home === 'broadcast') {%> 
 "images/broadcast.png"
 <% }else { %>
 
