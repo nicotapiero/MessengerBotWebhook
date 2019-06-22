@@ -35,7 +35,7 @@ app.use(body_parser.urlencoded({ extended: true }))
 app.use(body_parser.json())
 
 
-const nodeyourmeme = require('nodeyourmeme');
+//const nodeyourmeme = require('nodeyourmeme');
 
 
 //app.use('/img', express.static(__dirname + '/Images'));
@@ -917,14 +917,14 @@ resetCurrentPokemon(10000);
 
 
 
-
+/*
 async function printAbout() {
 //var promise = ;
 var yeehaw = nodeyourmeme.search('knuckles'.substring(7));
 console.log(yeehaw.about);
 }
 var yeehaw = nodeyourmeme.search('knuckles'.substring(7));
-
+*/
 function printPokemon() {
   var num = Math.floor(Math.random() * 803);
 //console.log("https://img.pokemondb.net/artwork/large/" + pokemon[num] + ".jpg")
@@ -935,12 +935,12 @@ console.log("currentPokemon is" + currentPokemon)
 console.log('waiting');
 }*/
 console.log('hey');
-console.log(yeehaw.about);
+//console.log(yeehaw.about);
 
 
 //let result = await promise.about
 //wait(5000);
-printAbout();
+//printAbout();
 //console.log('nico:::' + promise.about)
 
 // Sets server port and logs message on success
