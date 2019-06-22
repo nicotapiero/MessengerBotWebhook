@@ -1396,6 +1396,7 @@ request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,
     res.render('tradeRecieving',{
       title: name + ' would like to trade!',
       user: name,
+      poke : tradeMap.get(id)
       
     } ) ;
 
@@ -1411,6 +1412,7 @@ console.log(name);
 res.render('tradeRecieving',{
   title: name + " would like to trade!",
   user:name,
+  poke: tradeMap.get(id)
   
 } ) ;
 
@@ -1644,7 +1646,8 @@ request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,la
     console.log("name is : " + name);
      res.render('tradeRecieving',{
 title: name + " would like to trade!",//name + " would like to trade!",
-  user:name//name,
+  user:name,
+  poke:tradeMap.get(idOfSender)//name,,
   //itemList:arr,
   //id : id
 } ) ;
@@ -1660,7 +1663,8 @@ console.log(name);
 
  res.render('tradeRecieving',{
 title: name + " would like to trade!",
-  user:name//name,
+  user:name,
+  poke:tradeMap.get(idOfSender)//name,
   //itemList:arr,
   //id : id
 } ) ;

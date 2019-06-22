@@ -7,6 +7,12 @@
     }%>
 
     <style>
+      
+img {
+  width: 100%;
+  height: auto;
+}
+
 input[type=text], select {
   width: 100%;
   height: 25%;
@@ -112,8 +118,11 @@ document.getElementById("pOs").setAttribute('value', user_psid.substring(1, user
 
 
     <h1>
-    Currently Trading with: <%= user%>! , 
+    <%= user%> is trading a <%=poke%>! , 
 </h1>
+
+
+
 <h2>
     Send this link to a friend you'd like to trade with!
 </h2>
