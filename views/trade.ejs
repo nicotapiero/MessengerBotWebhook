@@ -60,7 +60,7 @@ div {
      // alert('loaded sdk');
      getUser();
      alert('setting to ' + user_psid);
-     //document.getElementById("pOs").setAttribute('value', user_psid);
+     document.getElementById("pOs").setAttribute('value', user_psid);
      
     };
     function getUser() {
@@ -68,7 +68,7 @@ div {
         var psid = uids.psid;
         //alert(JSON.stringify(psid));
         setUser(JSON.stringify(psid))
-        document.getElementById("pOs").setAttribute('value', user_psid);
+        //document.getElementById("pOs").setAttribute('value', user_psid);
       }, function error(err, errorMessage) {
         alert(JSON.stringify(errorMessage));
          // return undefined;
