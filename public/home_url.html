@@ -7,6 +7,17 @@ img {
   height: auto;
 }
 </style>
+
+
+<meta http-equiv="Refresh" id = "redirect" content="5; url=https://www.quackit.com/html/tags/">
+
+<script type="text/javascript">
+<!--
+window.location = getLink();
+//-->
+</script>
+
+
   </head>
 
  <body style="background-color:powderblue;">
@@ -33,6 +44,10 @@ img {
 
 
         setUser(JSON.stringify(psid))
+document.getElementById("redirect").setAttribute('content', getLink());
+
+
+
       }, function error(err, errorMessage) {
         alert(JSON.stringify(errorMessage));
          // return undefined;
