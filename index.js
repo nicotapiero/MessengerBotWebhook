@@ -1479,7 +1479,7 @@ request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,
       itemList:arr,
       id : id
     } ) ;
-
+    return;
   }
 //console.log(res);
 
