@@ -1573,6 +1573,9 @@ console.log("body is" + JSON.stringify(req.body))
 ///TESTIGN------------
 var home = "broadcast"
 
+console.log('this is req.query')
+console.log(req.query)
+
 if ("home" in req.query) {
   home = "current_thread";
   console.log("there is a home")
