@@ -83,8 +83,8 @@ div {
       MessengerExtensions.getUserID(function success(uids) {
         var psid = uids.psid;
 
-        alert(JSON.stringify(psid));
-        alert("<%=home%>");
+        //alert(JSON.stringify(psid));
+        //alert("<%=home%>");
 
         psid = JSON.stringify(psid);
         setUser(psid)
@@ -297,7 +297,7 @@ MessengerExtensions.requestCloseBrowser(function success() {
 
 <script type="text/javascript">
   //getUser();
-  alert('just got user');
+  //alert('just got user');
   //console.log("this is what i have:" + user_psid);
  // console.log('function gives me ' + getUserPSIDString());
   

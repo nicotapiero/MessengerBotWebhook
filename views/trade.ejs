@@ -106,6 +106,28 @@ div {
       //user_psid.replace(/['"]+/g, '')
       return "https://nicoswebhook.herokuapp.com/trade?id=" + user_psid.substring(1,user_psid.length-1);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
    // function get
@@ -132,7 +154,7 @@ div {
 </script>
 
 
-<form id="tableForm" action="/trade?id=<%= id%>" method="post">
+<form id="tableForm" method="post">
     <select id="select" name="name">
     <% for(var a=0; a < itemList.length; a++) { %>
      <option value="<%= itemList[a] %>"><%= itemList[a] %></option>
