@@ -1,0 +1,76 @@
+curl -ik -X POST "Content-Type: application/json" -d '{
+    "persistent_menu": [
+        {
+            "locale": "default",
+            "composer_input_disabled": false,
+            "call_to_actions": [
+                {
+                    "type": "postback",
+                    "title": "Start catching",
+                    "payload": "Start catching"
+                },
+                {
+                    "type": "postback",
+                    "title": "Show caught pokémon",
+                    "payload": "Show caught Pokémon"
+                },
+                {
+                    "type": "postback",
+                    "title": "Begin trade",
+                    "payload": "Begin trade",
+                }
+            ]
+        }
+    ]
+}' "https://graph.facebook.com/v2.6/me/messages?access_token=EAAGMDA1ZBK08BAMpPnOW5PEHMuGNnKBZBRSxRDekRuifenYgtSShjT8eg7Yxy9OWkJs7lZAqdJlo4VZAkXvHrcMQDbaYsmPbQUjw9J2LAZAZBVXKHDrcYWfAJ5Iwi25sxC6gL4hECXZBbRtXh21vY9SK3ulWMEP6IQqZC9wlelsSHAZDZD"
+
+
+
+curl -X POST -H "Content-Type: application/json" -d '{
+  "persistent_menu":[
+    {
+      "locale":"default",
+      "composer_input_disabled": false,
+      "call_to_actions":[
+        {
+                    "type": "postback",
+                    "title": "Start catching",
+                    "payload": "Start catching"
+                },
+                {
+                    "type": "postback",
+                    "title": "Show caught pokémon",
+                    "payload": "Show caught Pokémon"
+                },
+                {
+                    "type": "postback",
+                    "title": "Begin trade",
+                    "payload": "Begin trade",
+                }
+          ]
+    },
+    
+  ]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAGMDA1ZBK08BAMpPnOW5PEHMuGNnKBZBRSxRDekRuifenYgtSShjT8eg7Yxy9OWkJs7lZAqdJlo4VZAkXvHrcMQDbaYsmPbQUjw9J2LAZAZBVXKHDrcYWfAJ5Iwi25sxC6gL4hECXZBbRtXh21vY9SK3ulWMEP6IQqZC9wlelsSHAZDZD" 
+
+
+https://graph.facebook.com/v2.6/me/accounts?access_token=faEAAGMDA1ZBK08BANgiiymTRAy0mkWtDFybUwEeVdc97HhQ7aR6sCF3mDuZAeLy82KZCsvE5wqpgvfZA0xNd2A379odA1n5usfn29CzhNd5Hvo0fphv9Y353xgz23CJmU93cOWNFSiDeGWzDMh2jZB4vv2K8lZB8ZCA42n1gh6WAEJzb0WZBBeNB5xZC4pDOBNqZA4yhFr3EjT6lsK4QoBwkLT3J
+
+https://graph.facebook.com/v2.6/me/subscribed_apps?method=POST&access_token=faEAAGMDA1ZBK08BANgiiymTRAy0mkWtDFybUwEeVdc97HhQ7aR6sCF3mDuZAeLy82KZCsvE5wqpgvfZA0xNd2A379odA1n5usfn29CzhNd5Hvo0fphv9Y353xgz23CJmU93cOWNFSiDeGWzDMh2jZB4vv2K8lZB8ZCA42n1gh6WAEJzb0WZBBeNB5xZC4pDOBNqZA4yhFr3EjT6lsK4QoBwkLT3J
+
+
+
+
+
+
+https://graph.facebook.com/v2.6/me/accounts?access_token=faEAAGMDA1ZBK08BANgiiymTRAy0mkWtDFybUwEeVdc97HhQ7aR6sCF3mDuZAeLy82KZCsvE5wqpgvfZA0xNd2A379odA1n5usfn29CzhNd5Hvo0fphv9Y353xgz23CJmU93cOWNFSiDeGWzDMh2jZB4vv2K8lZB8ZCA42n1gh6WAEJzb0WZBBeNB5xZC4pDOBNqZA4yhFr3EjT6lsK4QoBwkLT3J
+
+
+
+
+
+
+POST /v3.3/435458370579279/accounts/test-users HTTP/1.1
+Host: graph.facebook.com
+
+installed=true
