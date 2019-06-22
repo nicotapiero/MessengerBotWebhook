@@ -150,6 +150,7 @@ let message = {
   }
 };
 
+function sendShare(){
 MessengerExtensions.beginShareFlow(function(share_response) {
   // User dismissed without error, but did they share the message?
   if(share_response.is_sent){
@@ -167,7 +168,7 @@ message,
 
 
 
-
+}
 
 
 
@@ -208,7 +209,7 @@ message,
     Send this link to a friend you'd like to trade with!
 </h2>
 
-<img onclick="javascript:exportToForm('1.6','55','10','50','1')" src=
+<img onclick="javascript:sendShare()" src=
 <%if (home === 'broadcast') {%> 
 "images/broadcast.png"
 <% }else { %>
