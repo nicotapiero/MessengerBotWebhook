@@ -1447,7 +1447,8 @@ request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,
       title: name + ' would like to trade!',
       user: name,
       poke : tradeMap.get(id),
-      home : home
+      home : home,
+      id: id
     } ) ;
 
   }
@@ -1463,7 +1464,8 @@ res.render('tradeRecieving',{
   title: name + " would like to trade!",
   user:name,
   poke: tradeMap.get(id),
-  home:home
+  home:home,
+  id: id
   
 } ) ;
 
@@ -1719,7 +1721,8 @@ request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,la
 title: name + " would like to trade!",//name + " would like to trade!",
   user:name,
   poke:tradeMap.get(idOfSender),//name,,
-  home: home
+  home: home,
+  id : idOfSender
   //itemList:arr,
   //id : id
 } ) ;
@@ -1737,7 +1740,8 @@ console.log(name);
 title: name + " would like to trade!",
   user:name,
   poke:tradeMap.get(idOfSender),//name,
-  home: home
+  home: home,
+  id : idOfSender
   //itemList:arr,
   //id : id
 } ) ;
