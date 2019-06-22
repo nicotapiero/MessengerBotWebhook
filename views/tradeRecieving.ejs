@@ -221,13 +221,13 @@ alert(JSON.stringify(errorMessage))
           subtitle: 'A shared list from Tasks',
           default_action: {
             type: 'web_url',
-            url: 'https://nicoswebhook.herokuapp.com/trade',
+            url: 'https://nicoswebhook.herokuapp.com/trade?id=<%=id%>',
             messenger_extensions: true,
           },
           buttons: [{
           type: 'web_url',
     title: 'buttonText',
-    url: 'https://nicoswebhook.herokuapp.com/trade',
+    url: 'https://nicoswebhook.herokuapp.com/trade?id=<%=id%>',
     messenger_extensions: true,
     webview_height_ratio: 'compact',
         }],
