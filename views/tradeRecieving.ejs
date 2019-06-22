@@ -141,7 +141,8 @@ let message = {attachment: {
             url: 'https://nicoswebhook.herokuapp.com/trade',
             messenger_extensions: true,
           },
-          buttons: [type: 'web_url',
+          buttons: [{
+          type: 'web_url',
     title: 'buttonText',
     url: 'https://nicoswebhook.herokuapp.com/trade',
     messenger_extensions: true,
@@ -149,7 +150,7 @@ let message = {attachment: {
         }],
       },
     },
-}
+};
 
 
 
@@ -273,7 +274,7 @@ MessengerExtensions.requestCloseBrowser(function success() {
 />
 
 <script type="text/javascript">
-  getUser();
+  //getUser();
   alert('just got user');
   console.log("this is what i have:" + user_psid);
   console.log('function gives me ' + getUserPSIDString());
