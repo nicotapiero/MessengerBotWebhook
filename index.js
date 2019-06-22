@@ -1559,7 +1559,7 @@ console.log(idOfSender)
 
 if (idOfSender === req.query.id) {
 
-
+console.log(map.get(idOfSender))
 
 res.sendFile( __dirname + "/public/" + "selfTrade.html" );
 
