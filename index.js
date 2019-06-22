@@ -1165,11 +1165,11 @@ resetCurrentPokemon(sender_psid);
         type: "template",
         payload: {
           template_type: "button",
-          text: "OK, let's set your room preferences so I won't need to ask for them in the future.",
+          text: "OK, start the trade by clicking the button below.",
           buttons: [{
             type: "web_url",
             url: "https://nicoswebhook.herokuapp.com/trade?id=" + sender_psid,
-            title: "Set preferences",
+            title: "Begin trade",
             webview_height_ratio: "compact",
             messenger_extensions: true
           }]
@@ -1260,7 +1260,7 @@ if (payload === 'yes') {
     }
 
   }
-} else if (payload === 'Play again' || payload == "Start Catching") {
+} else if (payload === 'Play again' || payload === "Start Catching" || payload === 'Start catching') {
   if (!currentMap.has(sender_psid)){
     currentMap.set(sender_psid, "bulbasaur");
     resetCurrentPokemon(sender_psid);
@@ -1278,6 +1278,23 @@ if (payload === 'yes') {
     }
   }
 }
+} else if (payload === 'Begin trade') {
+  response = {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: "OK, start the trade by clicking the button below.",
+          buttons: [{
+            type: "web_url",
+            url: "https://nicoswebhook.herokuapp.com/trade?id=" + sender_psid,
+            title: "Begin trade",
+            webview_height_ratio: "compact",
+            messenger_extensions: true
+          }]
+        }
+      }
+    };
 }
 // Send the message to acknowledge the postback
 callSendAPI(sender_psid, response);
@@ -1389,7 +1406,7 @@ if (tradeMap.has(id)) {
 
 var name = "Trainer";
 
-request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAAGMDA1ZBK08BAMpPnOW5PEHMuGNnKBZBRSxRDekRuifenYgtSShjT8eg7Yxy9OWkJs7lZAqdJlo4VZAkXvHrcMQDbaYsmPbQUjw9J2LAZAZBVXKHDrcYWfAJ5Iwi25sxC6gL4hECXZBbRtXh21vY9SK3ulWMEP6IQqZC9wlelsSHAZDZD', { json: true }, (err, response, body) => {
+request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); 
     //name = "Trainer"
     console.log("name is : " + name);
@@ -1450,7 +1467,7 @@ res.render('tradeRecieving',{
 
 var name = "Trainer";
 
-request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAAGMDA1ZBK08BAMpPnOW5PEHMuGNnKBZBRSxRDekRuifenYgtSShjT8eg7Yxy9OWkJs7lZAqdJlo4VZAkXvHrcMQDbaYsmPbQUjw9J2LAZAZBVXKHDrcYWfAJ5Iwi25sxC6gL4hECXZBbRtXh21vY9SK3ulWMEP6IQqZC9wlelsSHAZDZD', { json: true }, (err, response, body) => {
+request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); 
     //name = "Trainer"
     console.log("name is : " + name);
@@ -1640,7 +1657,7 @@ console.log('poke is' + poke)
 
 
 var name = 'Trainer'
-request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=EAAGMDA1ZBK08BAMpPnOW5PEHMuGNnKBZBRSxRDekRuifenYgtSShjT8eg7Yxy9OWkJs7lZAqdJlo4VZAkXvHrcMQDbaYsmPbQUjw9J2LAZAZBVXKHDrcYWfAJ5Iwi25sxC6gL4hECXZBbRtXh21vY9SK3ulWMEP6IQqZC9wlelsSHAZDZD', { json: true }, (err, response, body) => {
+request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); 
     //name = "Trainer"
     console.log("name is : " + name);
