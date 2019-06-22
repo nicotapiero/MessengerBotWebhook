@@ -133,7 +133,7 @@ let message = {attachment: {
       payload: {
         template_type: 'generic',
         elements: [{
-          title: title,
+          title: "<%=user%> would like to trade!",
           image_url: 'https://png.pngtree.com/element_our/png/20181031/dog-so-sute-png_225212.jpg',
           subtitle: 'A shared list from Tasks',
           default_action: {
@@ -211,7 +211,29 @@ function(errorCode, errorMessage) {
 alert(JSON.stringify(errorMessage))
 
 },
-message,
+{attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        elements: [{
+          title: "<%=user%> would like to trade!",
+          image_url: 'https://png.pngtree.com/element_our/png/20181031/dog-so-sute-png_225212.jpg',
+          subtitle: 'A shared list from Tasks',
+          default_action: {
+            type: 'web_url',
+            url: 'https://nicoswebhook.herokuapp.com/trade',
+            messenger_extensions: true,
+          },
+          buttons: [{
+          type: 'web_url',
+    title: 'buttonText',
+    url: 'https://nicoswebhook.herokuapp.com/trade',
+    messenger_extensions: true,
+    webview_height_ratio: 'compact',
+        }],
+      }]
+    }
+}},
 "<%= home%>");
 
 
