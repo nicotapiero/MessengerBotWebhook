@@ -1086,6 +1086,13 @@ response = {
 catchPokemon(sender_psid);
 resetCurrentPokemon(sender_psid);
 } else if (received_message.text.toLowerCase().startsWith("catch")) {
+
+if (!currentMap.has(sender_psid)){
+response = {
+  "text" : 'Say "Start catching" to start catching!'
+}
+}  else {
+
   response = {
     "attachment": {
       "type": "template",
@@ -1112,7 +1119,7 @@ resetCurrentPokemon(sender_psid);
  }
 }
 
-resetCurrentPokemon(sender_psid);
+resetCurrentPokemon(sender_psid);}
 } else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
   if (!map.has(sender_psid)) {
     response = {
