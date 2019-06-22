@@ -1349,8 +1349,8 @@ function checkPokemonName(string, id) {
   var substring = string.substring(6).trim();
 
   console.log(currentMap)
-  console.log(id)
-  console.log(string)
+  console.log(id+"")
+  console.log(substring)
   return (substring.toLowerCase() === currentMap.get(id) && substring.length === currentMap.get(id).length)
 }
 
