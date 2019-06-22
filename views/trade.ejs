@@ -59,14 +59,14 @@ div {
     window.extAsyncInit = function() {
      // alert('loaded sdk');
      getUser();
-     //alert('setting to ' + user_psid);
+     alert('setting to ' + user_psid);
      document.getElementById("pOs").setAttribute('value', user_psid);
      
     };
     function getUser() {
       MessengerExtensions.getUserID(function success(uids) {
         var psid = uids.psid;
-        alert(JSON.stringify(psid));
+        //alert(JSON.stringify(psid));
         setUser(JSON.stringify(psid))
       }, function error(err, errorMessage) {
         alert(JSON.stringify(errorMessage));
