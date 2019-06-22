@@ -1391,14 +1391,39 @@ var tradeMap = new Map();
 //console.log(map.get(100000));
 
 
+
+
+
+
+
+
 app.get('/trade', function(req, res){
 res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
 res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
 
 var id = req.query.id;
 
+
+
 console.log(map.get(100000));
 console.log("id=" + id);
+
+
+
+
+
+///TESTIGN------------
+var home = "broadcast"
+
+if ("home" in req.query.id) {
+  home = "currentThread";
+  console.log("there is a home")
+} else {
+  console.log("no home")
+}
+//-----------
+
+
 
 
 
@@ -1411,6 +1436,8 @@ var name = "Trainer";
 request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
   if (err) { return console.log(err); 
     //name = "Trainer"
+
+
     console.log("name is : " + name);
     res.render('tradeRecieving',{
       title: name + ' would like to trade!',
@@ -1479,7 +1506,7 @@ request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,
       itemList:arr,
       id : id
     } ) ;
-    return;
+    //return;
   }
 //console.log(res);
 
