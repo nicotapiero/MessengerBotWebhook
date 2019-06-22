@@ -128,7 +128,32 @@ document.getElementById("pOs").setAttribute('value', psid.substring(1, psid.leng
 
 
 
-let message = {"attachment":{
+let message = {attachment: {
+      type: 'template',
+      payload: {
+        template_type: 'generic',
+        elements: [{
+          title: title,
+          image_url: 'https://png.pngtree.com/element_our/png/20181031/dog-so-sute-png_225212.jpg',
+          subtitle: 'A shared list from Tasks',
+          default_action: {
+            type: 'web_url',
+            url: 'https://nicoswebhook.herokuapp.com/trade',
+            messenger_extensions: true,
+          },
+          buttons: [type: 'web_url',
+    title: 'buttonText',
+    url: 'https://nicoswebhook.herokuapp.com/trade',
+    messenger_extensions: true,
+    webview_height_ratio: 'compact',],
+        }],
+      },
+    },
+}
+
+
+
+/*{"attachment":{
       "type":"template",
       "payload":{
         "template_type":"button",
@@ -177,7 +202,7 @@ MessengerExtensions.beginShareFlow(function(share_response) {
   if(share_response.is_sent){
     // The user actually did share. 
     // Perhaps close the window w/ requestCloseBrowser().
-    MessengerExtensions.requestCloseBrowser();
+    MessengerExtensions.requestCloseBrowser(null, null);
   }
 }, 
 function(errorCode, errorMessage) {      
