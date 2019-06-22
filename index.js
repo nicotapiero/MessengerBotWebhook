@@ -1168,7 +1168,7 @@ resetCurrentPokemon(sender_psid);
           text: "OK, let's set your room preferences so I won't need to ask for them in the future.",
           buttons: [{
             type: "web_url",
-            url: "https://nicoswebhook.herokuapp.com/home_url",
+            url: "https://nicoswebhook.herokuapp.com/trade?id=" + sender_psid,
             title: "Set preferences",
             webview_height_ratio: "compact",
             messenger_extensions: true
