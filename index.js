@@ -1057,7 +1057,7 @@ response = {
       }
     }
   }
-} else if (checkPokemonName(received_message.text), sender_psid) {
+} else if (checkPokemonName(received_message.text, sender_psid)) {
   response = {
     "attachment": {
       "type": "template",
@@ -1349,7 +1349,7 @@ function checkPokemonName(string, id) {
   var substring = string.substring(6).trim();
 
   console.log(currentMap)
-  console.log(id+"")
+  console.log(id)
   console.log(substring)
   return (substring.toLowerCase() === currentMap.get(id) && substring.length === currentMap.get(id).length)
 }
