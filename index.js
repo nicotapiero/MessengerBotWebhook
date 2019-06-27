@@ -1707,6 +1707,33 @@ console.log(map)
 
 res.sendFile( __dirname + "/public/" + "successfulTrade.html" );
 
+
+var name = "Trainer";
+
+request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
+  if (err) { return console.log(err); 
+  }
+
+if (body.first_name != undefined){
+name = body.first_name; 
+console.log("here's what you got" + body.first_name);
+console.log(name);
+}
+
+});
+
+
+
+var message = name + " just traded you a " + pokemonToTrade + " for your " + otherPoke + "!"
+
+
+
+var response = {
+  "text" : message
+}
+
+callSendAPI(req.query.id, response);
+
 }
 }
 
