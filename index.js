@@ -1713,7 +1713,7 @@ var name = "Trainer";
 request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
   if (err) { console.log(err); 
 
-    var message = name + " just traded you a " + pokemonToTrade + " for your " + otherPoke + "!"
+    var message = name + " just traded you their " + pokemonToTrade + " for your " + otherPoke + "!"
 var response = {
   "text" : message
 }
@@ -1726,7 +1726,7 @@ console.log("here's what you got" + body.first_name);
 console.log(name);
 
 
-var message = name + " just traded you a " + pokemonToTrade + " for your " + otherPoke + "!"
+var message = name + " just traded you their " + pokemonToTrade + " for your " + otherPoke + "!"
 var response = {
   "text" : message
 }
