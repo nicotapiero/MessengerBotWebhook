@@ -593,7 +593,7 @@ function resetCurrentPokemon(id) {
   "Phione",
   "Manaphy",
   "Darkrai",
-  "Shaymin",
+  //"Shaymin",
   "Arceus",
   "Victini",
   "Snivy",
@@ -770,7 +770,7 @@ function resetCurrentPokemon(id) {
   "Vivillon",
   "Litleo",
   "Pyroar",
-  "Flabébé",
+  //"Flabébé",
   "Floette",
   "Florges",
   "Skiddo",
@@ -821,7 +821,7 @@ function resetCurrentPokemon(id) {
   "Yveltal",
   "Zygarde",
   "Diancie",
-  "Hoopa",
+  //"Hoopa",
   "Volcanion",
   "Rowlet",
   "Dartrix",
@@ -873,7 +873,7 @@ function resetCurrentPokemon(id) {
   "Sandygast",
   "Palossand",
   "Pyukumuku",
-  "Type: Null",
+  //"Type: Null",
   "Silvally",
   "Minior",
   "Komala",
@@ -903,7 +903,14 @@ function resetCurrentPokemon(id) {
   "Guzzlord",
   "Necrozma",
   "Magearna",
-  "Marshadow"];
+  "Marshadow",
+  "Poipole",
+  "Naganadel",
+  "Stakataka",
+  "Blacephalon",
+  "Zeraora",
+  "Meltan",
+  "Melmetal"];
 
   var string = pokemon[number];
 
