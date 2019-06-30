@@ -1305,6 +1305,8 @@ function handlePostback(sender_psid, received_postback) {
       }
     };
   }
+  console.log(response);
+  console.log('^^ response')
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
