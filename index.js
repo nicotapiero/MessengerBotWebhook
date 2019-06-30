@@ -23,7 +23,7 @@
 'use strict';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
-const 
+const
 request = require('request'),
 express = require('express'),
 body_parser = require('body-parser'),
@@ -78,18 +78,18 @@ function catchPokemon(id) {
   var pc;
   if (map.has(id)) {
     pc = map.get(id);
-//pc.push(currentPokemon);
-} else {
-  pc = []
-}
+    //pc.push(currentPokemon);
+  } else {
+    pc = []
+  }
 
-//change this back to just "currentPokemon" if you wanna make easy duplicates
-//if (!pc.includes(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1))) {
+  //change this back to just "currentPokemon" if you wanna make easy duplicates
+  //if (!pc.includes(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1))) {
   pc.push(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1) )
-//} 
+  //}
 
-map.set(id, pc);
-console.log(map)
+  map.set(id, pc);
+  console.log(map)
 }
 
 
@@ -927,7 +927,7 @@ var yeehaw = nodeyourmeme.search('knuckles'.substring(7));
 */
 function printPokemon() {
   var num = Math.floor(Math.random() * 803);
-//console.log("https://img.pokemondb.net/artwork/large/" + pokemon[num] + ".jpg")
+  //console.log("https://img.pokemondb.net/artwork/large/" + pokemon[num] + ".jpg")
 }
 printPokemon();
 console.log("currentPokemon is" + currentPokemon)
@@ -947,42 +947,42 @@ console.log('hey');
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 // Accepts POST requests at /webhook endpoint
-app.post('/webhook', (req, res) => {  
+app.post('/webhook', (req, res) => {
 
-// Parse the request body from the POST
-let body = req.body;
+  // Parse the request body from the POST
+  let body = req.body;
 
-// Check the webhook event is from a Page subscription
-if (body.object === 'page') {
+  // Check the webhook event is from a Page subscription
+  if (body.object === 'page') {
 
-  body.entry.forEach(function(entry) {
+    body.entry.forEach(function(entry) {
 
-// Gets the body of the webhook event
-let webhook_event = entry.messaging[0];
-console.log(webhook_event);
+      // Gets the body of the webhook event
+      let webhook_event = entry.messaging[0];
+      console.log(webhook_event);
 
 
-// Get the sender PSID
-let sender_psid = webhook_event.sender.id;
-console.log('Sender ID: ' + sender_psid);
+      // Get the sender PSID
+      let sender_psid = webhook_event.sender.id;
+      console.log('Sender ID: ' + sender_psid);
 
-// Check if the event is a message or postback and
-// pass the event to the appropriate handler function
-if (webhook_event.message) {
-  handleMessage(sender_psid, webhook_event.message);        
-} else if (webhook_event.postback) {
+      // Check if the event is a message or postback and
+      // pass the event to the appropriate handler function
+      if (webhook_event.message) {
+        handleMessage(sender_psid, webhook_event.message);
+      } else if (webhook_event.postback) {
 
-  handlePostback(sender_psid, webhook_event.postback);
-}
+        handlePostback(sender_psid, webhook_event.postback);
+      }
 
-});
-// Return a '200 OK' response to all events
-res.status(200).send('EVENT_RECEIVED');
+    });
+    // Return a '200 OK' response to all events
+    res.status(200).send('EVENT_RECEIVED');
 
-} else {
-// Return a '404 Not Found' if event is not from a page subscription
-res.sendStatus(404);
-}
+  } else {
+    // Return a '404 Not Found' if event is not from a page subscription
+    res.sendStatus(404);
+  }
 
 });
 
@@ -992,64 +992,64 @@ app.get('/webhook', (req, res) => {
   /** UPDATE YOUR VERIFY TOKEN **/
   const VERIFY_TOKEN = "nicostoken";
 
-// Parse params from the webhook verification request
-let mode = req.query['hub.mode'];
-let token = req.query['hub.verify_token'];
-let challenge = req.query['hub.challenge'];
+  // Parse params from the webhook verification request
+  let mode = req.query['hub.mode'];
+  let token = req.query['hub.verify_token'];
+  let challenge = req.query['hub.challenge'];
 
-// Check if a token and mode were sent
-if (mode && token) {
+  // Check if a token and mode were sent
+  if (mode && token) {
 
-// Check the mode and token sent are correct
-if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+    // Check the mode and token sent are correct
+    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
 
-// Respond with 200 OK and challenge token from the request
-console.log('WEBHOOK_VERIFIED');
-res.status(200).send(challenge);
+      // Respond with 200 OK and challenge token from the request
+      console.log('WEBHOOK_VERIFIED');
+      res.status(200).send(challenge);
 
-} else {
-// Responds with '403 Forbidden' if verify tokens do not match
-res.sendStatus(403);      
-}
-}
+    } else {
+      // Responds with '403 Forbidden' if verify tokens do not match
+      res.sendStatus(403);
+    }
+  }
 });
 
 function handleMessage(sender_psid, received_message) {
   let response;
 
-// Checks if the message contains text
-if (received_message.text) {    
-// Create the payload for a basic text message, which
-// will be added to the body of our request to the Send API
-/* if (received_message.text.startsWith('Search:')) {
-//console.log(search)
-var text = nodeyourmeme.search(received_message.text.substring(7))
-while (!text) {
+  // Checks if the message contains text
+  if (received_message.text) {
+    // Create the payload for a basic text message, which
+    // will be added to the body of our request to the Send API
+    /* if (received_message.text.startsWith('Search:')) {
+    //console.log(search)
+    var text = nodeyourmeme.search(received_message.text.substring(7))
+    while (!text) {
 
-}
-var text2 = await text.about;
+  }
+  var text2 = await text.about;
 
-response = {
-"text": text2
+  response = {
+  "text": text2
 }
 } else {*/
 
 
-  if (received_message.text.toLowerCase() === 'start catching' || received_message.text.toLowerCase() === 'play again' || received_message.text.toLowerCase() === 'get started' || received_message.text.toLowerCase() === 'catch pokemon' || received_message.text.toLowerCase() === 'catch pokémon') {
+if (received_message.text.toLowerCase() === 'start catching' || received_message.text.toLowerCase() === 'play again' || received_message.text.toLowerCase() === 'get started' || received_message.text.toLowerCase() === 'catch pokemon' || received_message.text.toLowerCase() === 'catch pokémon') {
 
-    console.log("https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg")
+  console.log("https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg")
 
-    if (!currentMap.has(sender_psid)){
-      currentMap.set(sender_psid, "bulbasaur");
-      resetCurrentPokemon(sender_psid);
-    }
+  if (!currentMap.has(sender_psid)){
+    currentMap.set(sender_psid, "bulbasaur");
+    resetCurrentPokemon(sender_psid);
+  }
 
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-         "template_type": "generic",
-         "elements": [{
+  response = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [{
           "title": "‌‌A wild pokémon has appeared!",
           "subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
           "image_url": "https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg",
@@ -1062,145 +1062,145 @@ response = {
     "attachment": {
       "type": "template",
       "payload": {
-       "template_type": "generic",
-       "elements": [{
-        "title": "Congratulations! You caught a " +currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) +"!",
+        "template_type": "generic",
+        "elements": [{
+          "title": "Congratulations! You caught a " +currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) +"!",
 
-        "buttons": [
-        {
-         "type": "postback",
-         "title": "Play again",
-         "payload": "Play again",
-       },
-       {
-         "type": "postback",
-         "title": "Show caught pokémon",
-         "payload": "Show caught pokémon",
-       }
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "Play again",
+              "payload": "Play again",
+            },
+            {
+              "type": "postback",
+              "title": "Show caught pokémon",
+              "payload": "Show caught pokémon",
+            }
 
-       ],
-     }]
-   }
- }
-}
-catchPokemon(sender_psid);
-resetCurrentPokemon(sender_psid);
+          ],
+        }]
+      }
+    }
+  }
+  catchPokemon(sender_psid);
+  resetCurrentPokemon(sender_psid);
 } else if (received_message.text.toLowerCase().startsWith("catch")) {
 
-if (!currentMap.has(sender_psid)){
-response = {
-  "text" : 'Say "Start catching" to start catching!'
-}
-}  else {
-
-  response = {
-    "attachment": {
-      "type": "template",
-      "payload": {
-       "template_type": "generic",
-       "elements": [{
-        "title": "Darn! The " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) + " got away!",
-        
-        "buttons": [
-        {
-         "type": "postback",
-         "title": "Play again",
-         "payload": "Play again",
-       },
-       {
-         "type": "postback",
-         "title": "Show caught pokémon",
-         "payload": "Show caught pokémon",
-       }
-       
-       ],
-     }]
-   }
- }
-}
-
-resetCurrentPokemon(sender_psid);}
-} else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
-  if (!map.has(sender_psid)) {
+  if (!currentMap.has(sender_psid)){
     response = {
-      "text" : "You haven't caught any Pokémon!"
+      "text" : 'Say "Start catching" to start catching!'
     }
-  } else {
-    var stringMess = "You've caught:"
-    map.get(sender_psid).forEach(function(item){
-      stringMess = stringMess + "\n";
-      stringMess = stringMess + item;
-    });
-
-
+  }  else {
 
     response = {
-      "text" : stringMess
-    }
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Darn! The " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) + " got away!",
 
-  }}else if (received_message.text.toLowerCase().startsWith("show ")) {
-    console.log("showing pokemon")
-    var pokeName = received_message.text.toLowerCase().substring(5);
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Play again",
+                "payload": "Play again",
+              },
+              {
+                "type": "postback",
+                "title": "Show caught pokémon",
+                "payload": "Show caught pokémon",
+              }
 
-    if (map.has(sender_psid) && map.get(sender_psid).includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))) { 
-
-      response = {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "generic",
-            "elements": [{
-              "title": 'Your '+ received_message.text.substring(5) +"!",
-              "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
-            }]
-          }
-        }
-      }
-
-    } else {
-      response = {
-        "text" : 'You do not have a ' + received_message.text.substring(5) + "!"
-      }
-    }
-  } else if (received_message.text.startsWith("oh ma")) {
-    response = {
-      "text" : "be proud of the cow"
-    }
-  } else if (received_message.text.toLowerCase().startsWith("begin trade")) {
-    response = {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "button",
-          text: "OK, start the trade by clicking the button below.",
-          buttons: [{
-            type: "web_url",
-            url: "https://nicoswebhook.herokuapp.com/trade?id=" + sender_psid,
-            title: "Begin trade",
-            webview_height_ratio: "compact",
-            messenger_extensions: true
+            ],
           }]
         }
       }
-    };
-  } else if (received_message.text.toLowerCase().trim() === 'help'){
-    response = {
-      "text" : 'Commands:\n- Start Catching\n- Show caught pokémon\n- Show <pokémon you have caught>\n- Begin trade'
-    }
-  } 
-  else {
-    response = {
-
-      "text" : 'Unknown command! Type "help" for a list of commands'
     }
 
-  }}
+    resetCurrentPokemon(sender_psid);}
+  } else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
+    if (!map.has(sender_psid)) {
+      response = {
+        "text" : "You haven't caught any Pokémon!"
+      }
+    } else {
+      var stringMess = "You've caught:"
+      map.get(sender_psid).forEach(function(item){
+        stringMess = stringMess + "\n";
+        stringMess = stringMess + item;
+      });
 
-/*
-else {
-response = {
-"text": `You sent the message: "${received_message.text}". Now send me an attachment!`
-}
+
+
+      response = {
+        "text" : stringMess
+      }
+
+    }}else if (received_message.text.toLowerCase().startsWith("show ")) {
+      console.log("showing pokemon")
+      var pokeName = received_message.text.toLowerCase().substring(5);
+
+      if (map.has(sender_psid) && map.get(sender_psid).includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))) {
+
+        response = {
+          "attachment": {
+            "type": "template",
+            "payload": {
+              "template_type": "generic",
+              "elements": [{
+                "title": 'Your '+ received_message.text.substring(5) +"!",
+                "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
+              }]
+            }
+          }
+        }
+
+      } else {
+        response = {
+          "text" : 'You do not have a ' + received_message.text.substring(5) + "!"
+        }
+      }
+    } else if (received_message.text.startsWith("oh ma")) {
+      response = {
+        "text" : "be proud of the cow"
+      }
+    } else if (received_message.text.toLowerCase().startsWith("begin trade")) {
+      response = {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "button",
+            text: "OK, start the trade by clicking the button below.",
+            buttons: [{
+              type: "web_url",
+              url: "https://nicoswebhook.herokuapp.com/trade?id=" + sender_psid,
+              title: "Begin trade",
+              webview_height_ratio: "compact",
+              messenger_extensions: true
+            }]
+          }
+        }
+      };
+    } else if (received_message.text.toLowerCase().trim() === 'help'){
+      response = {
+        "text" : 'Commands:\n- Start Catching\n- Show caught pokémon\n- Show <pokémon you have caught>\n- Begin trade'
+      }
+    }
+    else {
+      response = {
+
+        "text" : 'Unknown command! Type "help" for a list of commands'
+      }
+
+    }}
+
+    /*
+    else {
+    response = {
+    "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+  }
 }
 //}
 } else if (received_message.attachments) {
@@ -1210,83 +1210,84 @@ response = {
 "attachment": {
 "type": "template",
 "payload": {
-	"template_type": "generic",
-	"elements": [{
-		"title": "Is this the right picture?",
-		"subtitle": "Tap a button to answer.",
-		"image_url": attachment_url,
-		"buttons": [
-		{
-			"type": "postback",
-			"title": "Yes!",
-			"payload": "yes",
-		},
-		{
-			"type": "postback",
-			"title": "No!",
-			"payload": "no",
-		}
-		],
-	}]
+"template_type": "generic",
+"elements": [{
+"title": "Is this the right picture?",
+"subtitle": "Tap a button to answer.",
+"image_url": attachment_url,
+"buttons": [
+{
+"type": "postback",
+"title": "Yes!",
+"payload": "yes",
+},
+{
+"type": "postback",
+"title": "No!",
+"payload": "no",
+}
+],
+}]
 }
 }
 }
 } */
 
 // Send the response message
-callSendAPI(sender_psid, response);    
+callSendAPI(sender_psid, response);
 }
 
 function handlePostback(sender_psid, received_postback) {
   console.log('ok')
   let response;
-// Get the payload for the postback
-let payload = received_postback.payload;
+  // Get the payload for the postback
+  let payload = received_postback.payload;
+  console.log(payload + "<-- payload")
 
-// Set the response based on the postback payload
-if (payload === 'yes') {
-  response = { "text": "Thanks!" }
-} else if (payload === 'no') {
-  response = { "text": "Oops, try sending another image." }
-} else if (payload === 'Show caught pokémon') {
-  if (!map.has(sender_psid)) {
+  // Set the response based on the postback payload
+  if (payload === 'yes') {
+    response = { "text": "Thanks!" }
+  } else if (payload === 'no') {
+    response = { "text": "Oops, try sending another image." }
+  } else if (payload === 'Show caught pokémon') {
+    if (!map.has(sender_psid)) {
+      response = {
+        "text" : "You haven't caught any Pokémon!"
+      }
+    } else {
+      var stringMess = "You've caught:"
+      map.get(sender_psid).forEach(function(item){
+        stringMess = stringMess + "\n";
+        stringMess = stringMess + item;
+      });
+
+
+
+      response = {
+        "text" : stringMess
+      }
+
+    }
+  } else if (payload === 'Play again' || payload === "Start Catching" || payload === 'Start catching' || payload === 'Get started') {
+    if (!currentMap.has(sender_psid)){
+      currentMap.set(sender_psid, "bulbasaur");
+      resetCurrentPokemon(sender_psid);
+    }
     response = {
-      "text" : "You haven't caught any Pokémon!"
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "‌‌A wild pokémon has appeared!",
+            "subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
+            "image_url": "https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg",
+          }]
+        }
+      }
     }
-  } else {
-    var stringMess = "You've caught:"
-    map.get(sender_psid).forEach(function(item){
-      stringMess = stringMess + "\n";
-      stringMess = stringMess + item;
-    });
-
-
-
+  } else if (payload === 'Begin trade') {
     response = {
-      "text" : stringMess
-    }
-
-  }
-} else if (payload === 'Play again' || payload === "Start Catching" || payload === 'Start catching' || payload === 'Get started') {
-  if (!currentMap.has(sender_psid)){
-    currentMap.set(sender_psid, "bulbasaur");
-    resetCurrentPokemon(sender_psid);
-  }
-  response = {
-    "attachment": {
-      "type": "template",
-      "payload": {
-       "template_type": "generic",
-       "elements": [{
-        "title": "‌‌A wild pokémon has appeared!",
-        "subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
-        "image_url": "https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg",
-      }]
-    }
-  }
-}
-} else if (payload === 'Begin trade') {
-  response = {
       attachment: {
         type: "template",
         payload: {
@@ -1302,40 +1303,40 @@ if (payload === 'yes') {
         }
       }
     };
-}
-// Send the message to acknowledge the postback
-callSendAPI(sender_psid, response);
+  }
+  // Send the message to acknowledge the postback
+  callSendAPI(sender_psid, response);
 }
 
 function callSendAPI(sender_psid, response) {
-// Construct the message body
-let request_body = {
-  "recipient": {
-    "id": sender_psid
-  },
-  "message": response
-}
-
-// Send the HTTP request to the Messenger Platform
-request({
-  "uri": "https://graph.facebook.com/v2.6/me/messages",
-  "qs": { "access_token": PAGE_ACCESS_TOKEN },
-  "method": "POST",
-  "json": request_body
-}, (err, res, body) => {
-  if (!err) {
-    console.log('message sent!')
-  } else {
-    console.error("Unable to send message:" + err);
+  // Construct the message body
+  let request_body = {
+    "recipient": {
+      "id": sender_psid
+    },
+    "message": response
   }
-}); 
+
+  // Send the HTTP request to the Messenger Platform
+  request({
+    "uri": "https://graph.facebook.com/v2.6/me/messages",
+    "qs": { "access_token": PAGE_ACCESS_TOKEN },
+    "method": "POST",
+    "json": request_body
+  }, (err, res, body) => {
+    if (!err) {
+      console.log('message sent!')
+    } else {
+      console.error("Unable to send message:" + err);
+    }
+  });
 }
 
 
 
 
 function capitalizeFirstLetter(string) {
-  return currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1) 
+  return currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1)
 }
 
 
@@ -1364,14 +1365,14 @@ function checkPokemonName(string, id) {
 
 
 Array.prototype.remove = function() {
-    var what, a = arguments, L = a.length, ax;
-    while (L && this.length) {
-        what = a[--L];
-        while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
-        }
+  var what, a = arguments, L = a.length, ax;
+  while (L && this.length) {
+    what = a[--L];
+    while ((ax = this.indexOf(what)) !== -1) {
+      this.splice(ax, 1);
     }
-    return this;
+  }
+  return this;
 };
 
 
@@ -1405,95 +1406,95 @@ var tradeMap = new Map();
 
 
 app.get('/trade', function(req, res){
-res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
-res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
+  res.header('X-Frame-Options: ALLOW-FROM https://www.messenger.com/');
+  res.header('X-Frame-Options: ALLOW-FROM https://www.facebook.com/');
 
-var id = req.query.id;
-
-
-
-console.log(map.get(100000));
-console.log("id=" + id);
+  var id = req.query.id;
 
 
 
-
-
-///TESTIGN------------
-var home = "broadcast"
-
-if ("home" in req.query) {
-  home = "current_thread";
-  console.log("there is a home")
-} else {
-  console.log("no home")
-}
-//-----------
+  console.log(map.get(100000));
+  console.log("id=" + id);
 
 
 
 
 
+  ///TESTIGN------------
+  var home = "broadcast"
 
-
-
-
-
-if (tradeMap.has(id)) {
-
-
-
-var name = "Trainer";
-
-request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
-  if (err) { return console.log(err); 
-    //name = "Trainer"
-
-    console.log("name is : " + name);
-    res.render('tradeRecieving',{
-      title: name + ' would like to trade!',
-      user: name,
-      poke : tradeMap.get(id),
-      home : home,
-      id: id
-    } ) ;
-
+  if ("home" in req.query) {
+    home = "current_thread";
+    console.log("there is a home")
+  } else {
+    console.log("no home")
   }
-//console.log(res);
-
-if (body.first_name != undefined){
-name = body.first_name; 
-console.log("here's what you got" + body.first_name);
-console.log(name);
-}
-
-res.render('tradeRecieving',{
-  title: name + " would like to trade!",
-  user:name,
-  poke: tradeMap.get(id),
-  home:home,
-  id: id
-  
-} ) ;
+  //-----------
 
 
 
 
 
-});
-
-/*
-
-res.render('tradeRecieving',{
-  title: name + " would like to trade!",
-  user:name,
-  //itemList:arr,
-  //id : id
-} ) ;
-*/
 
 
-//if trademap hs it
+
+
+
+  if (tradeMap.has(id)) {
+
+
+
+    var name = "Trainer";
+
+    request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
+      if (err) { return console.log(err);
+        //name = "Trainer"
+
+        console.log("name is : " + name);
+        res.render('tradeRecieving',{
+          title: name + ' would like to trade!',
+          user: name,
+          poke : tradeMap.get(id),
+          home : home,
+          id: id
+        } ) ;
+
+      }
+      //console.log(res);
+
+      if (body.first_name != undefined){
+        name = body.first_name;
+        console.log("here's what you got" + body.first_name);
+        console.log(name);
+      }
+
+      res.render('tradeRecieving',{
+        title: name + " would like to trade!",
+        user:name,
+        poke: tradeMap.get(id),
+        home:home,
+        id: id
+
+      } ) ;
+
+
+
+
+
+    });
+
+    /*
+
+    res.render('tradeRecieving',{
+    title: name + " would like to trade!",
+    user:name,
+    //itemList:arr,
+    //id : id
+  } ) ;
+  */
+
+
+  //if trademap hs it
 } else {
   console.log(tradeMap);
 
@@ -1506,53 +1507,53 @@ res.render('tradeRecieving',{
       arr.push(item);
     } )
 
-// arr = ['nico', 'poop'];
+    // arr = ['nico', 'poop'];
 
-var name = "Trainer";
+    var name = "Trainer";
 
-request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
-  if (err) { return console.log(err); 
-    //name = "Trainer"
-    console.log("name is : " + name);
-    res.render('trade',{
-      title: 'Select a Pokémon to trade, ' +name + "!",
-      user: name,
-      itemList:arr,
-      id : id
-    } ) ;
-    //return;
+    request('https://graph.facebook.com/v2.7/' + id + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
+      if (err) { return console.log(err);
+        //name = "Trainer"
+        console.log("name is : " + name);
+        res.render('trade',{
+          title: 'Select a Pokémon to trade, ' +name + "!",
+          user: name,
+          itemList:arr,
+          id : id
+        } ) ;
+        //return;
+      }
+      //console.log(res);
+
+      if (body.first_name != undefined){
+        name = body.first_name;
+        console.log("here's what you got" + body.first_name);
+        console.log(name);
+      }
+
+      res.render('trade',{
+        title: 'Select a Pokémon to trade, ' +name + "!",
+        user:name,
+        itemList:arr,
+        id : id
+      } ) ;
+
+
+
+
+
+    });
+
+    console.log(name);
+
+
+
+
+  } else {
+    console.log(map)
+    res.sendFile( __dirname + "/public/" + "noPokemon.html" );
+
   }
-//console.log(res);
-
-if (body.first_name != undefined){
-name = body.first_name; 
-console.log("here's what you got" + body.first_name);
-console.log(name);
-}
-
-res.render('trade',{
-  title: 'Select a Pokémon to trade, ' +name + "!",
-  user:name,
-  itemList:arr,
-  id : id
-} ) ;
-
-
-
-
-
-});
-
-console.log(name);
-
-
-
-
-} else {
-  console.log(map)
-  res.sendFile( __dirname + "/public/" + "noPokemon.html" );
-
-}
 
 }
 
@@ -1565,20 +1566,20 @@ console.log(name);
 
 
 
-app.post('/trade', (req, res) => { 
+app.post('/trade', (req, res) => {
 
   var home = "broadcast"
 
-console.log('this is req.query');
-console.log(JSON.stringify(req.query));
+  console.log('this is req.query');
+  console.log(JSON.stringify(req.query));
 
 
-if ("home" in req.query) {
-  home = "current_thread";
-  console.log("there is a home")
-} else {
-  console.log("no home")
-}
+  if ("home" in req.query) {
+    home = "current_thread";
+    console.log("there is a home")
+  } else {
+    console.log("no home")
+  }
 
 
 
@@ -1588,27 +1589,27 @@ if ("home" in req.query) {
   if (req.body.isTrading === "true") {
     console.log("isTrading true")
 
-console.log("body is" + JSON.stringify(req.body))
+    console.log("body is" + JSON.stringify(req.body))
 
-//if (tradeMap.)
+    //if (tradeMap.)
 
 
 
 
-///TESTIGN------------
-var home = "broadcast"
+    ///TESTIGN------------
+    var home = "broadcast"
 
-console.log('this is req.query');
-console.log(JSON.stringify(req.query));
+    console.log('this is req.query');
+    console.log(JSON.stringify(req.query));
 
 
-if ("home" in req.query) {
-  home = "current_thread";
-  console.log("there is a home")
-} else {
-  console.log("no home")
-}
-//-----------
+    if ("home" in req.query) {
+      home = "current_thread";
+      console.log("there is a home")
+    } else {
+      console.log("no home")
+    }
+    //-----------
 
 
 
@@ -1616,222 +1617,219 @@ if ("home" in req.query) {
 
 
 
-// Parse the request body from the POST
-var pokemonName = req.body.name;
+    // Parse the request body from the POST
+    var pokemonName = req.body.name;
 
-//tradeMap.set(req.query.id, pokemonName);
+    //tradeMap.set(req.query.id, pokemonName);
 
-console.log(pokemonName);
-console.log(tradeMap);
- 
- var name = JSON.stringify(req.body);
+    console.log(pokemonName);
+    console.log(tradeMap);
 
-console.log(name)
+    var name = JSON.stringify(req.body);
 
-console.log("is trading"+ req.body.isTrading)
+    console.log(name)
 
+    console.log("is trading"+ req.body.isTrading)
 
 
 
-var idOfSender = JSON.stringify(req.body.user_psid);
-  idOfSender = idOfSender.substring(1, idOfSender.length -1);
-console.log(idOfSender)
 
-if (idOfSender === req.query.id) {
+    var idOfSender = JSON.stringify(req.body.user_psid);
+    idOfSender = idOfSender.substring(1, idOfSender.length -1);
+    console.log(idOfSender)
 
-console.log(map.get(idOfSender))
+    if (idOfSender === req.query.id) {
 
-res.sendFile( __dirname + "/public/" + "selfTrade.html" );
+      console.log(map.get(idOfSender))
 
-} else {
+      res.sendFile( __dirname + "/public/" + "selfTrade.html" );
 
+    } else {
 
 
-var pokemonToTrade = JSON.stringify(req.body.pokemonName);
-pokemonToTrade = pokemonToTrade.substring(1, pokemonToTrade.length -1);
-pokemonToTrade = pokemonToTrade.toLowerCase();
-pokemonToTrade = pokemonToTrade.charAt(0).toUpperCase() + pokemonToTrade.slice(1)
-  console.log(map);
-  console.log(idOfSender)
-  var arr = map.get(idOfSender);
-  console.log('array is:vvvvv')
-  console.log(arr);
-if (!map.has(idOfSender) ){//|| arr === undefined){
-  res.sendFile( __dirname + "/public/" + "noPokemon.html" );
-  return;
-} 
-if (!arr.includes(pokemonToTrade)){
 
-  console.log('pokemon to Trade');
-  console.log(pokemonToTrade)
+      var pokemonToTrade = JSON.stringify(req.body.pokemonName);
+      pokemonToTrade = pokemonToTrade.substring(1, pokemonToTrade.length -1);
+      pokemonToTrade = pokemonToTrade.toLowerCase();
+      pokemonToTrade = pokemonToTrade.charAt(0).toUpperCase() + pokemonToTrade.slice(1)
+      console.log(map);
+      console.log(idOfSender)
+      var arr = map.get(idOfSender);
+      console.log('array is:vvvvv')
+      console.log(arr);
+      if (!map.has(idOfSender) ){//|| arr === undefined){
+        res.sendFile( __dirname + "/public/" + "noPokemon.html" );
+        return;
+      }
+      if (!arr.includes(pokemonToTrade)){
 
+        console.log('pokemon to Trade');
+        console.log(pokemonToTrade)
 
-res.render('noSuchPokemon',{
-fakepoke: pokemonToTrade,//name + " would like to trade!",
- // user:"getname"//name,
-  //itemList:arr,
-  //id : id
-} ) ;
 
+        res.render('noSuchPokemon',{
+          fakepoke: pokemonToTrade,//name + " would like to trade!",
+          // user:"getname"//name,
+          //itemList:arr,
+          //id : id
+        } ) ;
 
-}
 
-else {
+      }
 
-//trading begins
-console.log('map before')
-console.log(map);
+      else {
 
-var trader1Arr = map.get(req.query.id)
-var trader2Arr = map.get(idOfSender)
+        //trading begins
+        console.log('map before')
+        console.log(map);
 
-console.log(tradeMap)
+        var trader1Arr = map.get(req.query.id)
+        var trader2Arr = map.get(idOfSender)
 
-var otherPoke = tradeMap.get(req.query.id)
+        console.log(tradeMap)
 
-trader1Arr.remove(otherPoke);
-tradeMap.delete(req.query.id);
-trader2Arr.remove(pokemonToTrade);
-trader1Arr.push(pokemonToTrade);
-trader2Arr.push(otherPoke);
+        var otherPoke = tradeMap.get(req.query.id)
 
+        trader1Arr.remove(otherPoke);
+        tradeMap.delete(req.query.id);
+        trader2Arr.remove(pokemonToTrade);
+        trader1Arr.push(pokemonToTrade);
+        trader2Arr.push(otherPoke);
 
 
 
-map.set(req.query.id, trader1Arr);
-map.set(idOfSender, trader2Arr);
 
-console.log('map after')
-console.log(map)
+        map.set(req.query.id, trader1Arr);
+        map.set(idOfSender, trader2Arr);
 
+        console.log('map after')
+        console.log(map)
 
-res.sendFile( __dirname + "/public/" + "successfulTrade.html" );
 
+        res.sendFile( __dirname + "/public/" + "successfulTrade.html" );
 
-var name = "Trainer";
 
-request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
-  if (err) { console.log(err); 
+        var name = "Trainer";
 
-    var message = name + " just traded you their " + pokemonToTrade + " for your " + otherPoke + "!"
-var response = {
-  "text" : message
-}
-callSendAPI(req.query.id, response);
-  }
+        request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
+          if (err) { console.log(err);
 
-if (body.first_name != undefined){
-name = body.first_name; 
-console.log("here's what you got" + body.first_name);
-console.log(name);
+            var message = name + " just traded you their " + pokemonToTrade + " for your " + otherPoke + "!"
+            var response = {
+              "text" : message
+            }
+            callSendAPI(req.query.id, response);
+          }
 
+          if (body.first_name != undefined){
+            name = body.first_name;
+            console.log("here's what you got" + body.first_name);
+            console.log(name);
 
-var message = name + " just traded you their " + pokemonToTrade + " for your " + otherPoke + "!"
-var response = {
-  "text" : message
-}
-callSendAPI(req.query.id, response);
-}
 
+            var message = name + " just traded you their " + pokemonToTrade + " for your " + otherPoke + "!"
+            var response = {
+              "text" : message
+            }
+            callSendAPI(req.query.id, response);
+          }
 
 
 
-});
 
+        });
 
 
 
 
-}
-}
 
+      }
+    }
 
 
-} else {
-
-
-//here!!!
-
-
-  console.log("body is" + JSON.stringify(req.body))
-  var idOfSender = JSON.stringify(req.body.idOfSender);
-  idOfSender = idOfSender.substring(1, idOfSender.length -1);
-var poke = JSON.stringify(req.body.name);
-  poke = poke.substring(1, poke.length -1);
-
-console.log('poke is' + poke)
-
-  tradeMap.set(idOfSender, poke);
-  console.log(tradeMap)
-
-
-  if (idOfSender != req.query.id) {
-    console.log("wrong PSID! ")
-
-    console.log(parseInt(idOfSender) + "vs " + req.query.id)
-
-
-    res.sendFile( __dirname + "/public/" + "forceTrade.html" );
 
   } else {
-    console.log("right psid!!")
+
+
+    //here!!!
+
+
+    console.log("body is" + JSON.stringify(req.body))
+    var idOfSender = JSON.stringify(req.body.idOfSender);
+    idOfSender = idOfSender.substring(1, idOfSender.length -1);
+    var poke = JSON.stringify(req.body.name);
+    poke = poke.substring(1, poke.length -1);
+
+    console.log('poke is' + poke)
+
+    tradeMap.set(idOfSender, poke);
+    console.log(tradeMap)
+
+
+    if (idOfSender != req.query.id) {
+      console.log("wrong PSID! ")
+
+      console.log(parseInt(idOfSender) + "vs " + req.query.id)
+
+
+      res.sendFile( __dirname + "/public/" + "forceTrade.html" );
+
+    } else {
+      console.log("right psid!!")
 
 
 
 
 
-var name = 'Trainer'
-request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
-  if (err) { return console.log(err); 
-    //name = "Trainer"
-    console.log("name is : " + name);
-     res.render('tradeRecieving',{
-title: name + " would like to trade!",//name + " would like to trade!",
-  user:name,
-  poke:tradeMap.get(idOfSender),//name,,
-  home: home,
-  id : idOfSender
-  //itemList:arr,
-  //id : id
-} ) ;
+      var name = 'Trainer'
+      request('https://graph.facebook.com/v2.7/' + idOfSender + '?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token='+PAGE_ACCESS_TOKEN, { json: true }, (err, response, body) => {
+        if (err) { return console.log(err);
+          //name = "Trainer"
+          console.log("name is : " + name);
+          res.render('tradeRecieving',{
+            title: name + " would like to trade!",//name + " would like to trade!",
+            user:name,
+            poke:tradeMap.get(idOfSender),//name,,
+            home: home,
+            id : idOfSender
+            //itemList:arr,
+            //id : id
+          } ) ;
 
+        }
+        //console.log(res);
+
+        if (body.first_name != undefined){
+          name = body.first_name;
+          console.log("here's what you got" + body.first_name);
+          console.log(name);
+        }
+
+        res.render('tradeRecieving',{
+          title: name + " would like to trade!",
+          user:name,
+          poke:tradeMap.get(idOfSender),//name,
+          home: home,
+          id : idOfSender
+          //itemList:arr,
+          //id : id
+        } ) ;
+
+
+
+
+      });
+
+
+
+
+
+
+
+    }
   }
-//console.log(res);
-
-if (body.first_name != undefined){
-name = body.first_name; 
-console.log("here's what you got" + body.first_name);
-console.log(name);
-}
-
- res.render('tradeRecieving',{
-title: name + " would like to trade!",
-  user:name,
-  poke:tradeMap.get(idOfSender),//name,
-  home: home,
-  id : idOfSender
-  //itemList:arr,
-  //id : id
-} ) ;
 
 
 
 
 });
-
-   
-
-
-
-
-
-  }
-}
-
-
-
-
-});
-
-
-
