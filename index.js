@@ -1249,7 +1249,7 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "Thanks!" }
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
-  } else if (payload === 'Show caught pokémon') {
+  } else if (payload === 'Show caught pokémon' || payload === 'Show caught Pokémon') {
     if (!map.has(sender_psid)) {
       response = {
         "text" : "You haven't caught any Pokémon!"
@@ -1264,8 +1264,8 @@ function handlePostback(sender_psid, received_postback) {
 
 
       response = {
-        //"text" : stringMess
-        "text" : 'poop'
+        "text" : stringMess
+        //"text" : 'poop'
       }
 
     }
@@ -1305,8 +1305,8 @@ function handlePostback(sender_psid, received_postback) {
       }
     };
   }
-  console.log(response);
-  console.log('^^ response')
+//  console.log(response);
+  //console.log('^^ response')
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
