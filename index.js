@@ -1264,7 +1264,8 @@ function handlePostback(sender_psid, received_postback) {
 
 
       response = {
-        "text" : stringMess
+        //"text" : stringMess
+        "text" : 'poop'
       }
 
     }
