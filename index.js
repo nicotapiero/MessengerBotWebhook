@@ -1293,7 +1293,7 @@ function handlePostback(sender_psid, received_postback) {
           "template_type": "generic",
           "elements": [{
             "title": "‌‌A wild pokémon has appeared!",
-            "subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
+            "subtitle": 'Guess the pokémon name correctly and type "catch <pokémon name>" to catch it!',
             "image_url": "https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg",
           }]
         }
