@@ -67,10 +67,15 @@ map.set('2674269505918135', ["bulbasaur", "venusaur"]);
 
 
 //const request = require('request');
+/*
+var poop = 'catch probopass.   .'
+var substring = poop.substring(6).trim();
 
+  var regex = /[.,\s]/g;
 
-
-
+  substring = substring.replace(regex, '');
+  console.log(substring)
+*/
 
 
 
@@ -1058,7 +1063,7 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
         "template_type": "generic",
         "elements": [{
           "title": "‌‌A wild pokémon has appeared!",
-          "subtitle": 'Guess the pokémon and type "catch <pokémon>" to catch it!',
+          "subtitle": 'Guess the pokémon name correctly and type "catch <pokémon name>" to catch it!',
           "image_url": "https://img.pokemondb.net/artwork/large/" + currentMap.get(sender_psid) + ".jpg",
         }]
       }
@@ -1071,7 +1076,7 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
       "payload": {
         "template_type": "generic",
         "elements": [{
-          "title": "Congratulations! You caught a " +currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) +"!",
+          "title": "Congratulations! You caught a " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) +"!",
 
           "buttons": [
             {
@@ -1365,6 +1370,10 @@ function threeNum(num) {
 
 function checkPokemonName(string, id) {
   var substring = string.substring(6).trim();
+
+  var regex = /[.,\s]/g;
+
+  substring = substring.replace(regex, '');
 
   console.log(currentMap)
   console.log(id)
