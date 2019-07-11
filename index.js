@@ -1750,7 +1750,7 @@ app.post('/trade', (req, res) => {
 
 
             var message = name + " just traded you their " + pokemonToTrade + " for your " + otherPoke + "!"
-            var response = {
+            var responseMessage = {
               "text" : message
             }
             console.log(req.query.id + " is the query, have name");
