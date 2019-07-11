@@ -1737,12 +1737,13 @@ app.post('/trade', (req, res) => {
             var responseMessage = {
               "text" : message
             }
+            console.log(req.query.id + " is the query, Error");
             callSendAPI(req.query.id, responseMessage);
           }
 
           if (body.first_name != undefined){
             name = body.first_name;
-            console.log(response)
+            //console.log(response)
 
             console.log("here's what you got" + body.first_name);
             console.log(name);
@@ -1752,14 +1753,16 @@ app.post('/trade', (req, res) => {
             var response = {
               "text" : message
             }
+            console.log(req.query.id + " is the query, have name");
             callSendAPI(req.query.id, responseMessage);
           } else {
             console.log('YOU REACHED THE ELSE! no callSendAPI');
-            
+
             var message = name + " just traded you their " + pokemonToTrade + " for your " + otherPoke + "!"
             var responseMessage = {
               "text" : message
             }
+            console.log(req.query.id + " is the query, don't name");
             callSendAPI(req.query.id, responseMessage);
           }
 
