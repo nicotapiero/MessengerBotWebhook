@@ -139,7 +139,7 @@ class newMap {
     return true;
     id = String(id);
     let boolean;
-    await Pokedex.findOne({id: id}, function(err, data){
+    Pokedex.findOne({id: id}, function(err, data){
     if(err){
       boolean = false;
     }
