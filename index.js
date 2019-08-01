@@ -261,21 +261,59 @@ console.log(substring)
 
 
 function catchPokemon(id) {
-  var pc;
+  //var pc;
+
+  let pc = [];
+
+  Pokedex.findOne({id: id}, function(err, data){
+      if(err){
+        
+      }
+
+
+
+      console.log("got data!")
+      console.log(data)
+      if (pc && pc.length != 0) {
+        pc = data.pokemon;
+      }
+      
+    });
+
+
+
+
+
+/*
   if (map.has(id)) {
     pc = map.get(id);
     //pc.push(currentPokemon);
   } else {
     pc = []
   }
-
+*/
   //change this back to just "currentPokemon" if you wanna make easy duplicates
   //if (!pc.includes(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1))) {
   pc.push(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1) )
   //}
 
-  map.set(id, pc);
+  var pokedex = new Pokedex({
+        id: id,
+        pokemon: pc
+      });
+
+      pokedex.save(function(err, updatedPokedex) {
+        if(err){
+          console.log(err);
+          return;
+        }
+        console.log(updatedPokedex);
+        console.log('successfully saved')
+      });
+
+  //map.set(id, pc);
   console.log(map)
+  resetCurrentPokemon(id);
 }
 
 
@@ -1098,7 +1136,11 @@ function resetCurrentPokemon(id) {
   "Meltan",
   "Melmetal"];
 
+
+
   var string = pokemon[number];
+
+  //let currentPersonPokemon = new Current({id: id, currentPokemon: string})
 
   currentMap.set(id, string.toLowerCase());
   console.log("your pokemon is:::" +string.toLowerCase());
@@ -1250,69 +1292,10 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
       }
     }
   }
-} else if (checkPokemonName(received_message.text, sender_psid)) {
-  response = {
-    "attachment": {
-      "type": "template",
-      "payload": {
-        "template_type": "generic",
-        "elements": [{
-          "title": "Congratulations! You caught a " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) +"!",
-
-          "buttons": [
-            {
-              "type": "postback",
-              "title": "Play again",
-              "payload": "Play again",
-            },
-            {
-              "type": "postback",
-              "title": "Show caught pokémon",
-              "payload": "Show caught pokémon",
-            }
-
-          ],
-        }]
-      }
-    }
-  }
-  catchPokemon(sender_psid);
-  resetCurrentPokemon(sender_psid);
 } else if (received_message.text.toLowerCase().startsWith("catch")) {
+  handleCatching(received_message.text, sender_psid)
+  return
 
-  if (!currentMap.has(sender_psid)){
-    response = {
-      "text" : 'Say "Start catching" to start catching!'
-    }
-  }  else {
-
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Darn! The " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) + " got away!",
-
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Play again",
-                "payload": "Play again",
-              },
-              {
-                "type": "postback",
-                "title": "Show caught pokémon",
-                "payload": "Show caught pokémon",
-              }
-
-            ],
-          }]
-        }
-      }
-    }
-
-    resetCurrentPokemon(sender_psid);}
   } else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
     handleShowCaughtPokemon(sender_psid);
     return;
@@ -1455,6 +1438,75 @@ function handleShowCaughtPokemon(sender_psid) {
 
 }
 
+function handleCatching(received_message.text, sender_psid) {
+  if (!currentMap.has(sender_psid)){
+    response = {
+      "text" : 'Say "Start catching" to start catching!'
+    }
+    callSendAPI(sender_psid, response)
+    return;
+  }
+
+  if (checkPokemonName(received_message.text, sender_psid)) {
+  response = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [{
+          "title": "Congratulations! You caught a " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) +"!",
+
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "Play again",
+              "payload": "Play again",
+            },
+            {
+              "type": "postback",
+              "title": "Show caught pokémon",
+              "payload": "Show caught pokémon",
+            }
+
+          ],
+        }]
+      }
+    }
+  }
+  catchPokemon(sender_psid);
+ 
+} else if (received_message.text.toLowerCase().startsWith("catch")) {
+
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": "Darn! The " + currentMap.get(sender_psid).charAt(0).toUpperCase() + currentMap.get(sender_psid).slice(1) + " got away!",
+
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Play again",
+                "payload": "Play again",
+              },
+              {
+                "type": "postback",
+                "title": "Show caught pokémon",
+                "payload": "Show caught pokémon",
+              }
+
+            ],
+          }]
+        }
+      }
+    }
+
+    resetCurrentPokemon(sender_psid);}
+
+  }
+
 
 
 
@@ -1585,6 +1637,7 @@ function threeNum(num) {
 */
 
 function checkPokemonName(string, id) {
+
   var substring = string.substring(6).trim();
 
   var regex = /[.,\s]/g;
