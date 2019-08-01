@@ -137,7 +137,7 @@ class newMap {
 
   has(id){
     id = String(id);
-    let returned = this.getTrainerArray(id)
+    let returned = await this.getTrainerArray(id)
     console.log(returned);
     if (returned != undefined) {
       return true
@@ -148,13 +148,14 @@ class newMap {
 
   get(id){
     id = String(id);
-    return this.getTrainerArray(id)
+    return await this.getTrainerArray(id)
 
   }
 
   set(id, array){
     id = String(id);
-    if (this.getTrainerArray(id)) {
+
+    if (this.has(id)) {
       this.updateTrainerArray(id, arr)
     } else {
 var pokedex = new Pokedex({
@@ -244,9 +245,9 @@ function catchPokemon(id) {
 
 
 
-
-catchPokemon('100000');
-console.log(map.get(100000))
+//old adding
+//catchPokemon('100000');
+//console.log(map.get(100000))
 
 
 function resetCurrentPokemon(id) {
