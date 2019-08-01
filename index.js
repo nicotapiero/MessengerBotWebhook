@@ -1301,7 +1301,7 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
 
     resetCurrentPokemon(sender_psid);}
   } else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
-    handleCaughtPokemon();
+    handleShowCaughtPokemon();
     return;
     }else if (received_message.text.toLowerCase().startsWith("show ")) {
       console.log("showing pokemon")
@@ -1402,18 +1402,28 @@ response = {
 callSendAPI(sender_psid, response);
 }
 
-function handleCaughtPokemon(sender_psid) {
+function handleShowCaughtPokemon(sender_psid) {
+  console.log(sender_psid+ "This is handleshowaught")
   console.log(typeof sender_psid)
-sender_psid = String(sender_psid);
+  sender_psid = String(sender_psid);
   Pokedex.findOne({id: sender_psid}, function(err, data){
-    if(err || data.pokemon.length == 0){
+    if(err){
       
       let response = {
         "text" : "You haven't caught any Pokémon!"
       }
       callSendAPI(sender_psid, response)
     }
-      let response;
+      console.log("got data!")
+      console.log(data)
+
+      if (!data || data.length == 0) {
+        let response = {
+        "text" : "You haven't caught any Pokémon!"
+        }
+        callSendAPI(sender_psid, response)
+      } else {
+        let response;
       var stringMess = "You've caught:"
       data.pokemon.forEach(function(item){
         stringMess = stringMess + "\n";
@@ -1421,12 +1431,13 @@ sender_psid = String(sender_psid);
       });
 
 
-    console.log("got data!")
-    console.log(data)
+    
     response = {
         "text" : stringMess
       }
       callSendAPI(sender_psid, response)
+      }
+      
   });
 
 }
