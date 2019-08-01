@@ -129,6 +129,21 @@ var pokedexSchema = new mongoose.Schema({
 var Pokedex = mongoose.model('Pokedex', pokedexSchema);
 
 
+var currentSchema = new mongoose.Schema({
+  id: String,
+  currentPokemon: String
+});
+
+var Current = mongoose.model('Current', currentSchema);
+
+var tradeSchema = new mongoose.Schema({
+  id: String,
+  tradingPokemon: String
+});
+
+var Trade = mongoose.model('Trade', tradeSchema);
+
+
 class newMap {
 
   constructor() {
@@ -140,39 +155,37 @@ class newMap {
     id = String(id);
     let boolean;
     var query = Pokedex.findOne({id: id}, function(err, data){
-    if(err){
-      boolean = false;
-    }
-    console.log("got data!")
-    console.log(data)
-    
-    if (data.length == 0){
-      boolean = false
-    } 
-    boolean =  true;
-  });
+      if(err){
+        boolean = false;
+      }
+      console.log("got data!")
+      console.log(data)
+
+      if (data.length == 0){
+        boolean = false
+      }
+      boolean =  true;
+    });
 
     var promise = query.exec();
 
-    while (promise instanceof Promise) {
-
-    }
 
 
-return boolean
+
+    return boolean
   }
 
   get(id){
     id = String(id);
     id = String(id);
-  Pokedex.findOne({id: id}, function(err, data){
-    if(err){
-      return undefined;
-    }
-    console.log("got data!")
-    console.log(data)
-    return data.pokemon;
-  });
+    Pokedex.findOne({id: id}, function(err, data){
+      if(err){
+        return undefined;
+      }
+      console.log("got data!")
+      console.log(data)
+      return data.pokemon;
+    });
   }
 
   set(id, array){
@@ -181,44 +194,44 @@ return boolean
     if (this.has(id)) {
       this.updateTrainerArray(id, arr)
     } else {
-var pokedex = new Pokedex({
-          id: id,
-          pokemon: array
-        });
+      var pokedex = new Pokedex({
+        id: id,
+        pokemon: array
+      });
 
       pokedex.save(function(err, updatedPokedex) {
-              if(err){
-                console.log(err);
-                return;
-              }
-              console.log(updatedPokedex);
-              console.log('successfully saved')
-            });
+        if(err){
+          console.log(err);
+          return;
+        }
+        console.log(updatedPokedex);
+        console.log('successfully saved')
+      });
     }
   }
 
   getTrainerArray(id) {
     id = String(id);
-  Pokedex.findOne({id: id}, function(err, data){
-    if(err){
-      return undefined;
-    }
-    console.log("got data!")
-    console.log(data)
-    return data.pokemon;
-  });
-}
+    Pokedex.findOne({id: id}, function(err, data){
+      if(err){
+        return undefined;
+      }
+      console.log("got data!")
+      console.log(data)
+      return data.pokemon;
+    });
+  }
 
-updateTrainerArray(id, arr) {
-  id = String(id);
-  Pokedex.findOneAndUpdate({id: id}, {$set:{pokemon:arr}}, {new: true}, (err, doc) => {
-    if (err) {
+  updateTrainerArray(id, arr) {
+    id = String(id);
+    Pokedex.findOneAndUpdate({id: id}, {$set:{pokemon:arr}}, {new: true}, (err, doc) => {
+      if (err) {
         console.log("Something wrong when updating data!");
-    }
+      }
 
-    console.log(doc);
-});
-}
+      console.log(doc);
+    });
+  }
 
 }
 
@@ -239,10 +252,10 @@ var map = new newMap();
 var poop = 'catch probopass.   .'
 var substring = poop.substring(6).trim();
 
-  var regex = /[.,\s]/g;
+var regex = /[.,\s]/g;
 
-  substring = substring.replace(regex, '');
-  console.log(substring)
+substring = substring.replace(regex, '');
+console.log(substring)
 */
 
 
@@ -1303,69 +1316,69 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
   } else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
     handleShowCaughtPokemon(sender_psid);
     return;
-    }else if (received_message.text.toLowerCase().startsWith("show ")) {
-      console.log("showing pokemon")
-      var pokeName = received_message.text.toLowerCase().substring(5);
+  }else if (received_message.text.toLowerCase().startsWith("show ")) {
+    console.log("showing pokemon")
+    var pokeName = received_message.text.toLowerCase().substring(5);
 
-      if (map.has(sender_psid) && map.get(sender_psid).includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))) {
+    if (map.has(sender_psid) && map.get(sender_psid).includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))) {
 
-        response = {
-          "attachment": {
-            "type": "template",
-            "payload": {
-              "template_type": "generic",
-              "elements": [{
-                "title": 'Your '+ received_message.text.substring(5) +"!",
-                "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
-              }]
-            }
-          }
-        }
-
-      } else {
-        response = {
-          "text" : 'You do not have a ' + received_message.text.substring(5) + "!"
-        }
-      }
-    } else if (received_message.text.startsWith("oh ma")) {
       response = {
-        "text" : "be proud of the cow"
-      }
-    } else if (received_message.text.toLowerCase().startsWith("begin trade")) {
-      response = {
-        attachment: {
-          type: "template",
-          payload: {
-            template_type: "button",
-            text: "OK, start the trade by clicking the button below.",
-            buttons: [{
-              type: "web_url",
-              url: "https://nicoswebhook.herokuapp.com/trade?id=" + sender_psid,
-              title: "Begin trade",
-              webview_height_ratio: "compact",
-              messenger_extensions: true
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": [{
+              "title": 'Your '+ received_message.text.substring(5) +"!",
+              "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
             }]
           }
         }
-      };
-    } else if (received_message.text.toLowerCase().trim() === 'help'){
+      }
+
+    } else {
       response = {
-        "text" : 'Commands:\n- Start Catching\n- Show caught pokémon\n- Show <pokémon you have caught>\n- Begin trade'
+        "text" : 'You do not have a ' + received_message.text.substring(5) + "!"
       }
     }
-    else {
-      response = {
-
-        "text" : 'Unknown command! Type "help" for a list of commands'
-      }
-
-    }}
-
-    /*
-    else {
+  } else if (received_message.text.startsWith("oh ma")) {
     response = {
-    "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+      "text" : "be proud of the cow"
+    }
+  } else if (received_message.text.toLowerCase().startsWith("begin trade")) {
+    response = {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: "OK, start the trade by clicking the button below.",
+          buttons: [{
+            type: "web_url",
+            url: "https://nicoswebhook.herokuapp.com/trade?id=" + sender_psid,
+            title: "Begin trade",
+            webview_height_ratio: "compact",
+            messenger_extensions: true
+          }]
+        }
+      }
+    };
+  } else if (received_message.text.toLowerCase().trim() === 'help'){
+    response = {
+      "text" : 'Commands:\n- Start Catching\n- Show caught pokémon\n- Show <pokémon you have caught>\n- Begin trade'
+    }
   }
+  else {
+    response = {
+
+      "text" : 'Unknown command! Type "help" for a list of commands'
+    }
+
+  }}
+
+  /*
+  else {
+  response = {
+  "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+}
 }
 //}
 } else if (received_message.attachments) {
@@ -1408,22 +1421,22 @@ function handleShowCaughtPokemon(sender_psid) {
   sender_psid = String(sender_psid);
   Pokedex.findOne({id: sender_psid}, function(err, data){
     if(err){
-      
+
       let response = {
         "text" : "You haven't caught any Pokémon!"
       }
       callSendAPI(sender_psid, response)
     }
-      console.log("got data!")
-      console.log(data)
+    console.log("got data!")
+    console.log(data)
 
-      if (!data || data.length == 0) {
-        let response = {
+    if (!data || data.length == 0) {
+      let response = {
         "text" : "You haven't caught any Pokémon!"
-        }
-        callSendAPI(sender_psid, response)
-      } else {
-        let response;
+      }
+      callSendAPI(sender_psid, response)
+    } else {
+      let response;
       var stringMess = "You've caught:"
       data.pokemon.forEach(function(item){
         stringMess = stringMess + "\n";
@@ -1431,13 +1444,13 @@ function handleShowCaughtPokemon(sender_psid) {
       });
 
 
-    
-    response = {
+
+      response = {
         "text" : stringMess
       }
       callSendAPI(sender_psid, response)
-      }
-      
+    }
+
   });
 
 }
@@ -1459,6 +1472,9 @@ function handlePostback(sender_psid, received_postback) {
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   } else if (payload === 'Show caught pokémon' || payload === 'Show caught Pokémon') {
+    handleShowCaughtPokemon(sender_psid)
+    return
+    /*
     console.log("this is map.has(" + sender_psid+ "):" + map.has(sender_psid))
 
     if (!map.has(sender_psid)) {
@@ -1479,7 +1495,7 @@ function handlePostback(sender_psid, received_postback) {
         //"text" : 'poop'
       }
 
-    }
+    }*/
   } else if (payload === 'Play again' || payload === "Start Catching" || payload === 'Start catching' || payload === 'Get started') {
     if (!currentMap.has(sender_psid)){
       currentMap.set(sender_psid, "bulbasaur");
@@ -1516,7 +1532,7 @@ function handlePostback(sender_psid, received_postback) {
       }
     };
   }
-//  console.log(response);
+  //  console.log(response);
   //console.log('^^ response')
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -1548,7 +1564,7 @@ function callSendAPI(sender_psid, response) {
 
 
 
-
+/*
 function capitalizeFirstLetter(string) {
   return currentPokemon.charAt(0).toUpperCase() + currentPokemon.slice(1)
 }
@@ -1566,6 +1582,7 @@ function threeNum(num) {
     return ""+num;
   }
 }
+*/
 
 function checkPokemonName(string, id) {
   var substring = string.substring(6).trim();
@@ -2064,12 +2081,3 @@ app.post('/trade', (req, res) => {
 
 
 });
-
-
-
-
-
-
-
-
-
