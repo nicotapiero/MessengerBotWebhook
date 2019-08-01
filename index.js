@@ -1439,6 +1439,7 @@ function handleShowCaughtPokemon(sender_psid) {
 }
 
 function handleCatching(text, sender_psid) {
+  let response;
   if (!currentMap.has(sender_psid)){
     response = {
       "text" : 'Say "Start catching" to start catching!'
