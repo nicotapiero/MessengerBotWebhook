@@ -142,7 +142,7 @@ class newMap {
       return false;
     }
     console.log("got data!")
-    console.log(data)
+    console.log(data.pokemon)
     return true;
   });
   }
@@ -1416,6 +1416,8 @@ function handlePostback(sender_psid, received_postback) {
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
   } else if (payload === 'Show caught pokémon' || payload === 'Show caught Pokémon') {
+    console.log("this is map.has(" + sender_psid+ "):" + map.has(sender_psid))
+
     if (!map.has(sender_psid)) {
       response = {
         "text" : "You haven't caught any Pokémon!"
