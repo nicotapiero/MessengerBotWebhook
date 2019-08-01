@@ -136,6 +136,7 @@ class newMap {
   }
 
   has(id){
+    id = String(id);
     let returned = this.getTrainerArray(id)
     console.log(returned);
     if (returned != undefined) {
@@ -146,11 +147,13 @@ class newMap {
   }
 
   get(id){
+    id = String(id);
     return this.getTrainerArray(id)
 
   }
 
   set(id, array){
+    id = String(id);
     if (this.getTrainerArray(id)) {
       this.updateTrainerArray(id, arr)
     } else {
@@ -171,15 +174,19 @@ var pokedex = new Pokedex({
   }
 
   getTrainerArray(id) {
+    id = String(id);
   Pokedex.findOne({id: id}, function(err, data){
     if(err){
       return undefined;
     }
+    console.log("got data!")
+    console.log(data)
     return data;
   });
 }
 
 updateTrainerArray(id, arr) {
+  id = String(id);
   Pokedex.findOneAndUpdate({id: id}, {$set:{pokemon:arr}}, {new: true}, (err, doc) => {
     if (err) {
         console.log("Something wrong when updating data!");
@@ -195,7 +202,7 @@ var map = new newMap();
 
 
 
-
+//console.log(getTrainerArray('2674269505918135'));
 
 
 
