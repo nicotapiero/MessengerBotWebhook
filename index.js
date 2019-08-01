@@ -54,15 +54,150 @@ var currentPokemon = "current";
 
 //console.log(myModule.testFunction());
 
+
+
+
+
+/*
 var map = new Map([['100000' ,["bulbasaur", "ivysaur"]]]);
 console.log(map.get(100000));
 
-map.set('500', ['bulbasaur']);
+map.set('500', ['bulbasaur']);*/
 
 var currentMap = new Map([['100000' ,"bulbasaur"]]);
 console.log(currentMap.get(100000));
 
-map.set('2674269505918135', ["bulbasaur", "venusaur"]);
+//map.set('2674269505918135', ["bulbasaur", "venusaur"]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = process.env.URI;
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
+var mongoose = require('mongoose');
+mongoose.connect(uri, {useNewUrlParser: true});
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
+
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('connected!')
+});
+
+var pokedexSchema = new mongoose.Schema({
+  id: String,
+  pokemon: Array
+});
+
+var Pokedex = mongoose.model('Pokedex', pokedexSchema);
+
+
+class newMap {
+
+  constructor() {
+
+  }
+
+  has(id){
+    if (this.getTrainerArray(id)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  get(id){
+    return this.getTrainerArray(id)
+
+  }
+
+  set(id, array){
+    if (this.getTrainerArray(id)) {
+      this.updateTrainerArray(id, arr)
+    } else {
+var pokedex = new Pokedex({
+          id: id,
+          pokemon: array
+        });
+
+      pokedex.save(function(err, updatedPokedex) {
+              if(err){
+                console.log(err);
+                return;
+              }
+              console.log(updatedPokedex);
+              console.log('successfully saved')
+            });
+    }
+  }
+
+  getTrainerArray(id) {
+  Pokedex.findOne({id: id}, function(err, data){
+    if(err){
+      return undefined;
+    }
+    return data;
+  });
+}
+
+updateTrainerArray(id, arr) {
+  Pokedex.findOneAndUpdate({id: id}, {$set:{pokemon:arr}}, {new: true}, (err, doc) => {
+    if (err) {
+        console.log("Something wrong when updating data!");
+    }
+
+    console.log(doc);
+});
+}
+
+}
+
+var map = new newMap();
+
+
+
+
+
+
+
+
 
 
 
@@ -1865,3 +2000,12 @@ app.post('/trade', (req, res) => {
 
 
 });
+
+
+
+
+
+
+
+
+
