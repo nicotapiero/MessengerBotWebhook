@@ -143,7 +143,7 @@ class newMap {
     }
     console.log("got data!")
     console.log(data)
-    return data;
+    return data.pokemon;
   });
   }
 
@@ -156,7 +156,7 @@ class newMap {
     }
     console.log("got data!")
     console.log(data)
-    return data;
+    return data.pokemon;
   });
   }
 
@@ -190,7 +190,7 @@ var pokedex = new Pokedex({
     }
     console.log("got data!")
     console.log(data)
-    return data;
+    return data.pokemon;
   });
 }
 
