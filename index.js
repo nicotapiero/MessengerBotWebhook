@@ -265,6 +265,8 @@ function catchPokemon(id) {
 
   let pc = [];
 
+  let pokemonToPush = currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1);
+
   Pokedex.findOne({id: id}, function(err, data){
       if(err){
         
@@ -278,7 +280,7 @@ function catchPokemon(id) {
 
       if (data) {
         pc = data.pokemon;
-        pc.push(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1) )
+        pc.push(pokemonToPush)
         Pokedex.findOneAndUpdate({id: id}, {$set:{pokemon:pc}}, {new: true}, (err, doc) => {
       if (err) {
         console.log("Something wrong when updating data!");
