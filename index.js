@@ -136,7 +136,9 @@ class newMap {
   }
 
   has(id){
-    if (this.getTrainerArray(id)) {
+    let returned = this.getTrainerArray(id)
+    console.log(returned);
+    if (returned == undefined) {
       return true
     } else {
       return false
@@ -1268,6 +1270,7 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
 
     resetCurrentPokemon(sender_psid);}
   } else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
+    
     if (!map.has(sender_psid)) {
       response = {
         "text" : "You haven't caught any Pokémon!"
