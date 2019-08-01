@@ -136,13 +136,16 @@ class newMap {
   }
 
   has(id){
+    return true;
     id = String(id);
     Pokedex.findOne({id: id}, function(err, data){
     if(err){
       return false;
     }
     console.log("got data!")
-    console.log(data.pokemon)
+    console.log(data)
+    
+    if (data.length == 0) return false;
     return true;
   });
   }
