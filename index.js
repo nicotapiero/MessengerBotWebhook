@@ -276,7 +276,7 @@ function catchPokemon(id) {
       console.log(data)
       if (pc && pc.length != 0) {
         pc = data.pokemon;
-      }
+      } 
       
     });
 
@@ -302,7 +302,20 @@ function catchPokemon(id) {
         pokemon: pc
       });
 
-      pokedex.save(function(err, updatedPokedex) {
+  Pokedex.findOne({id: id}, function(err, data){
+      if(err){
+        
+      }
+      if (data) {
+        Pokedex.findOneAndUpdate({id: id}, {$set:{pokemon:pc}}, {new: true}, (err, doc) => {
+      if (err) {
+        console.log("Something wrong when updating data!");
+      }
+
+      console.log(doc);
+    });
+      } else {
+        pokedex.save(function(err, updatedPokedex) {
         if(err){
           console.log(err);
           return;
@@ -310,6 +323,18 @@ function catchPokemon(id) {
         console.log(updatedPokedex);
         console.log('successfully saved')
       });
+      }
+
+
+      console.log("got data!")
+      console.log(data)
+      if (pc && pc.length != 0) {
+        pc = data.pokemon;
+      } 
+      
+    });
+
+      
 
   //map.set(id, pc);
   console.log(map)
