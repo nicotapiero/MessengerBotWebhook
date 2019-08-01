@@ -138,16 +138,20 @@ class newMap {
   has(id){
     return true;
     id = String(id);
-    Pokedex.findOne({id: id}, function(err, data){
+    let boolean;
+    await Pokedex.findOne({id: id}, function(err, data){
     if(err){
-      return false;
+      boolean = false;
     }
     console.log("got data!")
     console.log(data)
     
-    if (data.length == 0) return false;
-    return true;
-  });
+    if (data.length == 0){
+      boolean = false
+    } 
+    boolean =  true;
+  }).then();
+return boolean
   }
 
   get(id){
