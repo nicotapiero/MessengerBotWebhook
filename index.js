@@ -138,7 +138,7 @@ class newMap {
   has(id){
     let returned = this.getTrainerArray(id)
     console.log(returned);
-    if (returned == undefined) {
+    if (returned != undefined) {
       return true
     } else {
       return false
