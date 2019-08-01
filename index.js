@@ -136,7 +136,7 @@ class newMap {
   }
 
   has(id){
-    return true;
+    //return true;
     id = String(id);
     let boolean;
     Pokedex.findOne({id: id}, function(err, data){
