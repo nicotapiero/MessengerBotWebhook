@@ -270,13 +270,42 @@ function catchPokemon(id) {
         
       }
 
-
-
       console.log("got data!")
       console.log(data)
       if (pc && pc.length != 0) {
         pc = data.pokemon;
       } 
+
+      if (data) {
+        pc = data.pokemon;
+        pc.push(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1) )
+        Pokedex.findOneAndUpdate({id: id}, {$set:{pokemon:pc}}, {new: true}, (err, doc) => {
+      if (err) {
+        console.log("Something wrong when updating data!");
+      }
+
+      console.log(doc);
+    });
+
+      } else {
+        var pokedex = new Pokedex({
+        id: id,
+        pokemon: pc
+      });
+        pokedex.save(function(err, updatedPokedex) {
+        if(err){
+          console.log(err);
+          return;
+        }
+        console.log(updatedPokedex);
+        console.log('successfully saved')
+      });
+      }
+      
+
+
+
+      
       
     });
 
@@ -294,9 +323,9 @@ function catchPokemon(id) {
 */
   //change this back to just "currentPokemon" if you wanna make easy duplicates
   //if (!pc.includes(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1))) {
-  pc.push(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1) )
+  
   //}
-
+/*
   console.log('here is PC')
   console.log(pc)
   var pokedex = new Pokedex({
@@ -309,13 +338,7 @@ function catchPokemon(id) {
         
       }
       if (data) {
-        Pokedex.findOneAndUpdate({id: id}, {$set:{pokemon:pc}}, {new: true}, (err, doc) => {
-      if (err) {
-        console.log("Something wrong when updating data!");
-      }
-
-      console.log(doc);
-    });
+        
       } else {
         pokedex.save(function(err, updatedPokedex) {
         if(err){
@@ -326,7 +349,7 @@ function catchPokemon(id) {
         console.log('successfully saved')
       });
       }
-
+*/
 /*
       console.log("got data!")
       console.log(data)
@@ -334,7 +357,7 @@ function catchPokemon(id) {
         pc = data.pokemon;
       } */
       
-    });
+   // });
 
       
 
