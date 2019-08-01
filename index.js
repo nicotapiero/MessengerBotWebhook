@@ -137,19 +137,27 @@ class newMap {
 
   has(id){
     id = String(id);
-    let returned = await this.getTrainerArray(id)
-    console.log(returned);
-    if (returned != undefined) {
-      return true
-    } else {
-      return false
+    Pokedex.findOne({id: id}, function(err, data){
+    if(err){
+      return undefined;
     }
+    console.log("got data!")
+    console.log(data)
+    return data;
+  });
   }
 
   get(id){
     id = String(id);
-    return await this.getTrainerArray(id)
-
+    id = String(id);
+  Pokedex.findOne({id: id}, function(err, data){
+    if(err){
+      return undefined;
+    }
+    console.log("got data!")
+    console.log(data)
+    return data;
+  });
   }
 
   set(id, array){
