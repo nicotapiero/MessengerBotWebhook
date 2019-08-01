@@ -297,6 +297,8 @@ function catchPokemon(id) {
   pc.push(currentMap.get(id).charAt(0).toUpperCase() + currentMap.get(id).slice(1) )
   //}
 
+  console.log('here is PC')
+  console.log(pc)
   var pokedex = new Pokedex({
         id: id,
         pokemon: pc
@@ -325,12 +327,12 @@ function catchPokemon(id) {
       });
       }
 
-
+/*
       console.log("got data!")
       console.log(data)
       if (pc && pc.length != 0) {
         pc = data.pokemon;
-      } 
+      } */
       
     });
 
@@ -1530,7 +1532,7 @@ function handleCatching(text, sender_psid) {
     }
 
     resetCurrentPokemon(sender_psid);}
-
+    callSendAPI(sender_psid, response);
   }
 
 
