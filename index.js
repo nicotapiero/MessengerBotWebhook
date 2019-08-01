@@ -99,7 +99,7 @@ console.log(currentMap.get(100000));
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = process.env.URI;
+const uri = 'mongodb+srv://admin:admin@cluster0-qgj4i.mongodb.net/test?retryWrites=true&w=majority'//process.env.URI;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   const collection = client.db("test").collection("devices");
@@ -139,7 +139,7 @@ class newMap {
     //return true;
     id = String(id);
     let boolean;
-    Pokedex.findOne({id: id}, function(err, data){
+    var query = Pokedex.findOne({id: id}, function(err, data){
     if(err){
       boolean = false;
     }
@@ -150,7 +150,15 @@ class newMap {
       boolean = false
     } 
     boolean =  true;
-  }).then();
+  });
+
+    var promise = query.exec();
+
+    while (promise instanceof Promise) {
+      
+    }
+
+
 return boolean
   }
 
