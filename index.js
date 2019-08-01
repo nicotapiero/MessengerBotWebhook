@@ -1438,7 +1438,7 @@ function handleShowCaughtPokemon(sender_psid) {
 
 }
 
-function handleCatching(received_message.text, sender_psid) {
+function handleCatching(text, sender_psid) {
   if (!currentMap.has(sender_psid)){
     response = {
       "text" : 'Say "Start catching" to start catching!'
@@ -1447,7 +1447,7 @@ function handleCatching(received_message.text, sender_psid) {
     return;
   }
 
-  if (checkPokemonName(received_message.text, sender_psid)) {
+  if (checkPokemonName(text, sender_psid)) {
   response = {
     "attachment": {
       "type": "template",
@@ -1475,7 +1475,7 @@ function handleCatching(received_message.text, sender_psid) {
   }
   catchPokemon(sender_psid);
  
-} else if (received_message.text.toLowerCase().startsWith("catch")) {
+} else if (text.toLowerCase().startsWith("catch")) {
 
     response = {
       "attachment": {
