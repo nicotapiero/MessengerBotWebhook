@@ -139,11 +139,11 @@ class newMap {
     id = String(id);
     Pokedex.findOne({id: id}, function(err, data){
     if(err){
-      return undefined;
+      return false;
     }
     console.log("got data!")
     console.log(data)
-    return data.pokemon;
+    return true;
   });
   }
 
