@@ -1301,7 +1301,7 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
 
     resetCurrentPokemon(sender_psid);}
   } else if (received_message.text.toLowerCase().startsWith("show caught pokemon") || received_message.text.toLowerCase().startsWith("show caught pokémon")) {
-    handleShowCaughtPokemon();
+    handleShowCaughtPokemon(sender_psid);
     return;
     }else if (received_message.text.toLowerCase().startsWith("show ")) {
       console.log("showing pokemon")
