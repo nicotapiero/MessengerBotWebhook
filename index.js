@@ -1404,7 +1404,7 @@ callSendAPI(sender_psid, response);
 
 function handleCaughtPokemon(sender_psid) {
   console.log(typeof sender_psid)
-sender_id = String(sender_id);
+sender_psid = String(sender_psid);
   Pokedex.findOne({id: sender_psid}, function(err, data){
     if(err || data.pokemon.length == 0){
       
