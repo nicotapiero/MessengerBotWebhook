@@ -1848,8 +1848,10 @@ app.get('/trade', function(req, res){
 Pokedex.findOne({id: id}, function(err, data){
       if(err){
         res.sendFile( __dirname + "/public/" + "noPokemon.html" );
-      } else if (!data || data == null || data.pokemon.length == 0){
+        return;
+      } else if (!data || data === null || data.pokemon.length == 0){
         res.sendFile( __dirname + "/public/" + "noPokemon.html" );
+        return;
       }
       console.log("got data!")
       console.log(data)
