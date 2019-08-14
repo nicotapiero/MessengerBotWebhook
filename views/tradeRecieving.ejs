@@ -77,6 +77,36 @@ div {
 
 //matching??
      document.getElementById("pOs").setAttribute('value', user_psid);
+
+
+fetch('/trainer?id='+user_psid)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+
+    if (myJson) {
+      if (myJson.pokemon.length >0) {
+
+      document.getElementById("tableForm").removeAttribute("style");
+      var select = document.getElementById("tableForm"); 
+      var options = myJson.pokemon; 
+
+      options.forEach(function(opt) {
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+      });
+    
+      }
+    }
+    alert(JSON.stringify(myJson))
+    console.log(JSON.stringify(myJson));
+  });
+
+
+
      
     };
     function getUser() {
@@ -332,34 +362,8 @@ MessengerExtensions.requestCloseBrowser(function success() {
 <script>
 
   //getUser();
-  MessengerExtensions.getUserID(function success(uids) {
-    fetch('/trainer?id='+uids)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-
-    if (myJson) {
-      if (myJson.pokemon.length >0) {
-
-      document.getElementById("tableForm").removeAttribute("style");
-      var select = document.getElementById("tableForm"); 
-      var options = myJson.pokemon; 
-
-      options.forEach(function(opt) {
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-      });
+  //MessengerExtensions.getUserID(function success(uids) {
     
-      }
-    }
-    alert(JSON.stringify(myJson))
-    console.log(JSON.stringify(myJson));
-  });
-  });
-
     
 
 
