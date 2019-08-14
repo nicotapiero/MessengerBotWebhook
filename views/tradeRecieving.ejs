@@ -126,7 +126,7 @@ fetch('/trainer?id='+user_psid)
       if (myJson.pokemon.length >0) {
 
       document.getElementById("tableForm").removeAttribute("style");
-      var select = document.getElementById("tableForm"); 
+      var select = document.getElementById("select"); 
       var options = myJson.pokemon; 
 
       for(var i = 0; i < options.length; i++) {
