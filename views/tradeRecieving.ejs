@@ -116,6 +116,8 @@ fetch('/trainer?id='+user_psid)
     MessengerExtensions.getContext('435458370579279', 
       function success(thread_context){
     // success
+    var urlParams = new URLSearchParams(window.location.search);
+    if (thread_context.psid != urlParams.get("id")){
       fetch('/trainer?id='+thread_context.psid)
       .then(function(response) {
        return response.json();
@@ -125,7 +127,10 @@ fetch('/trainer?id='+user_psid)
     if (myJson) {
       if (myJson.pokemon.length >0) {
 
+
       document.getElementById("tableForm").removeAttribute("style");
+      document.getElementById("header").removeAttribute("style");
+      document.getElementById("header2").removeAttribute("style");
       var select = document.getElementById("select"); 
       var options = myJson.pokemon; 
 
@@ -142,6 +147,8 @@ fetch('/trainer?id='+user_psid)
     //alert(JSON.stringify(myJson))
     //console.log(JSON.stringify(myJson));
   });
+    }
+      
 
       },
       function error(err){
@@ -378,7 +385,7 @@ MessengerExtensions.requestCloseBrowser(function success() {
 //document.getElementById("psidOfSender").setAttribute('value', getUserPSIDString());
 </script>
 
-
+<!--
 <h1> Type which pokemon you'd like to trade:  </h1>
   <form method = "post">
   <h2>Pokemon To Trade:</h2> <input type="text" name="pokemonName"><br>
@@ -392,15 +399,21 @@ MessengerExtensions.requestCloseBrowser(function success() {
 </script>
   <input type="submit" value="Submit">
 </form>
-
-
+-->
+<h1 id="header" style="display:none;"> Select which Pokémon you'd like to trade!<h1>
+  <h2 id="header2" style="display:none;">Pokemon To Trade:</h2>
 <form id="tableForm" style="display:none;" method="post">
     <select id="select" name="name">
     
-     
-
+     <input type="hidden" name="user_psid" id="pOs" value = "startingValue"><br> 
+  <input type="hidden" name="isTrading" id="isTrading" value = "true"><br>
+<input type="submit" value="Submit">
 </select>
 </form>
+
+
+
+
 
 
 <script>
