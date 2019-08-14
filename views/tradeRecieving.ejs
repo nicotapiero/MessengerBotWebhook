@@ -332,7 +332,8 @@ MessengerExtensions.requestCloseBrowser(function success() {
 <script>
 
   //getUser();
-  fetch('/trainer?id='+user_psid)
+  MessengerExtensions.getUserID(function success(uids) {
+    fetch('/trainer?id='+uids)
   .then(function(response) {
     return response.json();
   })
@@ -357,6 +358,12 @@ MessengerExtensions.requestCloseBrowser(function success() {
     alert(JSON.stringify(myJson))
     console.log(JSON.stringify(myJson));
   });
+  });
+
+    
+
+
+  
     alert('tst')
 </script>
 
