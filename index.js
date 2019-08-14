@@ -2024,7 +2024,7 @@ app.post('/trade', (req, res) => {
 
     } else {
 
-
+      console.log(req.body)
 
       var pokemonToTrade = JSON.stringify(req.body.pokemonName);
       pokemonToTrade = pokemonToTrade.substring(1, pokemonToTrade.length -1);
