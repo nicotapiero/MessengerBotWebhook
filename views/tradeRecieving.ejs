@@ -331,7 +331,7 @@ MessengerExtensions.requestCloseBrowser(function success() {
 
 <script type="text/javascript">
 
-
+  getUser();
   fetch('/trainer?id='+getUserPSIDString())
   .then(function(response) {
     return response.json();
