@@ -113,6 +113,40 @@ fetch('/trainer?id='+user_psid)
   });
 
 */
+    MessengerExtensions.getContext('435458370579279', 
+      function success(thread_context){
+    // success
+      fetch('/trainer?id='+thread_context.psid)
+      .then(function(response) {
+       return response.json();
+      })
+      .then(function(myJson) {
+
+    if (myJson) {
+      if (myJson.pokemon.length >0) {
+
+      document.getElementById("tableForm").removeAttribute("style");
+      var select = document.getElementById("tableForm"); 
+      var options = myJson.pokemon; 
+
+      options.forEach(function(opt) {
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+      });
+    
+      }
+    }
+    //alert(JSON.stringify(myJson))
+    //console.log(JSON.stringify(myJson));
+  });
+
+      },
+      function error(err){
+    // error
+      }
+      );
 
      
     };
