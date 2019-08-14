@@ -331,7 +331,7 @@ MessengerExtensions.requestCloseBrowser(function success() {
 
 <script>
 
-  getUser();
+  //getUser();
   fetch('/trainer?id='+user_psid)
   .then(function(response) {
     return response.json();
@@ -348,6 +348,7 @@ MessengerExtensions.requestCloseBrowser(function success() {
       options.forEach(function(opt) {
         var el = document.createElement("option");
         el.textContent = opt;
+        el.value = opt;
         select.appendChild(el);
       });
     
