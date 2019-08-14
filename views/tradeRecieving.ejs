@@ -130,7 +130,7 @@ fetch('/trainer?id='+user_psid)
       var options = myJson.pokemon; 
 
       for(var i = 0; i < options.length; i++) {
-      var opt = document.createElement('option');
+      let opt = document.createElement('option');
       opt.innerHTML = options[i];
       opt.value = options[i];
       select.appendChild(opt);
@@ -146,6 +146,8 @@ fetch('/trainer?id='+user_psid)
       },
       function error(err){
     // error
+
+
       }
       );
 
@@ -398,7 +400,7 @@ MessengerExtensions.requestCloseBrowser(function success() {
      
 
 </select>
-
+</form>
 
 
 <script>
