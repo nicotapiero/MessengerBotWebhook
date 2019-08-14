@@ -2416,7 +2416,7 @@ app.post('/trade', (req, res) => {
 
 
 app.get('/trainer', (req, res) => {
-  console.log('call for' + req.query.id)
+  console.log('call for' + req.query.id);
   Pokedex.findOne({id: req.query.id}, function(err, data){
         if(err){
           return;
