@@ -2038,7 +2038,7 @@ app.post('/trade', (req, res) => {
 
       //var arr = map.get(idOfSender);
       console.log('array is:vvvvv')
-      console.log(arr);
+      //console.log(arr);
 
 
       Pokedex.findOne({id: idOfSender}, function(err, data){
