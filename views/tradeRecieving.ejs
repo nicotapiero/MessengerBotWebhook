@@ -320,6 +320,48 @@ MessengerExtensions.requestCloseBrowser(function success() {
 </form>
 
 
+<form id="tableForm" style="display:none;" method="post">
+    <select id="select" name="name">
+    
+     
+
+</select>
+
+
+
+<script type="text/javascript">
+
+
+  fetch('/trainer'+getUserPSIDString())
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+
+    if (myJson) {
+      if (myJson.pokemon.length >0) {
+
+      document.getElementById("tableForm").removeAttribute("style");
+      var select = document.getElementById("tableForm"); 
+      var options = myJson.pokemon; 
+
+      for(var i = 0; i < options.length; i++) {
+        var opt = options[i];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        select.appendChild(el);
+      }​
+
+
+
+      }
+    }
+    console.log(JSON.stringify(myJson));
+  });
+</script>
+
+
+
 <a href="javascript:getLink();">
 
 <img border="0" alt="cover photo" src="/images/cover.png">
