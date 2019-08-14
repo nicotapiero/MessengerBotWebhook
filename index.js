@@ -2412,3 +2412,21 @@ app.post('/trade', (req, res) => {
 
 
 });
+
+
+
+app.get('/trainer', (req, res) => {
+  Pokedex.findOne({id: req.query.id}, function(err, data){
+        if(err){
+          return;
+        }
+        res.json(data);
+        //res.send();
+        });
+  
+
+
+
+
+});
+
