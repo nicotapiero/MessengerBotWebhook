@@ -2076,10 +2076,10 @@ app.post('/trade', (req, res) => {
           boolean = false;
         }
 
-        trader1Arr = data.pokemon;
+        trader1Arr = data2.pokemon;
 
 
-        var trader2Arr = data2.pokemon
+        var trader2Arr = data.pokemon
 
         console.log(tradeMap)
 
@@ -2091,6 +2091,22 @@ app.post('/trade', (req, res) => {
         trader1Arr.push(pokemonToTrade);
         trader2Arr.push(otherPoke);
 
+        Pokedex.findOneAndUpdate({id: req.query.id}, {$set:{pokemon:trader1Arr}}, {new: true}, (err, doc) => {
+      if (err) {
+        console.log("Something wrong when updating data!");
+      }
+
+      console.log(doc);
+    });
+
+        Pokedex.findOneAndUpdate({id: idOfSender}, {$set:{pokemon:trader2Arr}}, {new: true}, (err, doc) => {
+      if (err) {
+        console.log("Something wrong when updating data!");
+      }
+
+      console.log(doc);
+    });
+/*
         var pokedex1 = new Pokedex({
         id: req.query.id,
         pokemon: trader1Arr
@@ -2119,7 +2135,7 @@ app.post('/trade', (req, res) => {
         console.log('successfully saved')
       });
 
-
+*/
 
         //map.set(req.query.id, trader1Arr);
         //map.set(idOfSender, trader2Arr);
