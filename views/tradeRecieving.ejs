@@ -345,15 +345,12 @@ MessengerExtensions.requestCloseBrowser(function success() {
       var select = document.getElementById("tableForm"); 
       var options = myJson.pokemon; 
 
-      for(var i = 0; i < options.length; i++) {
-        var opt = options[i];
+      options.forEach(function(opt) {
         var el = document.createElement("option");
         el.textContent = opt;
         select.appendChild(el);
-      }​
-
-
-
+      });
+    
       }
     }
     alert(JSON.stringify(myJson))
