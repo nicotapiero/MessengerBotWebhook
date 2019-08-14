@@ -129,12 +129,13 @@ fetch('/trainer?id='+user_psid)
       var select = document.getElementById("tableForm"); 
       var options = myJson.pokemon; 
 
-      options.forEach(function(opt) {
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-      });
+      for(var i = 0; i < options.length; i++) {
+      var opt = document.createElement('option');
+      opt.innerHTML = options[i];
+      opt.value = options[i];
+      select.appendChild(opt);
+      }
+      
     
       }
     }
