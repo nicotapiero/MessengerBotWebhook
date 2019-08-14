@@ -292,6 +292,7 @@ function catchPokemon(id) {
       });
 
     } else {
+      pc.push(pokemonToPush);
       var pokedex = new Pokedex({
         id: id,
         pokemon: pc
@@ -2075,10 +2076,10 @@ app.post('/trade', (req, res) => {
           boolean = false;
         }
 
-        trader1Arr = data2.pokemon;
+        trader1Arr = data.pokemon;
 
 
-        var trader2Arr = data.pokemon
+        var trader2Arr = data2.pokemon
 
         console.log(tradeMap)
 
