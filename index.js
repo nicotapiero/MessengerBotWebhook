@@ -101,6 +101,9 @@ console.log(currentMap.get(100000));
 const MongoClient = require('mongodb').MongoClient;
 const uri = process.env.URI;
 const client = new MongoClient(uri, { useNewUrlParser: true });
+
+
+
 client.connect(err => {
   const collection = client.db("test").collection("devices");
   // perform actions on the collection object
@@ -110,6 +113,10 @@ client.connect(err => {
 
 var mongoose = require('mongoose');
 mongoose.connect(uri, {useNewUrlParser: true});
+
+
+
+
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
@@ -1841,16 +1848,16 @@ app.get('/trade', function(req, res){
 Pokedex.findOne({id: id}, function(err, data){
       if(err){
         res.sendFile( __dirname + "/public/" + "noPokemon.html" );
-      } else if (data == null || data.pokemon.length == 0){
+      } else if (!data || data == null || data.pokemon.length == 0){
         res.sendFile( __dirname + "/public/" + "noPokemon.html" );
       }
       console.log("got data!")
       console.log(data)
 
       if (data.length == 0){
-        boolean = false
+        //boolean = false
       }
-      boolean =  true;
+      //boolean =  true;
     
 
 
@@ -2036,7 +2043,7 @@ app.post('/trade', (req, res) => {
         if(err){
           res.sendFile( __dirname + "/public/" + "noPokemon.html" );
           return;
-        } else if (data == null || data.pokemon.length == 0) {
+        } else if (!data || data == null || data.pokemon.length == 0) {
           res.sendFile( __dirname + "/public/" + "noPokemon.html" );
           return;
         }
