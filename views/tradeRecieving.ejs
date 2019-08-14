@@ -77,7 +77,7 @@ div {
 
 //matching??
      document.getElementById("pOs").setAttribute('value', user_psid);
-
+     alert(user_psid)
 
 fetch('/trainer?id='+user_psid)
   .then(function(response) {
@@ -101,8 +101,8 @@ fetch('/trainer?id='+user_psid)
     
       }
     }
-    alert(JSON.stringify(myJson))
-    console.log(JSON.stringify(myJson));
+    //alert(JSON.stringify(myJson))
+    //console.log(JSON.stringify(myJson));
   });
 
 
@@ -368,7 +368,7 @@ MessengerExtensions.requestCloseBrowser(function success() {
 
 
   
-    alert('tst')
+   // alert('tst')
 </script>
 
 
