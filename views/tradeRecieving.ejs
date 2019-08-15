@@ -147,6 +147,12 @@ fetch('/trainer?id='+user_psid)
     //alert(JSON.stringify(myJson))
     //console.log(JSON.stringify(myJson));
   });
+
+      document.getElementById("sendLinkHeader").setAttribute("style", "display:none;")
+      document.getElementById("sendLinkImg").setAttribute("style", "display:none;")
+
+
+
     }
       
 
@@ -363,11 +369,11 @@ MessengerExtensions.requestCloseBrowser(function success() {
 
 
 
-<h2>
+<h2 id="sendLinkHeader">
     Send this link to a friend you'd like to trade with!
 </h2>
 
-<img onclick="javascript:sendShare()" src=
+<img id="sendLinkImg" onclick="javascript:sendShare()" src=
 <%if (locals.home === 'broadcast') {%> 
 "images/broadcast.png"
 <% }else { %>
