@@ -72,6 +72,25 @@ div {
      getUser();
      //alert('setting to ' + user_psid);
      document.getElementById("pOs").setAttribute('value', user_psid);
+
+
+
+var urlParams = new URLSearchParams(window.location.search);
+     MessengerExtensions.getContext('435458370579279', 
+    function success(thread_context){
+      if (thread_context.psid != urlParams.get("id")) {
+        window.location.href = "/expiredTrade.html";
+      }
+    // success
+    },
+    function error(err){
+    // error
+    }
+  );
+     
+
+
+
      
     };
     function getUser() {
