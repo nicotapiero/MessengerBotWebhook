@@ -1358,6 +1358,55 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
   console.log("showing pokemon")
   var pokeName = received_message.text.toLowerCase().substring(5);
 
+
+
+  let arr = [];
+
+  Pokedex.findOne({id: sender_psid}, function(err, data){
+    if(err){
+
+      response = {
+        "text" : "You haven't caught any Pokémon!"
+      }
+      callSendAPI(sender_psid, response)
+      return;
+    }
+    console.log("got data!")
+    console.log(data)
+
+    if (!data || data.length == 0) {
+      response = {
+        "text" : "You haven't caught any Pokémon!"
+      }
+      callSendAPI(sender_psid, response)
+      return;
+    } else {
+      if (data.pokemon.includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))){
+        response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": 'Your '+ received_message.text.substring(5) +"!",
+            "image_url": "https://img.pokemondb.net/artwork/large/" + pokeName + ".jpg",
+          }]
+        }
+      }
+    }
+  } else {
+    response = {
+        "text" : "You haven't caught any Pokémon!"
+      }
+  }
+      
+
+      callSendAPI(sender_psid, response)
+      return;
+    }
+
+  });
+/*
   if (map.has(sender_psid) && map.get(sender_psid).includes(pokeName.charAt(0).toUpperCase() + pokeName.slice(1))) {
 
     response = {
@@ -1378,6 +1427,11 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
       "text" : 'You do not have a ' + received_message.text.substring(5) + "!"
     }
   }
+*/
+
+
+
+
 } else if (received_message.text.startsWith("oh ma")) {
   response = {
     "text" : "be proud of the cow"
