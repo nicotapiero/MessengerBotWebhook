@@ -1396,8 +1396,8 @@ if (received_message.text.toLowerCase() === 'start catching' || received_message
     }
   } else {
     response = {
-        "text" : "You haven't caught any Pokémon!"
-      }
+      "text" : 'You do not have a ' + received_message.text.substring(5) + "!"
+    }
   }
       
 
